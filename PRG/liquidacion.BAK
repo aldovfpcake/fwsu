@@ -1,0 +1,49 @@
+SET TALK OFF
+SET EXCLUSIVE OFF
+SET REPROCESS TO AUTOMATIC
+SET MULTILOCKS ON
+SET DELETED ON
+SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+OPEN DATABASE SUELDOS SHARED
+ON ERROR DO errhand WITH ;
+ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
+
+SELECT 0
+SELECT * FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR vpersolinea
+*SELECT 0
+*IF .NOT. USED('B92013')
+*    SELECT 0
+*    USE B92013
+*ENDIF
+IF .NOT. USED('curliq')
+    SELECT 0
+    USE curliq NODATA
+ENDIF  
+lSuccess=CURSORSETPROP("Buffering", 3, "curliq")
+IF lSuccess = .f.
+    =MESSAGEBOX("Operation NOT successful!",0,"Operation Status")
+ENDIF
+
+SELECT * FROM CODSUEL ORDER BY CONCEPTO INTO CURSOR CONCEPTOS   
+SET EXCLUSIVE ON
+SELECT curliq
+*INDEX on STR(concepto,4) TO  c:\x-curl
+*SET INDEX TO f:\sueldos\x-curl
+SET EXCLUSIVE OFF
+
+
+DO FORM liquidacion
+READ EVENTS
+
+PROCEDURE errhand
+DO FORM FORMERROR
+PARAMETER merror, mess, mess1, mprog, mlineno
+CLEAR
+? 'Error número: ' + LTRIM(STR(merror))
+? 'Mensaje de error: ' + mess
+? 'Línea de código con error: ' + mess1
+? 'Número de línea del error: ' + LTRIM(STR(mlineno))
+? 'Programa con error: ' + mprog
+IF merror = 2005
+     x = TABLEREVERT( )
+ENDIF   
