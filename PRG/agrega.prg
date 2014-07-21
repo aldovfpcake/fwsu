@@ -1,3 +1,4 @@
+* prueba github
 WAIT WINDOW "agrega desde aca" + STR(vpersolinea.legajo,3)
 vlegajo    = vpersolinea.legajo
 vconcepto  = 0
