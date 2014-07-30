@@ -8,3 +8,4 @@ MODIFY FILE "T:\FWSU\PRG\CRVISD.PRG"
 * este procedimiento es para crear la vista de liquidacion de sueldo
 * 1 se usa creovista que guarda  la vista en crvisd
 * 2 se corre el progama crvisd 
+* prueba de segundo commit
