@@ -47,4 +47,5 @@ CLEAR
 ? 'Programa con error: ' + mprog
 IF merror = 2005
      x = TABLEREVERT( )
-ENDIF   
+ENDIF
+RETURN   

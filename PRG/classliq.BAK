@@ -28,6 +28,9 @@ Define Class LIQUIDACION As Custom
 	whasta        = 0 
 	wmesanterior  = " "
 	wdescrip      = " "  
+	waporte       = 0
+	wtotsinapor   = 0
+	wtotaporneg   = 0
 	Procedure Init
 		Set Date Italian
 		Set Century On
@@ -86,7 +89,11 @@ Define Class LIQUIDACION As Custom
 				Case This.wconextracc = 'USUARIO'
 
 				Case This.wconextracc = 'EMBARGO'
-
+                     This.embargo 
+			    CASE This.wconextracc = 'EBGALIMENT'
+			         this.embargosal
+			
+			
 			Endcase
              
             Do Case
@@ -100,6 +107,7 @@ Define Class LIQUIDACION As Custom
                      wvalorfin = this.wimporte
               
             Endcase             
+          
             
             Try 
 	            DO Case
@@ -127,18 +135,30 @@ Define Class LIQUIDACION As Custom
               this.wimporte = 0
            ENDIF   
            
+            * SE USA POR COMAPTIBILIDAD
+           * 
+            IF curliq.concepto = 150
+               SET STEP ON 
+               this.embargosal
+            
+            ENDIF
+           
+           
+           
             DO Case
                CASE this.wtipoconcep =  'C/APORTE'   
                     SELECT curliq
-                   replace curliq.aporte WITH this.wimporte
+                    replace curliq.aporte WITH this.wimporte
+                    this.waporte = this.waporte + this.wimporte
                CASE this.wtipoconcep =  'APORTE NEG'        
-                    
+                    this.wtotaporneg = this.wtotaporneg + this.wimporte
                     SELECT curliq 
                     replace curliq.aporte WITH (this.wimporte - (this.wimporte*2))
                     this.wimporte = (this.wimporte - (this.wimporte*2))
                CASE this.wtipoconcep =   'S/APORTE' 
                     SELECT curliq
                     replace  curliq.sinaporte WITH this.wimporte
+                    this.wtotsinapor = this.wtotsinapor+ this.wimporte
                CASE this.wtipoconcep =   'DESCUENTO'       
                     SELECT curliq
                     replace  curliq.descuento WITH this.wimporte 
@@ -434,11 +454,16 @@ Define Class LIQUIDACION As Custom
         SCAN
             wexiste = 0
           	SELECT CONCEPTO  FROM CURLIQ  WHERE CURLIQ.CONCEPTO = RECSU.CONCEPTO INTO CURSOR EXTCOP
-          	IF EXTCOP.CONCEPTO = 0
-          	        
+          	
+          	IF EXTCOP.CONCEPTO = 0 
+          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123
+          	       
+          	       WAIT WINDOW "NADA"
+          	   ELSE
             		INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCRIP,CANTIDAD,APORTE,SINAPORTE,DESCUENTO,LIQUIDA);
             		VALUES(this.wlegajo,RECSU.CONCEPTO,RECSU.DESCRIP,RECSU.CANTIDAD,RECSU.APORTE,RECSU.SINAPORTE,RECSU.DESCUENTO,this.wtipoliq)
-          	ENDIF
+          	   ENDIF
+          	 ENDIF
             SELECT EXTCOP
         ENDSCAN
         SELECT RECSU
@@ -528,7 +553,7 @@ Define Class LIQUIDACION As Custom
           
                IF ultimosue.ultimo > prome1
                  prome1 = ultimosue.ultimo
-                 WAIT WINDOW "TOMANDO BASE MAYO"
+                 
                ENDIF     
   
           
@@ -561,9 +586,38 @@ Define Class LIQUIDACION As Custom
     ENDPROC
     
     
+    PROCEDURE EMBARGO
+           
+      VarEmbargo =0
+      try 
+        SalarioMin = VAL(FILETOSTR('smv.txt'))
+      CATCH TO e 
+            this.mensaje("No Se puede Abrir El Archivo smv.txt")
+       
+      ENDTRY
+       
+      DO CASE  
+         CASE this.waporte > SalarioMin*2
+              VarEmbargo = (this.waporte - SalarioMin)*0.20
+         CASE this.waporte  < SalarioMin*2              
+              VarEmbargo = (this.waporte - SalarioMin)*0.10
+      ENDCASE         
+      this.wimporte = VarEmbargo
+      
+    ENDPROC
+    
+    PROCEDURE EMBARGOSAL
+       
+       LOCAL VarTotalSueldo,VarEmbargo
+       STORE 0 TO VarTotalSueldo,VarEmbargo
+       VarTotalSueldo = (this.waporte -this.wtotaporneg)+ this.wtotsinapor
+       VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
+       this.wimporte  = VarEmbargo
+       
     
     
     
+    ENDPROC
     
     
  
@@ -571,24 +625,42 @@ Enddefine
 
 
 
+DEFINE CLASS configurar AS liquidacion
+ PropRuta = " "
+ 
+     
+    PROCEDURE init
+       
+ 
+    Endproc
+
+       
+	PROCEDURE Seteo        
+      SET EXCLUSIVE OFF
+      SET DATE ITALIAN
+      SET TALK OFF
+	  SET EXCLUSIVE OFF
+	  SET REPROCESS TO AUTOMATIC
+      SET MULTILOCKS ON
+	  SET DELETED ON
+    Endproc
+
+    
+    PROCEDURE SeteoPat
+       this.PropRuta ="t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS"
+    Endproc
+
+    PROCEDURE Abrobase
+       TRY 
+         OPEN DATABASE SUELDOS
+       CATCH TO Err
+         this.mensaje ("Error No se Puede Abrir la Base De Datos")
+       ENDTRY   
+	Endproc
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ENDDEFINE
 
 
 

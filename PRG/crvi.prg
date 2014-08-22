@@ -1,3 +1,4 @@
+PARAMETERS archivo
 CLOSE tables
 SET muLtilocks on
 SET EXCLUSIVE OFF
@@ -5,7 +6,7 @@ SET SQLBUFFERING ON
 SET SAFETY OFF
 SELECT 0
 OPEN DATABASE f:\sueldos\sueldos
-archivo = "c:\suerut\empre1\62014"
+*archivo = "f:\sueldos\empre1\62014"
 USE &archivo
 CREATE SQL VIEW  curliq as;
 SELECT legajo, concepto, tipoconcep, valoruni,  cantidad,; 
