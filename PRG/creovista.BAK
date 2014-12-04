@@ -2,7 +2,8 @@
 SET PROCEDURE TO T:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
 Obj.SeteoPat
-liq = "52014"
+arch = "B112014"
+liq = arch
 X = FILETOSTR("T:\FWSU\PRG\CRVI.PRG")
 CADBU = "12014"
 CADREP = liq
@@ -14,4 +15,4 @@ WAIT WINDOW "PROCESO TERMINADO"
 DO CRVISD WITH liq
 * este procedimiento es para crear la vista de liquidacion de sueldo
 * 1 se usa creovista que guarda  la vista en crvisd
-* 2 se corre el progama crvisd 
+* 2 se corre el progama crvisd * prueba de segundo commit

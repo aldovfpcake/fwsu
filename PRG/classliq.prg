@@ -31,6 +31,7 @@ Define Class LIQUIDACION As Custom
 	waporte       = 0
 	wtotsinapor   = 0
 	wtotaporneg   = 0
+	wdisplaynove  = .f.
 	Procedure Init
 		Set Date Italian
 		Set Century On
@@ -138,9 +139,7 @@ Define Class LIQUIDACION As Custom
             * SE USA POR COMAPTIBILIDAD
            * 
             IF curliq.concepto = 150
-               SET STEP ON 
                this.embargosal
-            
             ENDIF
            
            
@@ -210,16 +209,21 @@ Define Class LIQUIDACION As Custom
 
 
     PROCEDURE auditar
+      LOCAL retorna
+      retorna = .f. 
       SELECT * FROM AUDITOR WHERE MES = this.wmes .and. ANO = this.wano .and. legajo = this.wlegajo;
       INTO CURSOR VEOAUDIT
       IF .not. EOF()
-          MESSAGEBOX("Se Detectan Novedades a Cargar",16,"Atención")
-          browse
+          IF this.wdisplaynove = .t.
+             MESSAGEBOX("Se Detectan Novedades a Cargar",16,"Atención")
+            * browse
+          ENDIF 
+          retorna = .t.
       ENDIF
       SELECT VEOAUDIT
       
-      SELECT CURLIQ
-      return 
+      *SELECT CURLIQ
+      return retorna
     
     Endproc
 

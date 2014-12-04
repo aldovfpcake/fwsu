@@ -1,5 +1,6 @@
 SET TALK OFF
 SET EXCLUSIVE OFF
+SET DATE ITALIAN
 SET REPROCESS TO AUTOMATIC
 SET MULTILOCKS ON
 SET DELETED ON
@@ -30,13 +31,28 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-
-
-DO FORM liquidacion
+vmes = 11
+vano = 2014
+DO FORM liquidacion WITH "Noviembre 2014"
 READ EVENTS
 
 PROCEDURE errhand
 PARAMETER merror, mess, mess1, mprog, mlineno
+
+IF merror = 2005
+     x = TABLEREVERT( )
+ENDIF
+
+IF merror = 111 .or. merror = 1585
+   SELECT curliq
+   MESSAGEBOX("Revirtiendo Cambios Tabla de solo lectura",0,"Atención")
+   x = TABLEREVERT()
+ENDIF    
+
+IF merror = 12
+   RETURN
+endif   
+
 DO FORM FORMERROR
 
 CLEAR
@@ -45,7 +61,10 @@ CLEAR
 ? 'Línea de código con error: ' + mess1
 ? 'Número de línea del error: ' + LTRIM(STR(mlineno))
 ? 'Programa con error: ' + mprog
-IF merror = 2005
-     x = TABLEREVERT( )
-ENDIF
+
+
+
+
+
+
 RETURN   
