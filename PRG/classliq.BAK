@@ -216,7 +216,7 @@ Define Class LIQUIDACION As Custom
       IF .not. EOF()
           IF this.wdisplaynove = .t.
              MESSAGEBOX("Se Detectan Novedades a Cargar",16,"Atención")
-             browse
+            * browse
           ENDIF 
           retorna = .t.
       ENDIF
