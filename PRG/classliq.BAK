@@ -210,12 +210,17 @@ Define Class LIQUIDACION As Custom
 
     PROCEDURE auditar
       LOCAL retorna
+      IF this.wdisplaynove = .f.
+          RETURN .f.
+      ENDIF
+         
+      
       retorna = .f. 
       SELECT * FROM AUDITOR WHERE MES = this.wmes .and. ANO = this.wano .and. legajo = this.wlegajo;
       INTO CURSOR VEOAUDIT
       IF .not. EOF()
           IF this.wdisplaynove = .t.
-             MESSAGEBOX("Se Detectan Novedades a Cargar",16,"Atención")
+            * MESSAGEBOX("Se Detectan Novedades a Cargar",16,"Atención")
             * browse
           ENDIF 
           retorna = .t.
@@ -417,13 +422,24 @@ Define Class LIQUIDACION As Custom
     ENDPROC
     
     
-           
-    
-    
-    
-    
-
-    PROCEDURE BUSCOBASE
+          
+          
+          
+          
+          
+    PROCEDURE CARGODIACAM      
+       varcndiacam = 16
+          
+      SELECT concepto FROM curliq WHERE concepto = varcndiacam INTO CURSOR existe
+      
+      IF EOF() 
+         INSERT INTO curliq (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);
+         VALUES(this.wlegajo,varcndiacam,0,3) 
+      ENDIF    
+   ENDPROC
+  
+  
+   PROCEDURE BUSCOBASE
     PARAMETERS coneptbus
         SELECT * FROM maper WHERE tipoliq = this.wtipoliq .and. legajo = this.wlegajo;
         .and. concepto = coneptbus INTO CURSOR Exstmp 
@@ -623,8 +639,24 @@ Define Class LIQUIDACION As Custom
     
     ENDPROC
     
+    PROCEDURE EXISTEVAC
     
- 
+      *SELECT legajo,ano,desde,hasta,dias,sueldos FROM vacaci WHERE legajo = this.legajo .and.
+    
+    
+    
+    
+    ENDPROC
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
 Enddefine
 
 
@@ -660,11 +692,264 @@ DEFINE CLASS configurar AS liquidacion
        CATCH TO Err
          this.mensaje ("Error No se Puede Abrir la Base De Datos")
        ENDTRY   
-	Endproc
+	ENDPROC
+	
+ENDDEFINE
 
+DEFINE CLASS montoescrito as Custom
+    
+    
+            
+
+            FUNCTION nombremes
+			parameters wmes
+
+			nom = space(12)
+
+			declare meses [12]
+
+			meses[1]  = 'enero'
+			meses[2]  = 'febrero'
+			meses[3]  = 'marzo'
+			meses[4]  = 'abril'
+			meses[5]  = 'mayo'
+			meses[6]  = 'junio'
+			meses[7]  = 'julio'
+			meses[8]  = 'agosto'
+			meses[9]  = 'setiembre'
+
+			meses[10] = 'octubre'
+			meses[11] = 'noviembre'
+			meses[12] = 'diciembre'
+
+			if wmes = 0 .or. wmes > 12
+			   nom  = 'error en número de período'
+			else  
+			   nom  = meses[wmes] 
+			endif   
+
+			return nom
+         
+            ***********************         
+            FUNCTION monto()
+	   	    ***********************		
+			
+			parameters letras,nn
+			dimension nombre [28]
+			store "uno"        to nombre[1]
+			store "dos"        to nombre [2]
+			store "tres"       to nombre [3]
+			store "cuatro"     to nombre [4]
+			store "cinco"      to nombre [5]
+			store "seis"       to nombre [6]
+			store "siete"      to nombre [7]
+			store "ocho"       to nombre [8]
+			store "nueve"      to nombre [9]
+			store "diez"       to nombre [10]
+			store "once"       to nombre [11]
+			store "doce"       to nombre [12]
+			store "trece"      to nombre [13]
+			store "catorce"    to nombre [14]
+			store "quince"     to nombre [15]
+			store "dieciseis"  to nombre [16]
+			store "diecisiete" to nombre [17]
+			store "dieciocho"  to nombre [18]
+			store "diecinueve "to nombre [19]
+			store "veinte"     to nombre [20]
+			store "treinta"    to nombre [21]
+			store "cuarenta "  to nombre [22]
+			store "cincuenta"  to nombre [23]
+			store "sesenta  "  to nombre [24]
+			store "setenta  "  to nombre [25]
+			store "ochenta  "  to nombre [26]
+			store "noventa  "  to nombre [27]
+			store "ciento   "  to nombre [28]
+
+		  
+
+
+			store space(20) to gracia,nuni,centena,unimil,parcial,decemil
+			store space(3) to nrgral
+			store space(2) to cc,dec,unid,vn,vmil,wdec
+			store 0  to cientos,mil,integro,deci
+			integro = int(nn)
+			deci    = ((nn - integro)*100)
+
+			if deci = 0
+			   parcial = ' '
+			else
+			   parcial = ltrim("con " + str(deci,2) +"/100")
+			endif
+
+			if integro < 10000
+			   nrgral  = str(integro,4)
+			else 
+			   if integro > 100000
+				  nrgral = str(integro,6) 
+			   else
+				  nrgral   = str(integro,5)
+			   endif
+			 
+			endif
+
+			if integro < 10000
+				cientos = len(ltrim(nrgral))
+				mil     = len(ltrim(nrgral))
+				cc      =  substr(nrgral,3)
+				dec     = substr(cc,1,1)
+				unid    = substr(cc,2)
+				wdec    = substr(cc,1,2)
+			else
+				cientos  = val (substr (nrgral,3,1))
+				dec      =  substr(nrgral,4,1)  
+				unid     =  substr(nrgral,5,1)
+				wdec     =  substr(nrgral,4,2)
+			endif
+
+			if integro >= 10000 .and. integro < 20000
+				decenamil = substr(nrgral,1,2)
+				decemil    =  nombre[val(decenamil)] + "mil"
+			else
+				if integro >=20000
+					decenamil  = substr(nrgral,1,1)+ "0"		 
+													
+					unidademil = " "
+					bnum       = substr(nrgral,2,1)
+					if bnum <> "0"
+					  unidademil = nombre[val(bnum)]
+					endif
+					if decenamil = "20"
+					   decemil = "veinti"+ unidademil + "mil" 
+					else
+					   do case
+						  case decenamil = "30"
+										  decemil    =  nombre[21]+ unidademil + "mil"   
+					   endcase
+					endif
+					mil = 0
+				endif
+				*wait window decemil
+			endif
+
+
+
+			if mil = 4
+			   vmil= substr(nrgral,1,1)
+			   do case
+				  case val(vmil) = 1
+						 unimil  = "mil"
+				  case val(vmil) = 2
+					   unimil    = nombre[val(vmil)] + "mil"  
+				  case val(vmil) = 3
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 4
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 5
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 6
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 7
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 8
+					   unimil    = nombre[val(vmil)] + "mil"
+				  case val(vmil) = 9
+					   unimil    = nombre[val(vmil)] + "mil"
+				  otherwise
+					   unimil    = ' '
+			   endcase
+			endif
+
+			if cientos = 4 .or. cientos = 3
+			   vn = right((substr(nrgral,1,2)),1)
+			*  @1,1 say vn
+			 do case
+				   case val(vn) = 0
+						centena = '     '
+				   case val(vn) = 1
+						if val(wdec) = 0
+						   centena = "cien"
+						else
+						   centena = "ciento"
+						endif
+					case val(vn) = 5
+						centena = "quinientos"
+				   case val(vn) = 9
+						centena = "novecientos"
+				   otherwise
+						 centena =  nombre[val(vn)] + "cientos"
+				endcase
+			endif
+
+			if integro > 10000
+				do case 
+					case cientos = 0
+						 centena = " "    
+					case cientos = 1
+						 centena = "ciento "    
+					case cientos = 5
+						 centena = "quinientos"
+					case cientos = 5      
+						 centena = "novecientos"
+					otherwise		 
+						 centena =  nombre[cientos] + "cientos"
+				endcase
+			endif
+
+
+
+
+			do case
+			   case val(dec) = 0
+					gracia = "        "
+			   case val(dec)= 1
+					  gracia = nombre[val(wdec)]
+			   case val(dec) = 2
+					gracia   = nombre[(val(dec)*10)]
+			   case val(dec)= 3
+					gracia=    nombre[(val(dec)*10)-9]
+			   case val(dec)=4
+					gracia=    nombre[(val(dec)*10)-18]
+			   case val(dec)=5
+					gracia   = nombre[(val(dec)*10)-27]
+			   case val(dec)=6
+					gracia=    nombre[(val(dec)*10)-36]
+			   case val(dec)=7
+					gracia =   nombre[(val(dec)*10)-45]
+			   case val(dec)=8
+					gracia=    nombre[(val(dec)*10)-54]
+			   case val(dec)=9
+					gracia =   nombre[(val(dec)*10)-63]
+			endcase
+			if val(unid) = 0 .or. val(dec)=1
+				nuni = '  '
+			else
+			   if val(dec)=0
+				  nuni = nombre[val(unid)]
+			   else
+				 nuni ="y"+ " "+nombre[val(unid)]
+			   endif
+			endif
+
+
+			if integro < 10000
+				letras= trim(unimil)+" "+trim(centena)+" "+trim(gracia)+" "+trim(nuni)+" "+rtrim(parcial)
+			else
+				if integro > 10000
+					letras= trim(decemil)+" "+trim(centena)+" "+trim(gracia)+" "+trim(nuni)+" "+rtrim(parcial)
+				endif
+			endif    
+
+
+			return letras
 
 
 ENDDEFINE
+
+
+
+
+
+
 
 
 
