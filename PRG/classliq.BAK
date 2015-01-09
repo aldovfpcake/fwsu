@@ -641,9 +641,12 @@ Define Class LIQUIDACION As Custom
     
     PROCEDURE EXISTEVAC
     
-      *SELECT legajo,ano,desde,hasta,dias,sueldos FROM vacaci WHERE legajo = this.legajo .and.
-    
-    
+      SELECT legajo,ano,desde,hasta,dias,sueldos FROM vacaci WHERE legajo = this.wlegajo .and. ANO = this.wano;
+      INTO CURSOR VACEXST
+      IF .NOT. EOF()
+         BROWSE
+      ENDIF
+      SELECT CURLIQ
     
     
     ENDPROC

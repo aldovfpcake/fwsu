@@ -529,9 +529,9 @@ Define Class LIQUIDACION As Custom
        
        DO CASE
           CASE this.wmes = 1 
-               SELECT enero as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
-               SELECT julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
-               prome1 =   (lust.impt + aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+               *SELECT enero as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
+               SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
+               prome1 =   (aterior.julio+ aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
            CASE this.wmes = 2 
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT aterior

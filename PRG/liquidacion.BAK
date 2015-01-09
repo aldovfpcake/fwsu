@@ -33,7 +33,7 @@ SELECT curliq
 SET EXCLUSIVE OFF
 vmes = 12
 vano = 2014
-DO FORM liquidacion WITH "Diciembre 2014"
+DO FORM liquidacion WITH "Diciembre 2014",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

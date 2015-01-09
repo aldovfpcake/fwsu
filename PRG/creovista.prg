@@ -2,10 +2,13 @@
 SET PROCEDURE TO T:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
 Obj.SeteoPat
-arch = "122014"
+arch = "12015"
 liq = arch
 X = FILETOSTR("T:\FWSU\PRG\CRVI.PRG")
+********************
+*ESTA CADENA QUEDA FIJA
 CADBU = "12014"
+************************
 CADREP = liq
 vi = STRTRAN(X,CADBU,CADREP)
 STRTOFILE(vi,"T:\FWSU\PRG\CRVISD.PRG",0)
