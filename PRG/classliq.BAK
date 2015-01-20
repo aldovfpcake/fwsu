@@ -427,16 +427,16 @@ Define Class LIQUIDACION As Custom
           
           
           
-   * PROCEDURE CARGODIACAM      
-   *    varcndiacam = 16
-   *       
-   *   SELECT concepto FROM curliq WHERE concepto = varcndiacam INTO CURSOR existe
-   *   
-   *   IF EOF() 
-   *      INSERT INTO curliq (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);
-   *      VALUES(this.wlegajo,varcndiacam,0,3) 
-   *   ENDIF    
-   *ENDPROC
+    PROCEDURE CARGODIACAM      
+       varcndiacam = 16
+          
+      SELECT concepto FROM curliq WHERE concepto = varcndiacam INTO CURSOR existe
+      
+      IF EOF() 
+         INSERT INTO curliq (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);
+         VALUES(this.wlegajo,varcndiacam,0,3) 
+      ENDIF    
+   ENDPROC
   
   
    PROCEDURE BUSCOBASE
@@ -456,12 +456,19 @@ Define Class LIQUIDACION As Custom
       *INSERT INTO CURLIQ (CONCEPTO,CANTIDAD,APORTE,SINAPORTE,DESCUENTO);
        
         *if this.wmes > 1 
-           wmesliq = this.wmes -1
-           if this.wmes < 6
-          	  this.wmesanterior = ALLTRIM(STR(wmesliq,1)+ STR(this.wano,4))
-           else   
-              this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(this.wano,4))
+           IF this.wmes = 1
+              wmesliq = 12
+              wlustroant = this.wano - 1
+              this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(wlustroant,4))
+           else
+              wmesliq = this.wmes -1
+           	  if this.wmes < 6
+          	     this.wmesanterior = ALLTRIM(STR(wmesliq,1)+ STR(this.wano,4))
+             else   
+                 this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(this.wano,4))
+             endif
            endif
+           
           * wmesliq = 12
           * wlustroant = this.wano - 1
           * this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(wlustroant,4)) 

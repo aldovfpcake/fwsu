@@ -456,12 +456,19 @@ Define Class LIQUIDACION As Custom
       *INSERT INTO CURLIQ (CONCEPTO,CANTIDAD,APORTE,SINAPORTE,DESCUENTO);
        
         *if this.wmes > 1 
-           wmesliq = this.wmes -1
-           if this.wmes < 6
-          	  this.wmesanterior = ALLTRIM(STR(wmesliq,1)+ STR(this.wano,4))
-           else   
-              this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(this.wano,4))
+           IF this.wmes = 1
+              wmesliq = 12
+              wlustroant = this.wano - 1
+              this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(wlustroant,4))
+           else
+              wmesliq = this.wmes -1
+           	  if this.wmes < 6
+          	     this.wmesanterior = ALLTRIM(STR(wmesliq,1)+ STR(this.wano,4))
+             else   
+                 this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(this.wano,4))
+             endif
            endif
+           
           * wmesliq = 12
           * wlustroant = this.wano - 1
           * this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(wlustroant,4)) 
@@ -532,6 +539,8 @@ Define Class LIQUIDACION As Custom
                *SELECT enero as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                prome1 =   (aterior.julio+ aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+               
+               
            CASE this.wmes = 2 
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT aterior
