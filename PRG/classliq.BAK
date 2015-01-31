@@ -483,7 +483,7 @@ Define Class LIQUIDACION As Custom
           	SELECT CONCEPTO  FROM CURLIQ  WHERE CURLIQ.CONCEPTO = RECSU.CONCEPTO INTO CURSOR EXTCOP
           	
           	IF EXTCOP.CONCEPTO = 0 
-          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123
+          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16
           	       
           	       
           	   ELSE
@@ -539,6 +539,8 @@ Define Class LIQUIDACION As Custom
                *SELECT enero as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                prome1 =   (aterior.julio+ aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+               
+               
            CASE this.wmes = 2 
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT aterior
