@@ -450,6 +450,63 @@ Define Class LIQUIDACION As Custom
 
     ENDPROC
 
+    PROCEDURE FERIADONOTRA
+         IF this.wtipoliq <> 3
+            RETURN 
+         ENDIF
+         varfc   = 8
+         varfer  = 9
+         SELECT concepto FROM curliq WHERE concepto = varfer .or. concepto = varfc INTO CURSOR existe 
+         IF NOT EOF()  
+            RETURN    
+         ENDIF
+    
+         IF this.wmes = 1
+              wmesliq = 12
+              wlustroant = this.wano - 1
+              this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(wlustroant,4))
+           else
+              wmesliq = this.wmes -1
+           	  if this.wmes < 6
+          	     this.wmesanterior = ALLTRIM(STR(wmesliq,1)+ STR(this.wano,4))
+             else   
+                 this.wmesanterior = ALLTRIM(STR(wmesliq,2)+ STR(this.wano,4))
+             endif
+          endif
+
+
+          SELECT LEGAJO AS LE, SUM(this.FER(CONCEPTO,APORTE ))AS M   FROM (this.wmesanterior) ;
+          GROUP BY LEGAJO WHERE LEGAJO = this.wlegajo INTO CURSOR RMVAR
+          IF rmvar.m <>0
+             INSERT INTO CURLIQ (LEGAJO,CONCEPTO,aporte,LIQUIDA);
+            			VALUES(this.wlegajo,9,(rmvar.m/24) ,this.wtipoliq)
+          ENDIF 
+          
+          
+          *  MESSAGEBOX("Importe por Feriado " + STR(rmvar.m,7,2),"aT")
+
+    ENDPROC
+
+
+    FUNCTION FER
+	PARAMETERS wconcepto,waporte
+	LOCAL wimporte as Number
+	DO case
+   		CASE wconcepto = 5 .or. wconcepto = 6
+        wimporte = waporte
+   	CASE wconcepto = 17 .or. wconcepto = 23 .or. wconcepto = 14 .or. concepto = 24    
+        wimporte = waporte
+   	OTHERWISE
+        wimporte = 0
+	ENDCASE
+    RETURN wimporte             
+
+
+
+
+
+
+
 
     PROCEDURE TRAERECIBO
       * DEFINER EL ARCHIVO DE LIQUIDACION
@@ -536,12 +593,17 @@ Define Class LIQUIDACION As Custom
        
        DO CASE
           CASE this.wmes = 1 
-               *SELECT enero as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
+               SELECT  diciembre as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                prome1 =   (aterior.julio+ aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+               IF lust.impt> prome1
+                  prome1 = lust.diciembre 
+                  WAIT WINDOW "TOMANDO BASE DICIEMBRE"
+               ENDIF
                
                
-           CASE this.wmes = 2 
+           CASE this.wmes = 2
+                 
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT aterior
                SELECT  (enero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
