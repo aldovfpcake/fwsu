@@ -10,7 +10,7 @@ ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 SELECT 0
-SELECT * FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR vpersolinea
+SELECT * FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR vpersolinea READWRITE
 *SELECT 0
 *IF .NOT. USED('B92013')
 *    SELECT 0
@@ -31,9 +31,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 3
+vmes = 5
 vano = 2015
-DO FORM liquidacion WITH "Marzo 2015",vmes,vano
+DO FORM liquidacion WITH "Mayo 2015",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

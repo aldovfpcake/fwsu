@@ -621,7 +621,7 @@ Define Class LIQUIDACION As Custom
                SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
                IF ultsuel.ultimo > prome1
                   prome1= ultsuel.ultimo
-                  WAIT  
+                  WAIT WINDOW "TOMANDO BASE FEBRERO" 
                ENDIF   
                
           CASE this.wmes = 4 

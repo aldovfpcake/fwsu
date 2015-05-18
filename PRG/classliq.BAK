@@ -618,7 +618,11 @@ Define Class LIQUIDACION As Custom
                SELECT setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                prome1 =  (lust.impt+aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
-               WAIT WINDOW STR(prome1,8,2)
+               SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
+               IF ultsuel.ultimo > prome1
+                  prome1= ultsuel.ultimo
+                  WAIT  
+               ENDIF   
                
           CASE this.wmes = 4 
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
