@@ -31,6 +31,7 @@ Define Class LIQUIDACION As Custom
 	waporte       = 0
 	wtotsinapor   = 0
 	wtotaporneg   = 0
+	wtotdescue    = 0
 	wdisplaynove  = .f.
 	Procedure Init
 		Set Date Italian
@@ -61,6 +62,7 @@ Define Class LIQUIDACION As Custom
 			Do Case
 
 				Case This.wconextracc = 'ANTIGUEDAD'
+				   
 					This.wfechaliq = Ctod("28"+"-"+Str(This.wmes,2)+"-"+Str(This.wano,4))
 
 					If This.wcancelar = .F.
@@ -138,8 +140,8 @@ Define Class LIQUIDACION As Custom
            
             * SE USA POR COMAPTIBILIDAD
            * 
-            IF curliq.concepto = 150
-               this.embargosal
+            IF curliq.concepto = 150 .or. curliq.concepto = 153
+               this.embargosal(curliq.concepto)
             ENDIF
            
            
@@ -161,6 +163,7 @@ Define Class LIQUIDACION As Custom
                CASE this.wtipoconcep =   'DESCUENTO'       
                     SELECT curliq
                     replace  curliq.descuento WITH this.wimporte 
+                    this.wtotdescue = this.wtotdescue + this.wimporte
              ENDCASE
             
              IF this.wacumulador # 0
@@ -281,8 +284,9 @@ Define Class LIQUIDACION As Custom
 	Procedure buscolegajo
 		Select * From PERSONAL Where LEGAJO = This.wlegajo;
 			INTO Cursor CURPERSO
+			
 		If CURPERSO.LEGAJO = 0
-			This.mensaje("Error legajo Inexistente " + Str(This.wlegajo,4))
+			This.mensaje("Error legajo Inexistente en Archivo Personal " + Str(This.wlegajo,4))
 			This.wcancelar = .F.
 		Else
 			This.wfechaingreso  = CURPERSO.fechaing
@@ -407,12 +411,16 @@ Define Class LIQUIDACION As Custom
           	 wexiste = 0
           	SELECT CONCEPTO  FROM CURLIQ  WHERE CURLIQ.CONCEPTO = BASELIQ.CONCEPTO INTO CURSOR EXTCOP
           	IF EXTCOP.CONCEPTO = 0
-          	         
-            			INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);
-            			VALUES(this.wlegajo,BASELIQ.CONCEPTO,BASELIQ.UNIDADES,this.wtipoliq)
-          	             
+          	            IF  BASELIQ.CONCEPTO = 142
+          	               INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+            			   VALUES(this.wlegajo,BASELIQ.CONCEPTO,BASELIQ.UNIDADES,BASELIQ.IMPORTE,this.wtipoliq)
+            			ELSE
+            			   INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);
+            			    VALUES(this.wlegajo,BASELIQ.CONCEPTO,BASELIQ.UNIDADES,this.wtipoliq)
+          	           ENDIF  
           	ENDIF
           	SELECT BASELIQ
+          	
      	ENDSCAN
      	 SELECT BASELIQ
      	 USE
@@ -540,7 +548,7 @@ Define Class LIQUIDACION As Custom
           	SELECT CONCEPTO  FROM CURLIQ  WHERE CURLIQ.CONCEPTO = RECSU.CONCEPTO INTO CURSOR EXTCOP
           	
           	IF EXTCOP.CONCEPTO = 0 
-          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16
+          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142
           	       
           	       
           	   ELSE
@@ -702,15 +710,19 @@ Define Class LIQUIDACION As Custom
     ENDPROC
     
     PROCEDURE EMBARGOSAL
-       
+       PARAMETERS concepto
        LOCAL VarTotalSueldo,VarEmbargo
        STORE 0 TO VarTotalSueldo,VarEmbargo
-       VarTotalSueldo = (this.waporte -this.wtotaporneg)+ this.wtotsinapor
+       IF concepto = 150
+       	  VarTotalSueldo = (this.waporte -this.wtotaporneg)+ this.wtotsinapor
+       ENDIF
+       
+       IF concepto = 153
+          VarTotalSueldo = (this.waporte - this.wtotdescue) 
+       ENDIF   
+
        VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
        this.wimporte  = VarEmbargo
-       
-    
-    
     
     ENDPROC
     

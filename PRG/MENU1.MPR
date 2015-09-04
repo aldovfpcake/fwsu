@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 03/03/15              MENU1.MPR               09:20:12  
+*       * 08/20/15              MENU1.MPR               13:03:51  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -26,9 +26,9 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _4an0k0fqk OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
+DEFINE PAD _4fd0s01rt OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _4an0k0fql OF _MSYSMENU PROMPT "LISTADO" COLOR SCHEME 3 ;
+DEFINE PAD _4fd0s01ru OF _MSYSMENU PROMPT "LISTADO" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-ON SELECTION PAD _4an0k0fqk OF _MSYSMENU DO LIQUIDACION
-ON SELECTION PAD _4an0k0fql OF _MSYSMENU DO LISTA
+ON SELECTION PAD _4fd0s01rt OF _MSYSMENU DO LIQUIDACION
+ON SELECTION PAD _4fd0s01ru OF _MSYSMENU DO LISTA
