@@ -284,9 +284,7 @@ Define Class LIQUIDACION As Custom
 	Procedure buscolegajo
 		Select * From PERSONAL Where LEGAJO = This.wlegajo;
 			INTO Cursor CURPERSO
-			BROWSE TITLE "Curperso"
-	        SELECT PERSONAL
-	        BROWSE
+			
 		If CURPERSO.LEGAJO = 0
 			This.mensaje("Error legajo Inexistente en Archivo Personal " + Str(This.wlegajo,4))
 			This.wcancelar = .F.
@@ -550,7 +548,8 @@ Define Class LIQUIDACION As Custom
           	SELECT CONCEPTO  FROM CURLIQ  WHERE CURLIQ.CONCEPTO = RECSU.CONCEPTO INTO CURSOR EXTCOP
           	
           	IF EXTCOP.CONCEPTO = 0 
-          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142
+          	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
+          	   .OR. RECSU.CONCEPTO = 175
           	       
           	       
           	   ELSE
