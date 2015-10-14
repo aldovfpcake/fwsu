@@ -1,0 +1,5 @@
+SET PROCEDURE TO T:\FWSU\prg\CLASSLIQ
+CLOSE TABLES all
+x=CREATEOBJECT('configurar')
+x.Seteopat
+DO FORM resugral
