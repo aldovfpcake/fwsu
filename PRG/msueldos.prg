@@ -4,3 +4,4 @@ ob = CREATEOBJECT("configurar")
 ob.Seteo
 ob.Seteopat
 DO menu1.mpr
+READ EVENTS
