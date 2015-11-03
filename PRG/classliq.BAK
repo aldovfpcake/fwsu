@@ -553,7 +553,7 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 
           	       
           	       
           	   ELSE
@@ -1050,9 +1050,12 @@ DEFINE CLASS VISUREC AS Custom
   
    
    PROCEDURE veorec
+   SET STEP ON 
      TRY
-         SELECT 0
          USE (this.archivo) ALIAS liqsu
+              SELECT 0
+              USE (this.archivo) ALIAS liqsu
+         ENDIF     
          SELECT * FROM  liqsu WHERE legajo=this.legajo;
          .and. liquida = this.liquida ORDER BY concepto INTO cursor recibo READWRITE
          SELECT liqsu
@@ -1067,14 +1070,6 @@ DEFINE CLASS VISUREC AS Custom
    
    ENDPROC   
 
-  
-   PROCEDURE destroy
-   
-    SELECT RECIBO
-    USE
-   
-   
-   ENDPROC
 
 
 

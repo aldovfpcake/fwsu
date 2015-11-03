@@ -1050,9 +1050,13 @@ DEFINE CLASS VISUREC AS Custom
   
    
    PROCEDURE veorec
+      x = CREATEOBJECT('CONFIGURAR') 
+      x.seteopat
      TRY
-         SELECT 0
-         USE (this.archivo) ALIAS liqsu
+         IF .NOT. USED(this.archivo)
+              SELECT 0
+              USE (this.archivo) ALIAS liqsu
+         ENDIF     
          SELECT * FROM  liqsu WHERE legajo=this.legajo;
          .and. liquida = this.liquida ORDER BY concepto INTO cursor recibo READWRITE
          SELECT liqsu

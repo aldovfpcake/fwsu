@@ -1,6 +1,5 @@
-Form t:\fwsu\forms\codsuel.scx has the following errors:
-    Visual Class Library WIZEMBSS - Undefined
-    Visual Class Library WIZBTNS - Undefined
+Form t:\fwsu\forms\liquidacion.scx has the following errors:
+    Form CODSUEL - Undefined
 
 Program t:\fwsu\prg\cust_afip.prg has the following errors:
     Visual Class Library AFIP_ANSES - Undefined
