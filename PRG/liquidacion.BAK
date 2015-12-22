@@ -4,7 +4,12 @@ SET DATE ITALIAN
 SET REPROCESS TO AUTOMATIC
 SET MULTILOCKS ON
 SET DELETED ON
-SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+*SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
+SET PROCEDURE TO T:\fwsu\prg\classliq
+ob = CREATEOBJECT("configurar")
+ob.Seteo
+ob.Seteopat(1)
+
 OPEN DATABASE SUELDOS SHARED
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
@@ -31,9 +36,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 10
+vmes = 12
 vano = 2015
-DO FORM liquidacion WITH "Octubre 2015",vmes,vano
+DO FORM liquidacion WITH " Noviembre 2015",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

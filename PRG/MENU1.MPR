@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 09/23/15              MENU1.MPR               11:51:12  
+*       * 20-11-15              MENU1.MPR               09:34:28  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -26,9 +26,16 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _4gb0pem0v OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
+DEFINE PAD _4hx0kisbu OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _4gb0pem0w OF _MSYSMENU PROMPT "LISTADO" COLOR SCHEME 3 ;
+DEFINE PAD _4hx0kisbv OF _MSYSMENU PROMPT "LISTADOS" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-ON SELECTION PAD _4gb0pem0v OF _MSYSMENU DO LIQUIDACION
-ON SELECTION PAD _4gb0pem0w OF _MSYSMENU DO LISTA
+DEFINE PAD _4hx0kisbw OF _MSYSMENU PROMPT "LISTADO" COLOR SCHEME 3 ;
+	KEY ALT+L, ""
+ON SELECTION PAD _4hx0kisbu OF _MSYSMENU DO LIQUIDACION
+ON PAD _4hx0kisbv OF _MSYSMENU ACTIVATE POPUP listados
+ON SELECTION PAD _4hx0kisbw OF _MSYSMENU DO LISTA
+
+DEFINE POPUP listados MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF listados PROMPT "Resumen General"
+ON SELECTION BAR 1 OF listados do  resugral

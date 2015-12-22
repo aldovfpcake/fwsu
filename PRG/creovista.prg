@@ -1,8 +1,8 @@
 *SET PATH TO T:\FWSU\PRG;F:\SUELDOS\EMPRE1
 SET PROCEDURE TO T:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
-Obj.SeteoPat
-arch = "102015"
+Obj.SeteoPat(1)
+arch = "122015"
 liq = arch
 X = FILETOSTR("T:\FWSU\PRG\CRVI.PRG")
 ********************

@@ -39,16 +39,22 @@ Define Class LIQUIDACION As Custom
 		Set Century On
 		SET exclusive off
 		SET DELETED on
+		
 		*This.buscolegajo
 		*this.cargobase
 
 	Endproc
 
 	Procedure LIQUIDA
-		Local wvalorfin As Decimal
-        For i = 1 To Alen(This.wacumula)
+	    Local wvalorfin As Decimal
+        for i = 1 To Alen(This.wacumula)
 			This.wacumula(i) = 0
 		Endfor
+		
+		IF this.wmes = 12
+		    this.cargodiacam
+		ENDIF    
+		
 		
 		Select curliq
 		GO top
@@ -144,7 +150,10 @@ Define Class LIQUIDACION As Custom
             IF curliq.concepto = 150 .or. curliq.concepto = 153
                this.embargosal(curliq.concepto)
             ENDIF
-           
+            IF curliq.concepto = 405
+              
+               WAIT WINDOW this.wtipoconcep   
+            ENDIF
            
            
             DO Case
@@ -161,6 +170,10 @@ Define Class LIQUIDACION As Custom
                     SELECT curliq
                     replace  curliq.sinaporte WITH this.wimporte
                     this.wtotsinapor = this.wtotsinapor+ this.wimporte
+               CASE this.wtipoconcep = 'S/AP NEGATI'
+                    SELECT curliq 
+                    replace curliq.sinaporte WITH (this.wimporte - (this.wimporte*2))
+                      
                CASE this.wtipoconcep =   'DESCUENTO'       
                     SELECT curliq
                     replace  curliq.descuento WITH this.wimporte 
@@ -553,7 +566,7 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 
           	       
           	       
           	   ELSE
@@ -744,9 +757,7 @@ Define Class LIQUIDACION As Custom
     ENDPROC
     
     
-    
-    
-    
+       
     
     
     
@@ -778,7 +789,13 @@ DEFINE CLASS configurar AS liquidacion
 
     
     PROCEDURE SeteoPat
-       SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+       PARAMETERS cpath
+       DO CASE
+          CASE cpath = 1
+                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+          CASE cpath = 2
+                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
+       ENDCASE
     Endproc
 
     PROCEDURE Abrobase
@@ -1051,22 +1068,24 @@ DEFINE CLASS VISUREC AS Custom
    
    PROCEDURE veorec
       x = CREATEOBJECT('CONFIGURAR') 
-      x.seteopat
-     TRY
-         IF .NOT. USED(this.archivo)
-              SELECT 0
-              USE (this.archivo) ALIAS liqsu
-         ENDIF     
-         SELECT * FROM  liqsu WHERE legajo=this.legajo;
+      x.seteopat(1)
+    
+     *TRY
+         *IF .NOT. USED(this.archivo)
+         *     SELECT 0
+         *     USE (this.archivo) ALIAS liqsu
+         *ENDIF     
+          varchivo = this.archivo 
+          SELECT * FROM (varchivo)  WHERE legajo=this.legajo;
          .and. liquida = this.liquida ORDER BY concepto INTO cursor recibo READWRITE
-         SELECT liqsu
-         use
-    CATCH TO e
          
-         MESSAGEBOX ("Error",0,"NO SE ENENCUENTRA EL ARCHIVO ERROR Nº" + " " + CURDIR()+ STR(ERROR(),4) )
-         this.cancelar = .f.
-      
-    ENDTRY
+         
+    *CATCH TO e
+         
+    *     MESSAGEBOX ( "Error",0,"NO SE ENENCUENTRA EL ARCHIVO ERROR Nº" + " " + CURDIR()+ STR(ERROR(),4),0,"AT" )
+    *     this.cancelar = .f.
+    *     FINALLY  
+    *ENDTRY
    
    
    ENDPROC   
@@ -1080,6 +1099,62 @@ DEFINE CLASS VISUREC AS Custom
 ENDDEFINE
 
 
+
+DEFINE CLASS LQSAC AS LIQUIDACION
+
+wlustro  = " "
+wano     = 0
+wtiposac = 0
+wmejor   = 0
+
+
+
+
+
+PROCEDURE LIQUISAC
+      wlustro = "SBR" +SUBSTR(STR(this.wano,4),3)
+      
+     IF this.wtiposac = 2
+         SELECT junio,julio,agosto,setiembre,octubre,noviembre,diciembre FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR calcsac
+         this.wmejor = 0
+         this.wmejor = junio
+         
+         IF julio > this.wmejor
+            this.wmejor = Julio
+         ENDIF   
+           
+         IF agosto > this.wmejor
+                 this.wmejor = agosto
+         ENDIF
+              
+         IF setiembre > this.wmejor
+             this.wmejor = setiembre
+         ENDIF
+                
+         IF  octubre > this.wmejor
+              this.wmejor = octubre
+         ENDIF
+             
+         IF  noviembre > this.wmejor
+              this.wmejor = noviembre
+         ENDIF
+         
+         IF   diciembre > this.wmejor                  
+                 this.wmejor = diciembre   
+         ENDIF
+     ENDIF    
+      
+ENDPROC
+
+
+
+
+
+
+
+
+
+ENDDEFINE
 
 
 
