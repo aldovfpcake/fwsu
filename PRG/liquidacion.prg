@@ -21,6 +21,12 @@ SELECT * FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR vpersoline
 *    SELECT 0
 *    USE B92013
 *ENDIF
+IF .NOT. USED('comentarios')
+    SELECT 0
+    USE comentarios NODATA
+ENDIF  
+
+
 IF .NOT. USED('curliq')
     SELECT 0
     USE curliq NODATA
