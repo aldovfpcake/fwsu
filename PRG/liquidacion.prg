@@ -35,16 +35,16 @@ lSuccess=CURSORSETPROP("Buffering", 3, "curliq")
 IF lSuccess = .f.
     =MESSAGEBOX("Operation NOT successful!",0,"Operation Status")
 ENDIF
-
+_screen.Visible = .F.
 SELECT * FROM CODSUEL ORDER BY CONCEPTO INTO CURSOR CONCEPTOS   
 SET EXCLUSIVE ON
 SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 12
-vano = 2015
-DO FORM liquidacion WITH " Diciembre 2015",vmes,vano
+vmes = 3
+vano = 2016
+DO FORM liquidacion WITH " Marzo 2016",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

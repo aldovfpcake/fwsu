@@ -39,6 +39,8 @@ Define Class LIQUIDACION As Custom
 		Set Century On
 		SET exclusive off
 		SET DELETED on
+		Select curliq
+		*SET FILTER TO legajo = this.wlegajo .and. liquida = this.wtipoliq
 		
 		*This.buscolegajo
 		*this.cargobase
@@ -52,13 +54,14 @@ Define Class LIQUIDACION As Custom
 		Endfor
 		
 		IF this.wmes = 12
-		    this.cargodiacam
+		   *CODIGO PARA CARGAR DIA DE CAMIONERO
 		ENDIF    
 		
 		
 		Select curliq
+		*SET FILTER TO legajo = this.wlegajo .and. liquida = this.wtipoliq
 		GO top
-		SCAN
+		SCAN FOR LEGAJO = this.wlegajo .and. LIQUIDA = this.wtipoliq
 		    this.wcant = curliq.cantidad
 			This.bsconcepto(curliq.concepto)
 			Select curliq
@@ -639,16 +642,16 @@ Define Class LIQUIDACION As Custom
                   prome1 = lust.impt
                   WAIT WINDOW "TOMANDO BASE ENERO"
                ENDIF
-               WAIT WINDOW STR(prome1,8,2)
+               WAIT WINDOW STR(prome1,8,2) + "...."+ STR(lust.impt,8,2)
           CASE this.wmes = 3 
                SELECT setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                prome1 =  (lust.impt+aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
-               SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
-               IF ultsuel.ultimo > prome1
-                  prome1= ultsuel.ultimo
-                  WAIT WINDOW "TOMANDO BASE FEBRERO" 
-               ENDIF   
+               *SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
+               *IF ultsuel.ultimo > prome1
+               *   prome1= ultsuel.ultimo
+               *   WAIT WINDOW "TOMANDO BASE FEBRERO" 
+               *ENDIF   
                
           CASE this.wmes = 4 
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
@@ -656,15 +659,16 @@ Define Class LIQUIDACION As Custom
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                prome1 =  (aterior.octubre+aterior.noviembre+aterior.diciembre+lust.impt)/6
   
-              IF ultimosue.ultimo > prome1
-                 prome1 = ultimosue.ultimo
-                 WAIT WINDOW "TOMANDO BASE ABRIL"
-              ENDIF     
+              *IF ultimosue.ultimo > prome1
+              *   prome1 = ultimosue.ultimo
+               *  WAIT WINDOW "TOMANDO BASE ABRIL"
+              *ENDIF     
   
             
           CASE this.wmes = 5 
-               SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
-               prome1 =  (lust.impt)/5 
+               SELECT  noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
+               SELECT  (enero+febrero+marzo+abril) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               prome1 =  (aterior.noviembre + aterior.diciembre+ lust.impt)/6 
           
           CASE this.wmes = 6 
                SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
@@ -1113,6 +1117,36 @@ wmejor   = 0
 
 PROCEDURE LIQUISAC
       wlustro = "SBR" +SUBSTR(STR(this.wano,4),3)
+      
+      IF this.wtiposac = 1
+         SELECT enero,febrero,marzo,abril,mayo,junio FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR calcsac
+         this.wmejor = 0 
+         this.wmejor = enero
+         
+         IF febrero > this.wmejor    
+            this.wmejor = febrero
+         ENDIF    
+      
+         IF marzo > this.wmejor    
+            this.wmejor = marzo
+         ENDIF    
+      
+         IF abril > this.wmejor    
+            this.wmejor = abril
+         ENDIF    
+         
+         IF mayo  > this.wmejor    
+            this.wmejor = mayo
+         ENDIF    
+       
+         IF junio > this.wmejor    
+            this.wmejor = junio
+         ENDIF    
+      
+      ENDIF
+      
+      
+      
       
      IF this.wtiposac = 2
          SELECT junio,julio,agosto,setiembre,octubre,noviembre,diciembre FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR calcsac
