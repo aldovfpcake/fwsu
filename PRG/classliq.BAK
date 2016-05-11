@@ -59,7 +59,6 @@ Define Class LIQUIDACION As Custom
 		
 		
 		Select curliq
-		*SET FILTER TO legajo = this.wlegajo .and. liquida = this.wtipoliq
 		GO top
 		SCAN FOR LEGAJO = this.wlegajo .and. LIQUIDA = this.wtipoliq
 		    this.wcant = curliq.cantidad
@@ -569,7 +568,7 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 
           	       
           	       
           	   ELSE
@@ -647,11 +646,11 @@ Define Class LIQUIDACION As Custom
                SELECT setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                prome1 =  (lust.impt+aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
-               SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
-               IF ultsuel.ultimo > prome1
-                  prome1= ultsuel.ultimo
-                  WAIT WINDOW "TOMANDO BASE FEBRERO" 
-               ENDIF   
+               *SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
+               *IF ultsuel.ultimo > prome1
+               *   prome1= ultsuel.ultimo
+               *   WAIT WINDOW "TOMANDO BASE FEBRERO" 
+               *ENDIF   
                
           CASE this.wmes = 4 
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
@@ -659,15 +658,16 @@ Define Class LIQUIDACION As Custom
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                prome1 =  (aterior.octubre+aterior.noviembre+aterior.diciembre+lust.impt)/6
   
-              IF ultimosue.ultimo > prome1
-                 prome1 = ultimosue.ultimo
-                 WAIT WINDOW "TOMANDO BASE ABRIL"
-              ENDIF     
+              *IF ultimosue.ultimo > prome1
+              *   prome1 = ultimosue.ultimo
+               *  WAIT WINDOW "TOMANDO BASE ABRIL"
+              *ENDIF     
   
             
           CASE this.wmes = 5 
-               SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
-               prome1 =  (lust.impt)/5 
+               SELECT  noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
+               SELECT  (enero+febrero+marzo+abril) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               prome1 =  (aterior.noviembre + aterior.diciembre+ lust.impt)/6 
           
           CASE this.wmes = 6 
                SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust

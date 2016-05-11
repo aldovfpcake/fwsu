@@ -59,7 +59,6 @@ Define Class LIQUIDACION As Custom
 		
 		
 		Select curliq
-		*SET FILTER TO legajo = this.wlegajo .and. liquida = this.wtipoliq
 		GO top
 		SCAN FOR LEGAJO = this.wlegajo .and. LIQUIDA = this.wtipoliq
 		    this.wcant = curliq.cantidad
@@ -569,7 +568,7 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 
           	       
           	       
           	   ELSE
@@ -799,6 +798,8 @@ DEFINE CLASS configurar AS liquidacion
                 SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
           CASE cpath = 2
                 SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
+          CASE cpath = 3
+                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;C:\SUERUT\EMPRE1;F:\SUELDOS                 
        ENDCASE
     Endproc
 

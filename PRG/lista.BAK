@@ -1,6 +1,8 @@
 SET PROCEDURE TO T:\FWSU\prg\CLASSLIQ
 SET EXCLUSIVE OFF
+SET DELETED ON
 CLOSE TABLES all
+
 x=CREATEOBJECT('configurar')
-x.Seteopat(1)
+x.Seteopat(3)
 DO FORM listafm
