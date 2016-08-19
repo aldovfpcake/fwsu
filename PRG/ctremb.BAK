@@ -32,7 +32,7 @@ FOR x =1 TO 12
 
 NEXT
 SELECT CTREMB
-SUM FOR legajo = Varlegajo TO VarTot
+SUM importe TO VarTot FOR legajo = Varlegajo
 ? "Total General Retenido............ = " + STR(Vartot,10,2)
 
 

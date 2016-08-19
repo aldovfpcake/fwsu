@@ -39,7 +39,7 @@ Define Class LIQUIDACION As Custom
 		Set Century On
 		SET exclusive off
 		SET DELETED on
-		Select curliq
+		*Select curliq
 		*SET FILTER TO legajo = this.wlegajo .and. liquida = this.wtipoliq
 		
 		*This.buscolegajo
@@ -674,13 +674,7 @@ Define Class LIQUIDACION As Custom
                SELECT   diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                prome1 = (lust.impt + aterior.diciembre)/6  
-          
-               IF ultimosue.ultimo > prome1
-                 prome1 = ultimosue.ultimo
-                 
-               ENDIF     
-  
-          
+                       
           CASE this.wmes = 7 
                SELECT  (enero+febrero+marzo+abril+mayo+ junio) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
                prome1 =  (lust.impt)/6 
@@ -759,7 +753,21 @@ Define Class LIQUIDACION As Custom
     
     ENDPROC
     
+    PROCEDURE EXISTELGPER
+    PARAMETERS wleg
+    LOCAL VarBoldevuelve as Boolean
+    VarBoldevuelve = .t.   
     
+       SELECT LEGAJO,NOMBRE,FECHAING,ACTIVO,FECHABAJA FROM PERSONAL WHERE LEGAJO = WLEG INTO CURSOR EXTLEG
+       
+       IF  .NOT. EMPTY(EXTLEG.FECHABAJA)
+           this.mensaje("Legajo de Baja " + STR(legajo,4)+ " " + extleg.nombre)  
+           VarBoldevuelve = .f.
+       ENDIF
+        
+       RETURN  VarBoldevuelve 
+    
+    ENDPROC
        
     
     
@@ -795,11 +803,11 @@ DEFINE CLASS configurar AS liquidacion
        PARAMETERS cpath
        DO CASE
           CASE cpath = 1
-                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+                SET PATH TO U:\FWSU\FORMS;U:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
           CASE cpath = 2
-                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
+                SET PATH TO U:\FWSU\FORMS;U:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
           CASE cpath = 3
-                SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;C:\SUERUT\EMPRE1;F:\SUELDOS                 
+                SET PATH TO U:\FWSU\FORMS;U:\FWSU\PRG;C:\SUERUT\EMPRE3;F:\SUELDOS                 
        ENDCASE
     Endproc
 
@@ -939,8 +947,20 @@ DEFINE CLASS montoescrito as Custom
 					   decemil = "veinti"+ unidademil + "mil" 
 					else
 					   do case
+					      SET STEP ON 
 						  case decenamil = "30"
 										  decemil    =  nombre[21]+ unidademil + "mil"   
+					      case decenamil = "40"
+										  decemil    =  nombre[22]+ unidademil + "mil" 
+					      case decenamil = "50"
+										  decemil    =  nombre[23]+ unidademil + "mil"
+					      case decenamil = "60"
+										  decemil    =  nombre[24]+ unidademil + "mil"
+					      case decenamil = "70"
+										  decemil    =  nombre[25]+ unidademil + "mil"  					  
+					  
+					  
+					  
 					   endcase
 					endif
 					mil = 0

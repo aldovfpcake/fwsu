@@ -42,9 +42,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 4
+vmes = 8
 vano = 2016
-DO FORM liquidacion WITH " Abril 2016",vmes,vano
+DO FORM liquidacion WITH " Agosto 2016",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

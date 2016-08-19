@@ -11,12 +11,18 @@ SET PROCEDURE TO T:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
 ob.Seteopat(1)
+warchlq = "62016"
+SELECT 0
+USE (warchlq) ALIAS curliq
+
 xb = CREATEOBJECT("lqsac")
-xb.wano = 2015
-xb.wtiposac = 2
-warchlq = "122015"
+xb.wano = 2016
+xb.wtiposac = 1
+
+
 wtipo = 4
 wconcep = 18
+
 SET TEXTMERGE ON
 
 STORE FCREATE( 'c:\suerut\listados\myNamesFile.txt') TO _TEXT
@@ -24,42 +30,54 @@ STORE FCREATE( 'c:\suerut\listados\myNamesFile.txt') TO _TEXT
 
 SELECT LEGAJO,FECHAING,FECHABAJA FROM PERSONAL WHERE ACTIVO = "A" INTO CURSOR LIS ORDER BY LEGAJO
 SCAN
-     xb.wlegajo = lis.legajo
-     xb.liquisac 
-     TEXT
-       <<STR(LIS.LEGAJO,4)>> <<DTOC(LIS.FECHAING)>>  <<DTOC(LIS.FECHABAJA)>> <<STR(xb.wmejor/2,9,2)>>
-     ENDTEXT
-     *INSERT INTO &warchlq(legajo,liquida,concepto,aporte) values(lis.legajo,wtipo,wconcep,(xb.wmejor/2)) 
+*     xb.wlegajo = lis.legajo
+*     xb.liquisac 
+     
+*     TEXT
+*       <<STR(LIS.LEGAJO,4)>> <<DTOC(LIS.FECHAING)>>  <<DTOC(LIS.FECHABAJA)>> <<STR(xb.wmejor/2,9,2)>>
+*     ENDTEXT
+*     
+*     SELECT legajo,concepto FROM curliq WHERE legajo = lis.legajo .and. concepto = 18 .and. liquida = 4;
+*    INTO CURSOR existe
+*     IF EOF()
+*        INSERT INTO &warchlq(legajo,liquida,concepto,aporte) values(lis.legajo,wtipo,wconcep,(xb.wmejor/2)) 
+*     ELSE
+*        UPDATE &warchlq SET aporte = xb.wmejor/2 WHERE legajo = lis.legajo .and.liquida = wtipo .and. concepto =18
+*       
+*     ENDIF
+*     SELECT LIS
+
+      liquisac(lis.legajo)
+      SELECT lis 
+
 ENDSCAN
 
+RETURN
 
 
+
+
+
+
+
+
+
+**********************
+FUNCTION liquisac
+*********************
+PARAMETERS wleg
+?wleg
 SELECT LIS
 GO TOP
 lq = CREATEOBJECT('liquidacion')
-lq.wmes     = 12
-lq.wano     = 2015
+lq.wmes     = 6
+lq.wano     = 2016
 lq.wtipoliq = 4
-SELECT 0
-USE 122015
-SELECT 0
-USE CURLIQ NODATA
-SELECT LIS
+lq.wlegajo = wleg
+lq.liquida 
 
-SCAN
-    
-    lq.wlegajo = lis.legajo
-    SELECT curliq
-    vlegajo   = lis.legajo
-    vliquida  = 4
-    REQUERY()
-    *lq.cargobase
-    GO top
-    lq.liquida 
-     ?lis.legajo
-    SELECT lis 
-         
-ENDSCAN
+ RELEASE lq
 
+RETURN .T.
 
 CLOSE TABLES ALL

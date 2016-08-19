@@ -19,7 +19,7 @@ FOR I = 1 TO 11
     ?archivo
    IF FILE(archivo + '.dbf')
      SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
-     SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA INTO CURSOR liquida
+     SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA  INTO CURSOR liquida
      
      INSERT INTO sueldo(haber,sinaporte,descuento,neto,km,ctrol,mes,tipo,ano) VALUES (liquida.aporte,liquida.sinaporte,liquida.descuento,(liquida.aporte + liquida.sinaporte - liquida.descuento),liquida.km,liquida.ctrld,x,liquida.liquida,varano)
    ENDIF   

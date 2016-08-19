@@ -2,7 +2,7 @@ SET TALK OFF
 SET DELETED ON
 SET PATH TO F:\SUELDOS\EMPRE1
 VarAno = 2016
-Varlegajo = 765
+Varlegajo = 814
 VarTot = 0
 clear
 FOR x =1 TO 12

@@ -5,7 +5,7 @@ SET REPROCESS TO AUTOMATIC
 SET MULTILOCKS ON
 SET DELETED ON
 *SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
-SET PROCEDURE TO T:\fwsu\prg\classliq
+SET PROCEDURE TO u:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
 ob.Seteopat(1)
@@ -42,9 +42,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 5
+vmes = 8
 vano = 2016
-DO FORM liquidacion WITH " Mayo 2016",vmes,vano
+DO FORM liquidacion WITH " Agosto 2016",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand
