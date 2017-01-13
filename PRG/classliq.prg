@@ -34,6 +34,7 @@ Define Class LIQUIDACION As Custom
 	wtotaporneg   = 0
 	wtotdescue    = 0
 	wdisplaynove  = .f.
+	Wpromesu      = 0
 	Procedure Init
 		Set Date Italian
 		Set Century On
@@ -53,8 +54,10 @@ Define Class LIQUIDACION As Custom
 			This.wacumula(i) = 0
 		Endfor
 		
-		IF this.wmes = 12
-		   *CODIGO PARA CARGAR DIA DE CAMIONERO
+		IF this.wmes = 12 .and. this.wtipoliq = 3
+		   IF this.wlegajo <> 755
+		      this.cargodiacam
+		 ENDIF     
 		ENDIF    
 		
 		
@@ -89,6 +92,13 @@ Define Class LIQUIDACION As Custom
 					If This.wcancelar = .F.
 						Exit
 					Endif
+			   		
+		        
+		        CASE this.wconextracc = "VACACI"
+		             
+		             This.buscocategoria   
+		             This.promedio
+		             This.calcuvac			
 					
 
 				Case This.wconextracc =  'MAESTRO'
@@ -329,6 +339,7 @@ Define Class LIQUIDACION As Custom
 			This.wcancelar = .F.
 		Else
 			This.wimporte = CURCATEG.importe
+			This.wbasico  = CURCATEG.importe
 		Endif
 
 	Endproc
@@ -621,15 +632,9 @@ Define Class LIQUIDACION As Custom
        
        DO CASE
           CASE this.wmes = 1 
-               SELECT  diciembre as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
-               SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
-               prome1 =   (aterior.julio+ aterior.agosto + aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
-               IF lust.impt> prome1
-                  prome1 = lust.diciembre 
-                  WAIT WINDOW "TOMANDO BASE DICIEMBRE"
-               ENDIF
-               
-               
+               SELECT  s7,s8,s9,s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
+               this.wpromesu =   (aterior.s7+ aterior.s8 + aterior.s9 + aterior.s10 + aterior.s11 + aterior.s12)/6
+                              
            CASE this.wmes = 2
                  
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
@@ -656,7 +661,7 @@ Define Class LIQUIDACION As Custom
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero+marzo) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
-               prome1 =  (aterior.octubre+aterior.noviembre+aterior.diciembre+lust.impt)/6
+               this.wpromesu =  (aterior.octubre+aterior.noviembre+aterior.diciembre+lust.impt)/6
   
               *IF ultimosue.ultimo > prome1
               *   prome1 = ultimosue.ultimo
@@ -686,22 +691,42 @@ Define Class LIQUIDACION As Custom
                prome1 =  (lust.impt)/6
           CASE this.wmes = 10
                SELECT  (abril+mayo+ junio+ julio+ agosto + setiembre ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s4+s5+s6+s7+s8+s9)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6
           CASE this.wmes = 11 
                SELECT  (mayo+ junio+ julio+ agosto + setiembre+octubre ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s5+s6+s7+s8+s9+s10)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6
           CASE this.wmes = 12 
                SELECT  (junio+ julio+ agosto + setiembre+octubre+noviembre ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s6+s7+s8+s9+s10+s11)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6
       ENDCASE
       
       this.wimporte = prome1
-      *SELECT lust
-     * use
-     * SELECT anterior
-     * use   
-   
+    
     ENDPROC
+    
+    PROCEDURE CALCUVAC
+ 		this.wimporte = this.wbasico + this.wpromesu
+
+	ENDPROC
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     PROCEDURE EMBARGO
@@ -721,6 +746,7 @@ Define Class LIQUIDACION As Custom
               VarEmbargo = (this.waporte - SalarioMin)*0.10
       ENDCASE         
       this.wimporte = VarEmbargo
+      *this.updateembargo
       
     ENDPROC
     
@@ -733,9 +759,10 @@ Define Class LIQUIDACION As Custom
        ENDIF
        
        IF concepto = 153
-          VarTotalSueldo = (this.waporte - this.wtotdescue) 
+          VarTotalSueldo = ((this.waporte -this.wtotaporneg ) - this.wtotdescue) 
        ENDIF   
-
+	   WAIT WINDOW STR(this.waporte,7,2) + ' ' + str(this.wtotdescue,7,2)
+       WAIT WINDOW STR(this.wcant,2)
        VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
        this.wimporte  = VarEmbargo
     
@@ -752,6 +779,30 @@ Define Class LIQUIDACION As Custom
     
     
     ENDPROC
+    
+    *PROCEDURE PDATEEMBARGO
+    
+     * SELECT legajo,periodo FROM ctremb WHERE legajo = Varlegajo .and. periodo = archivo;
+      INTO CURSOR existe
+    
+     * SELECT CURLIQ
+    
+    
+    
+    
+    
+    
+    *ENDPROC
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     PROCEDURE EXISTELGPER
     PARAMETERS wleg
@@ -775,6 +826,16 @@ Define Class LIQUIDACION As Custom
     
      
 Enddefine
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1206,10 +1267,89 @@ ENDPROC
 
 
 
+ENDDEFINE
+
+
+DEFINE CLASS VAC AS liquidacion
+
+    PROCEDURE INIT
+    
+    
+    ENDPROC
+
+
+	PROCEDURE etiquetames
+	     
+	      
+	      
+	      DO CASE
+	         CASE this.wmes = 10
+	         
+	         
+	         
+	          
+	ENDPROC      
+	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 ENDDEFINE
+
+
 
 
 

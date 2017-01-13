@@ -1,3 +1,7 @@
+*PARAMETERS legajo,dias
+SET TALK OFF
+SET SAFETY OFF
+*CLOSE TABLES all
 SET TALK OFF
 SET EXCLUSIVE OFF
 SET DATE ITALIAN
@@ -7,57 +11,44 @@ SET DELETED ON
 OPEN DATABASE F:\SUELDOS\SUELDOS SHARED
 CLEAR
 *SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
-SET PROCEDURE TO T:\fwsu\prg\classliq
+SET PROCEDURE TO u:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
 ob.Seteopat(1)
-warchlq = "62016"
-SELECT 0
-USE (warchlq) ALIAS curliq
-
-xb = CREATEOBJECT("lqsac")
-xb.wano = 2016
-xb.wtiposac = 1
-
-
-wtipo = 4
+warchlq = "B92014"
 wconcep = 18
+*wlegajo = legajo
+wcant = 0 
+waporte = 0
+wliquida = 4
 
-SET TEXTMERGE ON
+SELECT 0
+use personal
 
-STORE FCREATE( 'c:\suerut\listados\myNamesFile.txt') TO _TEXT
+COPY TO ARRAY legajos FIELDS LEGAJO FOR ACTIVO = "A"
+FOR z=1 TO ALEN(legajos)
 
+  wlegajo = legajos[z]
+  borrar()
+  crear()
+  xb = CREATEOBJECT("lqsac")
+  xb.wano = 2016
+  xb.wlegajo = wlegajo
+  xb.wtiposac = 2
+  xb.liquisac
+  SELECT curliq
+  replace aporte WITH (xb.WMEJOR)/2
+  RELEASE xb
+  wtipo = 4
+  liquisac(wlegajo)
+  SELECT curliq
+ * BROWSE
+    actualizar()
+  
+*recibo()
+ next
 
-SELECT LEGAJO,FECHAING,FECHABAJA FROM PERSONAL WHERE ACTIVO = "A" INTO CURSOR LIS ORDER BY LEGAJO
-SCAN
-*     xb.wlegajo = lis.legajo
-*     xb.liquisac 
-     
-*     TEXT
-*       <<STR(LIS.LEGAJO,4)>> <<DTOC(LIS.FECHAING)>>  <<DTOC(LIS.FECHABAJA)>> <<STR(xb.wmejor/2,9,2)>>
-*     ENDTEXT
-*     
-*     SELECT legajo,concepto FROM curliq WHERE legajo = lis.legajo .and. concepto = 18 .and. liquida = 4;
-*    INTO CURSOR existe
-*     IF EOF()
-*        INSERT INTO &warchlq(legajo,liquida,concepto,aporte) values(lis.legajo,wtipo,wconcep,(xb.wmejor/2)) 
-*     ELSE
-*        UPDATE &warchlq SET aporte = xb.wmejor/2 WHERE legajo = lis.legajo .and.liquida = wtipo .and. concepto =18
-*       
-*     ENDIF
-*     SELECT LIS
-
-      liquisac(lis.legajo)
-      SELECT lis 
-
-ENDSCAN
-
-RETURN
-
-
-
-
-
+ 
 
 
 
@@ -66,14 +57,12 @@ RETURN
 FUNCTION liquisac
 *********************
 PARAMETERS wleg
-?wleg
-SELECT LIS
-GO TOP
 lq = CREATEOBJECT('liquidacion')
-lq.wmes     = 6
+lq.wmes     = 12
 lq.wano     = 2016
 lq.wtipoliq = 4
 lq.wlegajo = wleg
+lq.cargobase
 lq.liquida 
 
  RELEASE lq
@@ -81,3 +70,68 @@ lq.liquida
 RETURN .T.
 
 CLOSE TABLES ALL
+
+
+
+
+
+
+***********************
+FUNCTION recibo
+*********************
+obm = CREATEOBJECT("montoescrito")
+vlegajo = wlegajo
+PUBLIC monto,nombremes,banco,fecpjub,ano,fechapago
+SELECT SUM(aporte)as ap ,SUM(sinaporte) as sp, SUM(descuento) as ds;
+FROM CURLIQ INTO CURSOR tota
+neto = (tota.ap + tota.sp) - tota.ds
+monto = obm.monto(" ",neto)
+nombremes = obm.nombremes(12)
+banco = "HSBC"
+fecpjub = "14-10-2016"
+fechapago = "30-12-2016"
+SELECT 0
+USE vpersolinea
+LOCATE FOR legajo = vlegajo
+SELECT curliq
+REPORT FORM  RECIBOSUELDO TO PRINTER PROMPT NODIALOG PREVIEW
+
+return  
+
+
+*************************
+FUNCTION BORRAR
+************************
+USE f:\sueldos\empre1\b92014 exclusive
+ZAP
+INDEX on STR(concepto,4) TO f:\sueldos\empre1\b92014
+use
+
+
+*****************
+FUNCTION CREAR
+**************
+SELECT 0
+USE (warchlq) ALIAS curliq
+INSERT INTO curliq(legajo,concepto,cantidad,aporte,liquida) values(wlegajo,wconcep,wcant,waporte,wliquida)
+
+
+
+
+
+**********************
+FUNCTION actualizar
+************************
+SELECT curliq
+?"**************"
+? "Actualizando legajo......:" + STR(curliq.legajo,4)
+?"*************"
+ 
+SCAN
+   INSERT INTO f:\sueldos\empre1\122016 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
+   (curliq.legajo,curliq.concepto,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,4)
+
+ENDSCAN
+RETURN 0
+
+

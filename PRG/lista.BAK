@@ -1,8 +1,8 @@
-SET PROCEDURE TO T:\FWSU\prg\CLASSLIQ
+SET PROCEDURE TO U:\FWSU\prg\CLASSLIQ
 SET EXCLUSIVE OFF
 SET DELETED ON
 CLOSE TABLES all
-
-x=CREATEOBJECT('configurar')
-x.Seteopat(2)
+SET PATH TO c:\suerut\empre1
+*x=CREATEOBJECT('configurar')
+*x.Seteopat(1)
 DO FORM listafm

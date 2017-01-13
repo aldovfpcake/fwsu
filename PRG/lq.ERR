@@ -1,53 +1,53 @@
-Program u:\fwsu\prg\cust_afip.prg has the following errors:
-    Visual Class Library AFIP_ANSES - Undefined
+Programa u:\fwsu\prg\cust_afip.prg tiene los siguientes errores:
+    Biblioteca de clases visuales AFIP_ANSES - Indefinido
 
-Visual Class Library t:\...\setup\program files\microsoft visual foxpro 9\wizards\wizbtns.vcx has the following errors:
-    File WZLOCATE.BMP - Undefined
-    File WZLOCATE.MSK - Undefined
-    File WZPRINT.BMP - Undefined
-    File WZPRINT.MSK - Undefined
-    File WZCLOSE.BMP - Undefined
-    File WZCLOSE.MSK - Undefined
-    File WZNEW.BMP - Undefined
-    File WZNEW.MSK - Undefined
-    File WZDELETE.BMP - Undefined
-    File WZDELETE.MSK - Undefined
+Biblioteca de clases visuales t:\...\setup\program files\microsoft visual foxpro 9\wizards\wizbtns.vcx tiene los siguientes errores:
+    Archivo WZLOCATE.BMP - Indefinido
+    Archivo WZLOCATE.MSK - Indefinido
+    Archivo WZPRINT.BMP - Indefinido
+    Archivo WZPRINT.MSK - Indefinido
+    Archivo WZCLOSE.BMP - Indefinido
+    Archivo WZCLOSE.MSK - Indefinido
+    Archivo WZNEW.BMP - Indefinido
+    Archivo WZNEW.MSK - Indefinido
+    Archivo WZDELETE.BMP - Indefinido
+    Archivo WZDELETE.MSK - Indefinido
 
-Visual Class Library t:\...\setup\program files\microsoft visual foxpro 9\wizards\_framewk.vcx has the following errors:
-    Visual Class Library _BASE - Undefined
-    File BROWSE.BMP - Undefined
-    File BROWSE.MSK - Undefined
-    Visual Class Library _UI - Undefined
-    File TOP.MSK - Undefined
-    File PREVIOUS.BMP - Undefined
-    File PREVIOUS.MSK - Undefined
-    File NEXT.BMP - Undefined
-    File NEXT.MSK - Undefined
-    File BOTTOM.BMP - Undefined
-    File BOTTOM.MSK - Undefined
-    File SORTASC.BMP - Undefined
-    File SORTASC.MSK - Undefined
-    File SORTDES.BMP - Undefined
-    File SORTDES.MSK - Undefined
-    File FILTER.BMP - Undefined
-    File FILTER.MSK - Undefined
-    File NEW.BMP - Undefined
-    File NEW.MSK - Undefined
-    File OPEN.BMP - Undefined
-    File OPEN.MSK - Undefined
-    File SAVE.BMP - Undefined
-    File SAVE.MSK - Undefined
-    File REVERT.BMP - Undefined
-    File REVERT.MSK - Undefined
-    File PRINT.MSK - Undefined
-    File CUT.BMP - Undefined
-    File CUT.MSK - Undefined
-    File COPY.BMP - Undefined
-    File COPY.MSK - Undefined
-    File PASTE.BMP - Undefined
-    File PASTE.MSK - Undefined
-    File HELP.BMP - Undefined
-    File HELP.MSK - Undefined
-    Visual Class Library _APP - Undefined
-    Visual Class Library _TABLE - Undefined
+Biblioteca de clases visuales t:\...\setup\program files\microsoft visual foxpro 9\wizards\_framewk.vcx tiene los siguientes errores:
+    Biblioteca de clases visuales _BASE - Indefinido
+    Archivo BROWSE.BMP - Indefinido
+    Archivo BROWSE.MSK - Indefinido
+    Biblioteca de clases visuales _UI - Indefinido
+    Archivo TOP.MSK - Indefinido
+    Archivo PREVIOUS.BMP - Indefinido
+    Archivo PREVIOUS.MSK - Indefinido
+    Archivo NEXT.BMP - Indefinido
+    Archivo NEXT.MSK - Indefinido
+    Archivo BOTTOM.BMP - Indefinido
+    Archivo BOTTOM.MSK - Indefinido
+    Archivo SORTASC.BMP - Indefinido
+    Archivo SORTASC.MSK - Indefinido
+    Archivo SORTDES.BMP - Indefinido
+    Archivo SORTDES.MSK - Indefinido
+    Archivo FILTER.BMP - Indefinido
+    Archivo FILTER.MSK - Indefinido
+    Archivo NEW.BMP - Indefinido
+    Archivo NEW.MSK - Indefinido
+    Archivo OPEN.BMP - Indefinido
+    Archivo OPEN.MSK - Indefinido
+    Archivo SAVE.BMP - Indefinido
+    Archivo SAVE.MSK - Indefinido
+    Archivo REVERT.BMP - Indefinido
+    Archivo REVERT.MSK - Indefinido
+    Archivo PRINT.MSK - Indefinido
+    Archivo CUT.BMP - Indefinido
+    Archivo CUT.MSK - Indefinido
+    Archivo COPY.BMP - Indefinido
+    Archivo COPY.MSK - Indefinido
+    Archivo PASTE.BMP - Indefinido
+    Archivo PASTE.MSK - Indefinido
+    Archivo HELP.BMP - Indefinido
+    Archivo HELP.MSK - Indefinido
+    Biblioteca de clases visuales _APP - Indefinido
+    Biblioteca de clases visuales _TABLE - Indefinido
 

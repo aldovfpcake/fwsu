@@ -42,9 +42,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 8
-vano = 2016
-DO FORM liquidacion WITH " Agosto 2016",vmes,vano
+vmes = 1
+vano = 2017
+DO FORM liquidacion WITH " Enero 2017",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand
@@ -54,7 +54,7 @@ IF merror = 2005
      x = TABLEREVERT( )
 ENDIF
 
-IF merror = 111 .or. merror = 1585
+IF merror = 111 .or. merror = 1585 .or. merror = 3172
    SELECT curliq
    MESSAGEBOX("Revirtiendo Cambios Tabla de solo lectura",0,"Atención")
    x = TABLEREVERT()
@@ -63,6 +63,12 @@ ENDIF
 IF merror = 12
    RETURN
 endif   
+
+
+
+
+
+
 
 DO FORM FORMERROR
 
