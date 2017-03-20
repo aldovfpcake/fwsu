@@ -264,6 +264,18 @@ Define Class LIQUIDACION As Custom
     
     Endproc
 
+	Procedure InsertarConcepto
+	    Parameters ParConcepto
+	    if  this.conceptoduplicado(ParConcepto) = .t.
+             INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+              VALUES(this.wlegajo,ParConcepto,0,0, this.wtipoliq)
+			 
+		 endif
+	
+	
+	Endproc
+	
+	
 
 
 	Procedure mensaje
@@ -275,7 +287,7 @@ Define Class LIQUIDACION As Custom
 	Endproc
 
 	Procedure calcuant
-*-- Cálculo de antiguedad
+*-- Cï¿½lculo de antiguedad
 		Parameters factual,fcalcula
 * valor de retorno es antg
 		Store 0 To antg,Resto
@@ -323,7 +335,7 @@ Define Class LIQUIDACION As Custom
 			This.wcategoria     = Ltrim(CURPERSO.categoria)
 		Endif
         if !EMPTY(CURPERSO.fechabaja)
-           MESSAGEBOX("Legajo de Baja  " + DTOS(fechabaja),16,'Atención')
+           MESSAGEBOX("Legajo de Baja  " + DTOS(fechabaja),16,'Atenciï¿½n')
         endif           
            
     
@@ -350,7 +362,7 @@ Define Class LIQUIDACION As Custom
         SELECT * FROM maper WHERE legajo = this.wlegajo;
         .AND.  TIPOLIQ = this.wtipoliq  .AND. CONCEPTO = bcpto INTO CURSOR curmaper
         IF curmaper.concepto = 0
-           This.mensaje("No se Encuentra el concepto "+ CHR(9)+ "cargado en la liquidación base....:" + STR(curmaper.concepto,4))
+           This.mensaje("No se Encuentra el concepto "+ CHR(9)+ "cargado en la liquidaciï¿½n base....:" + STR(curmaper.concepto,4))
            This.cancelar = .F. 
         ELSE
            this.wimporte = curmaper.importe
@@ -433,7 +445,7 @@ Define Class LIQUIDACION As Custom
       	INTO CURSOR BASELIQ
       	SELECT BASELIQ
       	IF RECCOUNT() = 0
-         	this.mensaje("Empleado Sin Liquidación base")
+         	this.mensaje("Empleado Sin Liquidaciï¿½n base")
        	 RETURN
       	ENDIF
       	
@@ -606,6 +618,10 @@ Define Class LIQUIDACION As Custom
     LOCAL EXTCOP
     EXTCOP = 0
     SELECT CURLIQ
+	IF EOF()
+      RETURN .T.
+
+	ENDIF
     SCAN 
        IF buconcepto = curliq.concepto
           EXTCOP = 1
@@ -914,7 +930,7 @@ DEFINE CLASS montoescrito as Custom
 			meses[12] = 'diciembre'
 
 			if wmes = 0 .or. wmes > 12
-			   nom  = 'error en número de período'
+			   nom  = 'error en nï¿½mero de perï¿½odo'
 			else  
 			   nom  = meses[wmes] 
 			endif   
@@ -1173,7 +1189,7 @@ DEFINE CLASS VISUREC AS Custom
          
     *CATCH TO e
          
-    *     MESSAGEBOX ( "Error",0,"NO SE ENENCUENTRA EL ARCHIVO ERROR Nº" + " " + CURDIR()+ STR(ERROR(),4),0,"AT" )
+    *     MESSAGEBOX ( "Error",0,"NO SE ENENCUENTRA EL ARCHIVO ERROR Nï¿½" + " " + CURDIR()+ STR(ERROR(),4),0,"AT" )
     *     this.cancelar = .f.
     *     FINALLY  
     *ENDTRY

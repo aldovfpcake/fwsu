@@ -11,7 +11,7 @@ ob = CREATEOBJECT("configurar")
 ob.Seteopat(1)
 
 OPEN DATABASE SUELDOS SHARED
-ON ERROR DO errhand WITH ;
+*ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 SELECT 0
