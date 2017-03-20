@@ -7,7 +7,7 @@ SET DELETED ON
 *SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
 SET PROCEDURE TO u:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
-ob.Seteo
+*ob.Seteo
 ob.Seteopat(1)
 
 OPEN DATABASE SUELDOS SHARED
@@ -42,9 +42,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 1
+vmes = 3
 vano = 2017
-DO FORM liquidacion WITH " Enero 2017",vmes,vano
+DO FORM liquidacion WITH " Marzo 2017",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

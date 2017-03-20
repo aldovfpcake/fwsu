@@ -540,7 +540,7 @@ Define Class LIQUIDACION As Custom
     RETURN wimporte             
 
 
-
+    
 
 
 
@@ -634,23 +634,28 @@ Define Class LIQUIDACION As Custom
           CASE this.wmes = 1 
                SELECT  s7,s8,s9,s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                this.wpromesu =   (aterior.s7+ aterior.s8 + aterior.s9 + aterior.s10 + aterior.s11 + aterior.s12)/6
-                              
+               SELECT  julio,agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
+               prome1 = (aterior.julio +aterior.agosto+ aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+                               
            CASE this.wmes = 2
                  
                SELECT  agosto,setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT aterior
+               SELECT s8,s9,s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR anterpro
                SELECT  (enero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
+               SELECT s1 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso
                SELECT lust
                prome1 =  (lust.impt+aterior.agosto+ aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
-               IF lust.impt > prome1
-                  prome1 = lust.impt
-                  WAIT WINDOW "TOMANDO BASE ENERO"
-               ENDIF
-               WAIT WINDOW STR(prome1,8,2) + "...."+ STR(lust.impt,8,2)
+               this.wpromesu =(anterpro.s8+anterpro.s9+anterpro.s10+anterpro.s11+anterpro.s12+ encurso.s1)/6
+               
+               
           CASE this.wmes = 3 
                SELECT setiembre,octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
+               SELECT s9,s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR anterpro
+               SELECT s1,s2 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
                prome1 =  (lust.impt+aterior.setiembre + aterior.octubre + aterior.noviembre + aterior.diciembre)/6
+               this.wpromesu =(anterpro.s9+anterpro.s10+anterpro.s11+anterpro.s12+ encurso.s1+encurso.s2)/6
                *SELECT febrero as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ULTSUEL
                *IF ultsuel.ultimo > prome1
                *   prome1= ultsuel.ultimo
@@ -844,7 +849,7 @@ DEFINE CLASS configurar AS liquidacion
  
      
     PROCEDURE init
-       
+       this.Seteo
  
     Endproc
 

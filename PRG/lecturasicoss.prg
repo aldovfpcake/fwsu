@@ -1,11 +1,12 @@
 SET DATE ITALIAN
 SET SYSFORMATS ON
+SET DELETED ON
 loFS = CREATEOBJECT("Scripting.FileSystemObject")
 loFile= loFS.OpenTextFile("C:\suerut\presentacion\RUTA12SICOSS.txt", 1)
 CLEAR
 borrar()
-VarFchingreso = CTOD('01-10-2016')
-VarFchegreso  = CTOD('31-10-2016')
+VarFchingreso = CTOD('01-02-2017')
+VarFchegreso  = CTOD('28-02-2017')
 DO WHILE NOT loFile.AtEndOfStream
   lcLine = loFile.ReadLine()
    VarContrato =SUBSTR(lcline,59,3)
