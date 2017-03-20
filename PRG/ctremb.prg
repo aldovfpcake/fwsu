@@ -9,6 +9,7 @@ VarTot = 0
 *LEGAJO 814 Quevedo  embargo por $ 23893,80 embargo terminado 
 clear
 FOR I = 1 TO 2
+   FOR x =1 TO 12
       archivo = IIF(x<= 6, STR(x,1)+STR(varano,4),STR(x,2)+STR(varano,4))
       IF FILE(archivo+".dbf")
         SELECT SUM(IIF(CONCEPTO = 126,DESCUENTO,0))AS emb FROM &archivo WHERE LEGAJO = Varlegajo INTO CURSOR SUELDO
