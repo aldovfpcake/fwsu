@@ -253,9 +253,16 @@ Define Class LIQUIDACION As Custom
       SELECT VEOAUDIT
       SCAN      
          if  this.conceptoduplicado(veoaudit.concepto) = .t.
-             INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
-              VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.UNIDADES, this.wtipoliq)
-			 
+             This.bsconcepto(veoaudit.concepto)
+             if  This.wconextracc = 'USUARIO'
+                 IF this.wtipoconcep =   'DESCUENTO'
+                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+                    VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.IMPORTE, this.wtipoliq)
+                 ELSE 			  
+                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+                    VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.UNIDADES, this.wtipoliq)
+			     ENDIF
+			 ENDIF    
 		 endif	 
 
 	  ENDSCAN
@@ -268,7 +275,7 @@ Define Class LIQUIDACION As Custom
 	    Parameters ParConcepto
 	    if  this.conceptoduplicado(ParConcepto) = .t.
              INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
-              VALUES(this.wlegajo,ParConcepto,0, this.wtipoliq)
+              VALUES(this.wlegajo,ParConcepto,0,0, this.wtipoliq)
 			 
 		 endif
 	
@@ -682,7 +689,10 @@ Define Class LIQUIDACION As Custom
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero+marzo) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
-               this.wpromesu =  (aterior.octubre+aterior.noviembre+aterior.diciembre+lust.impt)/6
+               SELECT s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro
+               SELECT s1,s2,s3 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
+               prome1 = (aterior.octubre + aterior.noviembre + aterior.diciembre + lust.enero + lust.febrero + lust.marzo)/6
+               this.wpromesu =  (antepro.s10+antepro.s11+antepro.s12+encurso.s1+encurso.s2+encurso.s3)/6
   
               *IF ultimosue.ultimo > prome1
               *   prome1 = ultimosue.ultimo

@@ -17,7 +17,7 @@ SET FILTER TO !EMPTY(CUENTA);
 BROWSE
 clear
 GO TOP
-COUNT TO treg
+COUNT FOR sntecob <>0 TO treg
 SUM sntecob TO wtotal
 *           23456879-123456789-   
 @10,02 say "Total A Acredita :"

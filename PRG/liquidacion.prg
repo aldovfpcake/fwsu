@@ -11,7 +11,7 @@ ob = CREATEOBJECT("configurar")
 ob.Seteopat(1)
 
 OPEN DATABASE SUELDOS SHARED
-*ON ERROR DO errhand WITH ;
+ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 SELECT 0
@@ -42,9 +42,9 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 3
+vmes = 4
 vano = 2017
-DO FORM liquidacion WITH " Marzo 2017",vmes,vano
+DO FORM liquidacion WITH " Abril 2017",vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

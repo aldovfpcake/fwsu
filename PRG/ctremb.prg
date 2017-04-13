@@ -1,5 +1,6 @@
 SET TALK OFF
 SET DELETED ON
+SET EXCLUSIVE OFF
 SET PATH TO F:\SUELDOS\EMPRE1
 VarAno = 2016
 Varlegajo = 765
@@ -30,6 +31,7 @@ FOR I = 1 TO 2
         ENDIF
                         
         ?archivo + "  " + STR(sueldo.emb,10,2)  + " " + TRANSFORM(existe.pagado)
+         
         VarTot = VarTot +sueldo.emb   
      ENDIF
    NEXT
@@ -39,6 +41,7 @@ FOR I = 1 TO 2
 NEXT
 
 SELECT ctremb
+Vartot =0
 SUM importe TO VarTot FOR legajo = Varlegajo .AND. pagado = .f.
 ? "Total General Retenido............ = " + STR(Vartot,10,2)
 ?"lacha total a Retener ......$ 42517.81"
