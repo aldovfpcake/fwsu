@@ -1,0 +1,37 @@
+SET TALK OFF
+SET DELETED ON
+SET PATH TO F:\SUELDOS\EMPRE1
+SET EXCLUSIVE OFF
+
+CREATE CURSOR sueldo (haber n(10,2),sinaporte n(10,2),descuento n(10,2),neto n(10,2),km n(10,2),ctrol n(10,2),mes n(2),tipo n(2),ano n(4)) 
+clear
+varano = 0
+*historial de sueldos a partir del año (varano)
+varano = 2015 
+vvlegajo = 608
+clear
+
+FOR I = 1 TO 3
+    
+ FOR x = 1 TO  12
+    
+   
+    ?varano
+    archivo = IIF(x<= 6, STR(x,1)+STR(varano,4),STR(x,2)+STR(varano,4))
+    ?archivo
+   IF FILE(archivo + '.dbf')
+     
+     SELECT SUM(IIF(CONCEPTO=70,SINAPORTE,0))AS sinaporte ;
+     FROM &archivo WHERE LEGAJO = vvlegajo INTO CURSOR LIQUIDA READWRITE
+     IF ISNULL(LIQUIDA.SINAPORTE)
+        REPLACE LIQUIDA.SINAPORTE WITH 0 
+     ENDIF 
+     SELECT LIQUIDA
+     INSERT INTO historialsueldo(legajo,sinaporte,mes,año) VALUES (vvlegajo,liquida.sinaporte,x,varano)
+   ENDIF   
+       
+  NEXT
+  varano = varano + 1
+NEXT  
+SELECT HISTORIALSUELDO
+BROWSE FOR LEGAJO = vvlegajo

@@ -254,13 +254,14 @@ Define Class LIQUIDACION As Custom
       SCAN      
          if  this.conceptoduplicado(veoaudit.concepto) = .t.
              This.bsconcepto(veoaudit.concepto)
-             if  This.wconextracc = 'USUARIO'
+             
+             if  This.wconextracc = 'USUARIO' OR  this.wmodocarg = 'CANTIDAD'
                  IF this.wtipoconcep =   'DESCUENTO'
                     INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCUENTO,LIQUIDA);          	         
                     VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.IMPORTE, this.wtipoliq)
                  ELSE 			  
-                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
-                    VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.UNIDADES, this.wtipoliq)
+                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);          	         
+                    VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.CANTIDAD, this.wtipoliq)
 			     ENDIF
 			 ENDIF    
 		 endif	 
