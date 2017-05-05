@@ -260,7 +260,7 @@ Define Class LIQUIDACION As Custom
                     INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCUENTO,LIQUIDA);          	         
                     VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.IMPORTE, this.wtipoliq)
                  ELSE 			  
-                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+                    INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,LIQUIDA);          	         
                     VALUES(this.wlegajo,VEOAUDIT.CONCEPTO,VEOAUDIT.CANTIDAD, this.wtipoliq)
 			     ENDIF
 			 ENDIF    

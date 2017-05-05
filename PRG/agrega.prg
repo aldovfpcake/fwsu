@@ -1,6 +1,7 @@
 * prueba github
 PARAMETERS vcon
 *WAIT WINDOW "agrega desde aca" + STR(vpersolinea.legajo,3)
+_screen.ActiveForm.grid1.column2.setfocus
 vlegajo    = vpersolinea.legajo
 vconcepto  = vcon
 vtipo      = _screen.ActiveForm.tipoliq

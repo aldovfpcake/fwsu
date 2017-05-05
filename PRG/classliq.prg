@@ -688,7 +688,7 @@ Define Class LIQUIDACION As Custom
                
           CASE this.wmes = 4 
                SELECT   octubre,noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
-               SELECT  (enero+febrero+marzo) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
+               SELECT   enero,febrero,marzo  FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                SELECT s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro
                SELECT s1,s2,s3 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
