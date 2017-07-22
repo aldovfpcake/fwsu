@@ -5,8 +5,8 @@ loFS = CREATEOBJECT("Scripting.FileSystemObject")
 loFile= loFS.OpenTextFile("C:\suerut\presentacion\RUTA12SICOSS.txt", 1)
 CLEAR
 borrar()
-VarFchingreso = CTOD('01-02-2017')
-VarFchegreso  = CTOD('28-02-2017')
+VarFchingreso = CTOD('01-03-2017')
+VarFchegreso  = CTOD('31-02-2017')
 DO WHILE NOT loFile.AtEndOfStream
   lcLine = loFile.ReadLine()
    VarContrato =SUBSTR(lcline,59,3)

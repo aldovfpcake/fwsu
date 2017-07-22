@@ -1,56 +1,15 @@
-Program u:\fwsu\prg\cust_afip.prg has the following errors:
-    Visual Class Library AFIP_ANSES - Undefined
+Programa c:\fwsu\prg\cust_afip.prg tiene los siguientes errores:
+    Biblioteca de clases visuales AFIP_ANSES - Indefinido
 
-Visual Class Library t:\...\setup\program files\microsoft visual foxpro 9\wizards\wizbtns.vcx has the following errors:
-    File WZLOCATE.BMP - Undefined
-    File WZLOCATE.MSK - Undefined
-    File WZPRINT.BMP - Undefined
-    File WZPRINT.MSK - Undefined
-    File WZCLOSE.BMP - Undefined
-    File WZCLOSE.MSK - Undefined
-    File WZNEW.BMP - Undefined
-    File WZNEW.MSK - Undefined
-    File WZDELETE.BMP - Undefined
-    File WZDELETE.MSK - Undefined
+Biblioteca de clases visuales c:\vf9\wizards\_framewk.vcx tiene los siguientes errores:
+    Biblioteca de clases visuales _BASE - Indefinido
+    Biblioteca de clases visuales _UI - Indefinido
+    Biblioteca de clases visuales _APP - Indefinido
+    Biblioteca de clases visuales _TABLE - Indefinido
 
-Visual Class Library t:\...\setup\program files\microsoft visual foxpro 9\wizards\_framewk.vcx has the following errors:
-    Visual Class Library _BASE - Undefined
-    File BROWSE.BMP - Undefined
-    File BROWSE.MSK - Undefined
-    Visual Class Library _UI - Undefined
-    File TOP.MSK - Undefined
-    File PREVIOUS.BMP - Undefined
-    File PREVIOUS.MSK - Undefined
-    File NEXT.BMP - Undefined
-    File NEXT.MSK - Undefined
-    File BOTTOM.BMP - Undefined
-    File BOTTOM.MSK - Undefined
-    File SORTASC.BMP - Undefined
-    File SORTASC.MSK - Undefined
-    File SORTDES.BMP - Undefined
-    File SORTDES.MSK - Undefined
-    File FILTER.BMP - Undefined
-    File FILTER.MSK - Undefined
-    File NEW.BMP - Undefined
-    File NEW.MSK - Undefined
-    File OPEN.BMP - Undefined
-    File OPEN.MSK - Undefined
-    File SAVE.BMP - Undefined
-    File SAVE.MSK - Undefined
-    File REVERT.BMP - Undefined
-    File REVERT.MSK - Undefined
-    File PRINT.MSK - Undefined
-    File CUT.BMP - Undefined
-    File CUT.MSK - Undefined
-    File COPY.BMP - Undefined
-    File COPY.MSK - Undefined
-    File PASTE.BMP - Undefined
-    File PASTE.MSK - Undefined
-    File HELP.BMP - Undefined
-    File HELP.MSK - Undefined
-    Visual Class Library _APP - Undefined
-    Visual Class Library _TABLE - Undefined
+Programa c:\fwsu\prg\listaantasie.prg tiene los siguientes errores:
+    Informe ASIENTO2 - Indefinido
 
-Program u:\fwsu\prg\listaantasie.prg has the following errors:
-    Report ASIENTO2 - Undefined
+Formulario c:\fwsu\forms\acercade.scx tiene los siguientes errores:
+    Biblioteca de clases visuales _BASE - Indefinido
 
