@@ -7,8 +7,8 @@ CREATE CURSOR sueldo (haber n(10,2),sinaporte n(10,2),descuento n(10,2),neto n(1
 clear
 varano = 0
 *historial de sueldos a partir del año (varano)
-varano = 2015 
-vvlegajo = 780
+varano = 2016 
+vvlegajo = 675
 clear
 
 FOR I = 1 TO 3
@@ -22,8 +22,14 @@ FOR I = 1 TO 3
    IF FILE(archivo + '.dbf')
      SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
      SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA INTO CURSOR liquida
+     
+     *SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =31 .OR. CONCEPTO = 36,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
+     SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA INTO CURSOR liquida
+     
+     
      SELECT LIQUIDA
      INSERT INTO sueldo(haber,sinaporte,descuento,neto,km,ctrol,mes,tipo,ano) VALUES (liquida.aporte,liquida.sinaporte,liquida.descuento,(liquida.aporte + liquida.sinaporte - liquida.descuento),liquida.km,liquida.ctrld,x,liquida.liquida,varano)
+  
    ENDIF   
        
   NEXT

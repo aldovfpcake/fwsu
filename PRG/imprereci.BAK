@@ -7,13 +7,13 @@ objm =CREATEOBJECT("montoescrito")
 
 ob.Seteopat(1)
 ********************************
-vleg = 829
-vfechapago = "30-04-2017"
-vmes = 4
+vleg = 816
+vfechapago = "03-06-2017"
+vmes = 5
 vano = 2017
-vfecpjub = "08-04-2017"
+vfecpjub = "08-06-2017"
 vmonto = " "
-arch  = "42017"
+arch  = "52017"
 banco = "HSBC"
 ************************
 fechapago = CTOD(vfechapago)

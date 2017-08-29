@@ -1,0 +1,1 @@
+REPORT FORM c:\fwsu\forms\asiento.frx NOEJECT NOCONSOLE PREVIEW
