@@ -7,7 +7,7 @@ CLEAR
 borrar()
 VarFchingreso = CTOD('01-04-2017')
 VarFchegreso  = CTOD('30-04-2017')
-SET STEP ON 
+*SET STEP ON 
 DO WHILE NOT loFile.AtEndOfStream
   lcLine = loFile.ReadLine()
    VarContrato =SUBSTR(lcline,59,3)

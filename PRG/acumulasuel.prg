@@ -4,7 +4,7 @@ SET PATH TO F:\sueldos\empre1
 *SET PATH TO C:\SUERUT\EMPRE3
 SET DELETED ON
 ws = CREATEOBJECT("abretabla")
-ws.optabla(6,2017)
+ws.optabla(9,2017)
 *ws.acumulasuel()
 *ws.acumulasinvacaciones()
 ws.acumulasinenfermedad()
