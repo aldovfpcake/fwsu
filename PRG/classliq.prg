@@ -1040,7 +1040,7 @@ DEFINE CLASS montoescrito as Custom
 					   decemil = "veinti"+ unidademil + "mil" 
 					else
 					   do case
-					      SET STEP ON 
+					      *SET STEP ON 
 						  case decenamil = "30"
 										  decemil    =  nombre[21]+ unidademil + "mil"   
 					      case decenamil = "40"
@@ -1051,7 +1051,9 @@ DEFINE CLASS montoescrito as Custom
 										  decemil    =  nombre[24]+ unidademil + "mil"
 					      case decenamil = "70"
 										  decemil    =  nombre[25]+ unidademil + "mil"  					  
-					  
+					   
+					      case decenamil = "80" 
+					                       decemil    =  nombre[26]+ unidademil + "mil"   
 					  
 					  
 					   endcase

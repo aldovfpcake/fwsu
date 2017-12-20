@@ -16,17 +16,19 @@ ob.Seteo
 ob.Seteopat(1)
 clear
 warchlq = "B92014"
-warchiliquida = "102014"
+warchiliquida = "112014"
 wconcep = 20
-wlegajo = 776
-wcant = 14 
+******************************************************
+wlegajo = 558
+wcant = 28
+***************************************************
 waporte = 0
 wliquida = 2
 wvaloruni = 1
 borrar()
 crear()
 lq = CREATEOBJECT('liquidacion')
-lq.wmes = 10
+lq.wmes = 12
 lq.wano = 2017
 lq.wtipoliq = 2
 lq.wlegajo = wlegajo
@@ -36,8 +38,8 @@ lq.liquida
 SELECT curliq
 replace ALL valoruni WITH 1
 recibo()
-comentarios()
-actualizar()
+*comentarios()
+*actualizar()
 CLOSE TABLES all
 return
 
@@ -54,10 +56,12 @@ SELECT SUM(aporte)as ap ,SUM(sinaporte) as sp, SUM(descuento) as ds;
 FROM CURLIQ INTO CURSOR tota
 neto = (tota.ap + tota.sp) - tota.ds
 monto = obm.monto(" ",neto)
-nombremes = obm.nombremes(10)
+*********************************
+nombremes = obm.nombremes(lq.wmes)
+*******************************
 banco = "HSBC"
-fecpjub = "10-10-2017"
-fechapago = "20-10-2017"
+fecpjub = "12-12-2017"
+fechapago = "15-12-2017"
 SELECT 0
 USE vpersolinea
 LOCATE FOR legajo = vlegajo
@@ -89,12 +93,12 @@ FUNCTION actualizar
 ************************
 SELECT curliq
 ?"**************"
-? "Actualizando legajo......:" + STR(curliq.legajo,4)
+? "Actualizando legajo......:" + STR(wlegajo,4)
 ?"*************"
   
-SELECT concepto FROM f:\sueldos\empre1\102017 WHERE legajo = curliq.legajo;
+SELECT concepto FROM f:\sueldos\empre1\122017 WHERE legajo = wlegajo;
 INTO CURSOR EXISTE  
-  
+Varexiste = 1  
 IF EOF()
    VarExiste = 0
 ENDIF   
@@ -103,7 +107,7 @@ IF VarExiste = 0
    SELECT CURLIQ
    SCAN
       
-     INSERT INTO f:\sueldos\empre1\102017(legajo,concepto,cantidad,porte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
+     INSERT INTO f:\sueldos\empre1\122017(legajo,concepto,cantidad,aporte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
      (curliq.legajo,curliq.concepto,curliq.cantidad,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,2,1)
 
      ENDSCAN
@@ -123,7 +127,7 @@ IF EOF()
    INSERT INTO coments(legajo,mes,ano,coments) VALUES (lq.wlegajo,lq.wmes,lq.wano,"Vac Liquidadas--"+DTOC(DATE());
    + " "+ STR(wcant,2))
  ELSE   
-   UPDATE coments SET  coments = "Vac Liquidadas--"+DTOC(DATE());
+  * UPDATE coments SET  coments = "Vac Liquidadas--"+DTOC(DATE());
    + " "+ STR(wcant,2) WHERE legajo = lq.wlegajo .and. ano = lq.wano .and. mes = lq.wmes
    
 ENDIF

@@ -11,7 +11,7 @@ SET DELETED ON
 OPEN DATABASE F:\SUELDOS\SUELDOS SHARED
 CLEAR
 *SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
-SET PROCEDURE TO u:\fwsu\prg\classliq
+SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
 ob.Seteopat(1)
@@ -32,7 +32,7 @@ FOR z=1 TO ALEN(legajos)
   borrar()
   crear()
   xb = CREATEOBJECT("lqsac")
-  xb.wano = 2016
+  xb.wano = 2017
   xb.wlegajo = wlegajo
   xb.wtiposac = 2
   xb.liquisac
@@ -43,7 +43,8 @@ FOR z=1 TO ALEN(legajos)
   liquisac(wlegajo)
   SELECT curliq
  * BROWSE
-    actualizar()
+  
+   actualizar()
   
 *recibo()
  next
@@ -59,7 +60,7 @@ FUNCTION liquisac
 PARAMETERS wleg
 lq = CREATEOBJECT('liquidacion')
 lq.wmes     = 12
-lq.wano     = 2016
+lq.wano     = 2017
 lq.wtipoliq = 4
 lq.wlegajo = wleg
 lq.cargobase
@@ -128,7 +129,7 @@ SELECT curliq
 ?"*************"
  
 SCAN
-   INSERT INTO f:\sueldos\empre1\122016 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
+   INSERT INTO f:\sueldos\empre1\122017 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
    (curliq.legajo,curliq.concepto,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,4)
 
 ENDSCAN

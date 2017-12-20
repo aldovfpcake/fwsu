@@ -1,0 +1,2 @@
+SELECT legajo,nombre,calc(fechaing) dias, (0*1) as sldo FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR lista readwrite X= SLDO()
+Error en la línea 10: El comando contiene una frase o palabra clave no reconocida.
