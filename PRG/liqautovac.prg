@@ -19,8 +19,8 @@ warchlq = "B92014"
 warchiliquida = "112014"
 wconcep = 20
 ******************************************************
-wlegajo = 558
-wcant = 28
+wlegajo = 828
+wcant = 14
 ***************************************************
 waporte = 0
 wliquida = 2
@@ -38,8 +38,8 @@ lq.liquida
 SELECT curliq
 replace ALL valoruni WITH 1
 recibo()
-*comentarios()
-*actualizar()
+comentarios()
+actualizar()
 CLOSE TABLES all
 return
 
@@ -61,7 +61,7 @@ nombremes = obm.nombremes(lq.wmes)
 *******************************
 banco = "HSBC"
 fecpjub = "12-12-2017"
-fechapago = "15-12-2017"
+fechapago = "22-12-2017"
 SELECT 0
 USE vpersolinea
 LOCATE FOR legajo = vlegajo

@@ -992,7 +992,7 @@ DEFINE CLASS montoescrito as Custom
 			store 0  to cientos,mil,integro,deci
 			integro = int(nn)
 			deci    = ((nn - integro)*100)
-
+           
 			if deci = 0
 			   parcial = ' '
 			else
@@ -1028,7 +1028,20 @@ DEFINE CLASS montoescrito as Custom
 				decenamil = substr(nrgral,1,2)
 				decemil    =  nombre[val(decenamil)] + "mil"
 			else
+				
 				if integro >=20000
+				   IF integro > 100000
+				      cienmil = SUBSTR(nrgral,1,3)
+				   	  Ciento  = "CienMil"	   
+				      largo  = LEN(nrgral)
+				      NumMay = SUBSTR(nrgral,2,largo)
+				      nrgral = NumMay
+				      dec      =  substr(nrgral,4,1)
+				      unid     =  substr(nrgral,5,1)
+				      wdec     =  substr(nrgral,4,2)
+				   ENDIF
+				
+				
 					decenamil  = substr(nrgral,1,1)+ "0"		 
 													
 					unidademil = " "
@@ -1040,9 +1053,9 @@ DEFINE CLASS montoescrito as Custom
 					   decemil = "veinti"+ unidademil + "mil" 
 					else
 					   do case
-					      SET STEP ON 
+					 
 						  case decenamil = "30"
-										  decemil    =  nombre[21]+ unidademil + "mil"   
+										  decemil    =  nombre[21]+" y "+ unidademil + "mil"   
 					      case decenamil = "40"
 										  decemil    =  nombre[22]+ unidademil + "mil" 
 					      case decenamil = "50"
@@ -1051,7 +1064,9 @@ DEFINE CLASS montoescrito as Custom
 										  decemil    =  nombre[24]+ unidademil + "mil"
 					      case decenamil = "70"
 										  decemil    =  nombre[25]+ unidademil + "mil"  					  
-					  
+					   
+					      case decenamil = "80" 
+					                       decemil    =  nombre[26]+ unidademil + "mil"   
 					  
 					  
 					   endcase
@@ -1060,6 +1075,20 @@ DEFINE CLASS montoescrito as Custom
 				endif
 				*wait window decemil
 			endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1167,6 +1196,12 @@ DEFINE CLASS montoescrito as Custom
 				if integro > 10000
 					letras= trim(decemil)+" "+trim(centena)+" "+trim(gracia)+" "+trim(nuni)+" "+rtrim(parcial)
 				endif
+			
+			    IF integro > 100000
+			        letras = "Ciento "+trim(decemil)+" "+trim(centena)+" "+trim(gracia)+" "+trim(nuni)+" "+rtrim(parcial)
+			      
+			    ENDIF  
+			      
 			endif    
 
 
