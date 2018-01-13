@@ -1057,16 +1057,16 @@ DEFINE CLASS montoescrito as Custom
 						  case decenamil = "30"
 										  decemil    =  nombre[21]+" y "+ unidademil + "mil"   
 					      case decenamil = "40"
-										  decemil    =  nombre[22]+ unidademil + "mil" 
+										  decemil    =  nombre[22]+" y "+ unidademil + "mil" 
 					      case decenamil = "50"
-										  decemil    =  nombre[23]+ unidademil + "mil"
+										  decemil    =  nombre[23]+" y "+ unidademil + "mil"
 					      case decenamil = "60"
-										  decemil    =  nombre[24]+ unidademil + "mil"
+										  decemil    =  nombre[24]+" y "+ unidademil + "mil"
 					      case decenamil = "70"
-										  decemil    =  nombre[25]+ unidademil + "mil"  					  
+										  decemil    =  nombre[25]+" y "+ unidademil + "mil"  					  
 					   
 					      case decenamil = "80" 
-					                       decemil    =  nombre[26]+ unidademil + "mil"   
+					                       decemil    =  nombre[26]+" y "+ unidademil + "mil"   
 					  
 					  
 					   endcase

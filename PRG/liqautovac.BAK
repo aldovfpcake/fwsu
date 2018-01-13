@@ -1,3 +1,5 @@
+PARAMETERS xlegajo,xcantidad
+WAIT WINDOW STR(xlegajo,4 ) + " " + STR(xcantidad,2)
 SET TALK OFF
 SET SAFETY OFF
 *CLOSE TABLES all
@@ -6,6 +8,7 @@ SET EXCLUSIVE OFF
 SET DATE ITALIAN
 SET REPROCESS TO AUTOMATIC
 SET MULTILOCKS ON
+
 SET DELETED ON
 OPEN DATABASE F:\SUELDOS\SUELDOS SHARED
 CLEAR
@@ -19,8 +22,8 @@ warchlq = "B92014"
 warchiliquida = "112014"
 wconcep = 20
 ******************************************************
-wlegajo = 608
-wcant = 28
+wlegajo = xlegajo
+wcant   = xcantidad 
 ***************************************************
 waporte = 0
 wliquida = 2
@@ -28,8 +31,10 @@ wvaloruni = 1
 borrar()
 crear()
 lq = CREATEOBJECT('liquidacion')
-lq.wmes = 12
-lq.wano = 2017
+****************************************
+lq.wmes = 1
+lq.wano = 2018
+*************************************
 lq.wtipoliq = 2
 lq.wlegajo = wlegajo
 lq.buscolegajo
@@ -38,9 +43,17 @@ lq.liquida
 SELECT curliq
 replace ALL valoruni WITH 1
 recibo()
-comentarios()
-actualizar()
-CLOSE TABLES all
+*comentarios()
+*actualizar()
+*CLOSE TABLES all
+SELECT curliq
+USE
+wlegajo = 0
+wcant = 0
+ 
+RELEASE lq
+SELECT vpersolinea
+use
 return
 
 
@@ -51,7 +64,7 @@ FUNCTION recibo
 obm = CREATEOBJECT("montoescrito")
 vlegajo = wlegajo
 PUBLIC monto,nombremes,banco,fecpjub,ano,fechapago
-ano = 2017
+ano = 2018
 SELECT SUM(aporte)as ap ,SUM(sinaporte) as sp, SUM(descuento) as ds;
 FROM CURLIQ INTO CURSOR tota
 neto = (tota.ap + tota.sp) - tota.ds
@@ -60,11 +73,11 @@ monto = obm.monto(" ",neto)
 nombremes = obm.nombremes(lq.wmes)
 *******************************
 banco = "HSBC"
-fecpjub = "12-12-2017"
-fechapago = "15-12-2017"
+fecpjub = "08-1-2018"
+fechapago = "12-01-2018"
 SELECT 0
 USE vpersolinea
-LOCATE FOR legajo = vlegajo
+LOCATE FOR legajo = lq.wlegajo
 SELECT curliq
 REPORT FORM  RECIBOSUELDO TO PRINTER PROMPT NODIALOG PREVIEW
 
@@ -96,7 +109,7 @@ SELECT curliq
 ? "Actualizando legajo......:" + STR(wlegajo,4)
 ?"*************"
   
-SELECT concepto FROM f:\sueldos\empre1\122017 WHERE legajo = wlegajo;
+SELECT concepto FROM f:\sueldos\empre1\12018 WHERE legajo = wlegajo .and. liquida = 2;
 INTO CURSOR EXISTE  
 Varexiste = 1  
 IF EOF()
@@ -107,7 +120,7 @@ IF VarExiste = 0
    SELECT CURLIQ
    SCAN
       
-     INSERT INTO f:\sueldos\empre1\122017(legajo,concepto,cantidad,aporte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
+     INSERT INTO f:\sueldos\empre1\12018(legajo,concepto,cantidad,aporte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
      (curliq.legajo,curliq.concepto,curliq.cantidad,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,2,1)
 
      ENDSCAN
