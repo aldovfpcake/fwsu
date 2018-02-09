@@ -1,0 +1,6 @@
+SET PATH TO F:\SUELDOS\EMPRE1
+vvleg = 270
+
+SELECT S8.ante,s9.ante,s10.ante,s11.ante,s12.ante,s1.sbr18;
+from sbr17 as ante INNER JOIN sbr18 ON sbr17.legajo = sbr18.legajo WHERE sbr17.legajo = vvleg
+browse

@@ -19,7 +19,7 @@ ob.Seteo
 ob.Seteopat(1)
 clear
 warchlq = "B92014"
-warchiliquida = "112014"
+warchiliquida = "22018"
 wconcep = 20
 ******************************************************
 wlegajo = xlegajo
@@ -74,7 +74,7 @@ nombremes = obm.nombremes(lq.wmes)
 *******************************
 banco = "HSBC"
 fecpjub = "08-1-2018"
-fechapago = "12-01-2018"
+fechapago = dtoc(date())
 SELECT 0
 USE vpersolinea
 LOCATE FOR legajo = lq.wlegajo
@@ -109,7 +109,7 @@ SELECT curliq
 ? "Actualizando legajo......:" + STR(wlegajo,4)
 ?"*************"
   
-SELECT concepto FROM f:\sueldos\empre1\12018 WHERE legajo = wlegajo .and. liquida = 2;
+SELECT concepto FROM f:\sueldos\empre1\22018 WHERE legajo = wlegajo .and. liquida = 2;
 INTO CURSOR EXISTE  
 Varexiste = 1  
 IF EOF()
@@ -120,7 +120,7 @@ IF VarExiste = 0
    SELECT CURLIQ
    SCAN
       
-     INSERT INTO f:\sueldos\empre1\12018(legajo,concepto,cantidad,aporte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
+     INSERT INTO f:\sueldos\empre1\22018(legajo,concepto,cantidad,aporte,sinaporte,descuento,descrip,liquida,valoruni) VALUES;
      (curliq.legajo,curliq.concepto,curliq.cantidad,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,2,1)
 
      ENDSCAN

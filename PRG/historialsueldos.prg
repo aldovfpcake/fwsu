@@ -8,7 +8,7 @@ clear
 varano = 0
 *historial de sueldos a partir del año (varano)
 varano = 2017 
-vvlegajo = 839
+vvlegajo = 195
 clear
 
 FOR I = 1 TO 11

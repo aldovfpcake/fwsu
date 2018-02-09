@@ -1,0 +1,2 @@
+SELECT S8 S9,S10,s11,s12 from sbr17 as ante WHERE LEGAJO legajo = vvleg
+Error en la línea 5: El comando contiene una frase o palabra clave no reconocida.

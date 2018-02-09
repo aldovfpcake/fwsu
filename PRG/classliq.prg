@@ -897,11 +897,15 @@ DEFINE CLASS configurar AS liquidacion
        PARAMETERS cpath
        DO CASE
           CASE cpath = 1
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE1;F:\SUELDOS
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
           CASE cpath = 2
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
           CASE cpath = 3
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\SUERUT\EMPRE3;F:\SUELDOS                 
+          CASE cpath = 4
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
+       
+       
        ENDCASE
     Endproc
 

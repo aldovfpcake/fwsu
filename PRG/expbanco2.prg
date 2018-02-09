@@ -51,7 +51,7 @@ SCAN
   ENDIF  
   
 ENDSCAN	
-@lin,0  say CHR(13)
+*@lin,0  say CHR(13)
 CLOSE ALL
 SET DEVICE TO SCREEN
 
