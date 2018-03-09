@@ -44,8 +44,8 @@ SELECT ctremb
 Vartot =0
 SUM importe TO VarTot FOR legajo = Varlegajo .AND. pagado = .f.
 ? "Total General Retenido............ = " + STR(Vartot,10,2)
-?"lacha total a Retener ......$ 42517.81"
-VarFalta = 42517.81 - Vartot
+*?"lacha total a Retener ......$ 42517.81"
+VarFalta = 23893.80 - Vartot
 ?"Falta Retener...............$" + STR(VarFalta,10,2) 
  
 

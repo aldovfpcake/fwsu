@@ -5,8 +5,8 @@ loFS = CREATEOBJECT("Scripting.FileSystemObject")
 loFile= loFS.OpenTextFile("C:\suerut\presentacion\RUTA12SICOSS.TXT", 1)
 CLEAR
 borrar()
-VarFchingreso = CTOD('01-10-2017')
-VarFchegreso  = CTOD('31-10-2017')
+VarFchingreso = CTOD('01-12-2017')
+VarFchegreso  = CTOD('31-12-2017')
 *SET STEP ON 
 DO WHILE NOT loFile.AtEndOfStream
   lcLine = loFile.ReadLine()

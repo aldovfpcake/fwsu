@@ -6,14 +6,14 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO rh 
-ms = 10
+ms = 12
 an = 2017
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
  UPDATE repcab SET mes = op.nombres(ms),;
                       ano = an
-rp.distinta = 6
+rp.distinta = 3
 rp.vistapre = 10
 rp.reporte
 obas= CREATEOBJECT('asiento')

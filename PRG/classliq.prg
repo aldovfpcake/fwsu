@@ -85,7 +85,7 @@ Define Class LIQUIDACION As Custom
 					replace curliq.cantidad WITH this.wcant
 				    
 				Case This.wconextracc = 'CELDA'
-                     this.extraecelda
+				     this.extraecelda
                      
 				Case This.wconextracc = 'CATEGORIA'
 					This.buscocategoria
@@ -192,6 +192,7 @@ Define Class LIQUIDACION As Custom
                     this.wtotdescue = this.wtotdescue + this.wimporte
              ENDCASE
             
+             
              IF this.wacumulador # 0
                 wacuanterior = 0
                 wacuanterior = this.wacumula(this.wacumulador)
@@ -1391,6 +1392,8 @@ DEFINE CLASS VACACIONES As Custom
         IF this.registradas = 0
            INSERT INTO vacaci (legajo,ano,desde,hasta,dias,sueldos);
            VALUES (this.legajo,this.ano,this.desde,this.hasta,this.dias,this.sueldos)
+           
+           
         ELSE
            WAIT WINDOW "Vacaciones Registradas"   
         

@@ -13,7 +13,7 @@ op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
  UPDATE repcab SET mes = op.nombres(ms),;
                       ano = an
-rp.distinta = 3
+rp.distinta = 6
 rp.vistapre = 10
 rp.reporte
 obas= CREATEOBJECT('asiento')

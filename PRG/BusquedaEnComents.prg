@@ -1,0 +1,1 @@
+SELECT * FROM coments WHERE coments LIKE "ACCIDENTADO"

@@ -8,7 +8,7 @@ clear
 varano = 0
 *historial de sueldos a partir del año (varano)
 varano = 2017 
-vvlegajo = 195
+vvlegajo = 828
 clear
 
 FOR I = 1 TO 11
@@ -21,7 +21,11 @@ FOR I = 1 TO 11
     ?archivo
    IF FILE(archivo + '.dbf')
      SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
-     SUM(IIF(CONCEPTO =130 .OR. CONCEPTO =99,0,DESCUENTO))as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA INTO CURSOR liquida
+     SUM(IIF(CONCEPTO =130 .OR. CONCEPTO =99,0,DESCUENTO))as descuento,liquida FROM &archivo WHERE legajo = vvlegajo  GROUP BY LIQUIDA INTO CURSOR liquida
+   *  SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
+     SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo  GROUP BY LIQUIDA INTO CURSOR liquida
+     
+     
      
      *SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =31 .OR. CONCEPTO = 36,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
      SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo GROUP BY LIQUIDA INTO CURSOR liquida
