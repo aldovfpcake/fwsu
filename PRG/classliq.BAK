@@ -192,7 +192,7 @@ Define Class LIQUIDACION As Custom
                     this.wtotdescue = this.wtotdescue + this.wimporte
              ENDCASE
             
-             SET STEP ON 
+             
              IF this.wacumulador # 0
                 wacuanterior = 0
                 wacuanterior = this.wacumula(this.wacumulador)
@@ -753,15 +753,6 @@ Define Class LIQUIDACION As Custom
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     PROCEDURE EMBARGO
            
       VarEmbargo =0
@@ -853,9 +844,15 @@ Define Class LIQUIDACION As Custom
     
     ENDPROC
        
+    PROCEDURE DESTROY
+        VarOb = 0
+        VarOb = this.waporte *0.03
+        
+        WAIT WINDOW "Procedure Destroy"+ STR(VarOb 10,2)       
     
     
     
+    ENDPROC
     
     
      

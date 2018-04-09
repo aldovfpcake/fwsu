@@ -753,15 +753,6 @@ Define Class LIQUIDACION As Custom
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     PROCEDURE EMBARGO
            
       VarEmbargo =0
@@ -853,9 +844,6 @@ Define Class LIQUIDACION As Custom
     
     ENDPROC
        
-    
-    
-    
     
     
      
