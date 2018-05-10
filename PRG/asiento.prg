@@ -6,7 +6,7 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO rh 
-ms = 11
+ms = 12
 an = 2017
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
@@ -16,7 +16,9 @@ rp = CREATEOBJECT('reportesueldo')
 rp.distinta = 6
 rp.vistapre = 10
 rp.reporte
+rp.descuentolegal
 obas= CREATEOBJECT('asiento')
-*obas.validar
+obas.validar
 obas.generar
-SELECT * FROM sue3 ORDER BY seccion INTO CURSOR sue3
+
+SELECT * FROM sue3 ORDER BY seccion,chapa INTO CURSOR sue3

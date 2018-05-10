@@ -135,17 +135,18 @@ Define Class LIQUIDACION As Custom
 	            DO Case
 	               CASE this.wmodocarg   = 'CANTIDAD'
 	                                                       
-	                    this.wimporte    =  wvalorfin * this.wcant   
-	               CASE this.wmodocarg   = 'IMPORTE' .AND. this.wmodocarg = 'USUARIO' .AND. this.wconextracc = 'MAESTRO'
-	                  *  this.wimporte    =  this.buscobase(curliq.concepto)
-	               CASE this.wmodocarg   = "IMPORTE" .AND. this.wconextracc = "USUARIO"         
-	                    this.wimporte    =  curliq.aporte + curliq.sinaporte + curliq.descuento
-	               CASE this.wconextracc = 'ANTIGUEDAD' .AND. this.wmodocarg = 'DEFECTO'
-	                    this.wimporte    =  wvalorfin
-	               CASE this.wmodocarg   = 'DEFECTO' 	        
-	                    this.wimporte	 =  wvalorfin
-	                CASE this.wmodocarg   =  'IMPORTE' .and. this.wconextracc = 'MAESTRO'
-	                   * this.wimporte    =  this.buscobase(curliq.concepto)
+	                    this.wimporte    	=  wvalorfin * this.wcant   
+	               CASE this.wmodocarg   	= 'IMPORTE' .AND. this.wmodocarg = 'USUARIO' .AND. this.wconextracc = 'MAESTRO'
+	                  *  this.wimporte  	=  this.buscobase(curliq.concepto)
+	               CASE this.wmodocarg  	= "IMPORTE" .AND. this.wconextracc = "USUARIO"         
+	                    this.wimporte   	=  curliq.aporte + curliq.sinaporte + curliq.descuento
+	               CASE this.wconextracc	= 'ANTIGUEDAD' .AND. this.wmodocarg = 'DEFECTO'
+	                    this.wimporte    	=  wvalorfin
+	               CASE this.wmodocarg   	= 'DEFECTO' 	        
+	                    this.wimporte	 	=  wvalorfin
+	                CASE this.wmodocarg 	=  'IMPORTE' .and. this.wconextracc = 'MAESTRO'
+	                     * this.wimporte    =  this.buscobase(curliq.concepto)
+	                
 	            ENDCASE
 	        CATCH TO errp
 	              this.mensaje("Error En Reemplazo En Concepto " + STR(curliq.concepto,4))
@@ -600,7 +601,7 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654
           	       
           	       
           	   ELSE
@@ -893,7 +894,8 @@ DEFINE CLASS configurar AS liquidacion
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\SUERUT\EMPRE3;F:\SUELDOS                 
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
-       
+          CASE cpath = 5
+               SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
        
        ENDCASE
     Endproc
@@ -1389,24 +1391,24 @@ DEFINE CLASS VACACIONES As Custom
      ENDPROC
      
      PROCEDURE caludiasvac
-       	parameters años
+       	parameters a?s
        	dias = 0
-		IF años  = 0
+		IF a?s  = 0
    		   RETURN dias
 		endif   
 
 		do case
- 		   case años =< 4
+ 		   case a?s =< 4
                 dias  = 14
-  		   case años >=5 .and. años <= 9     
+  		   case a?s >=5 .and. a?s <= 9     
         		dias = 21   
-   		  case años >= 10 .and. años <= 19
+   		  case a?s >= 10 .and. a?s <= 19
         		dias = 28
-   			case años >19
+   			case a?s >19
         		dias = 35
 		ENDCASE
 		
-		IF años < 5
+		IF a?s < 5
 		  dias = 14
 		ENDIF  
 		
@@ -1420,6 +1422,14 @@ DEFINE CLASS VACACIONES As Custom
      
      
   ENDDEFINE 
+
+  DEFINE CLASS Formvac as Custom
+   legajo = 0
+   nombre = " "
+   dias = 0 
+   desde = CTOD("  -  -    ")
+   hasta = CTOD("  -  -    ")
+  ENDDEFINE
 
 
 

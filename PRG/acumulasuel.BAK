@@ -4,10 +4,10 @@ SET EXCLUSIVE OFF
 SET PATH TO C:\SUERUT\EMPRE3
 SET DELETED ON
 ws = CREATEOBJECT("abretabla")
-ws.optabla(1,2018)
+ws.optabla(3,2018)
 *ws.acumulasuel()
-*ws.acumulasinvacaciones()
-ws.acumulasinenfermedad()
+ws.acumulasinvacaciones()
+*ws.acumulasinenfermedad()
 USE SBR18
 *replace ALL octubre WITH 0
 browse
