@@ -1,16 +1,16 @@
-Error en la línea 1350: Falta una palabra clave en la estructura de comandos FOR...ENDFOR o DO CASE...ENDCASE.
-Error en la línea 1351: Falta una palabra clave en la estructura de comandos FOR...ENDFOR o DO CASE...ENDCASE.
+Error en la línea 1389: Falta una palabra clave en la estructura de comandos FOR...ENDFOR o DO CASE...ENDCASE.
+Error en la línea 1390: Falta una palabra clave en la estructura de comandos FOR...ENDFOR o DO CASE...ENDCASE.
 parameters a?s
-Error en la línea 1394: Error de sintaxis.
+Error en la línea 1433: Error de sintaxis.
 IF a?s  = 0
-Error en la línea 1396: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1435: El comando contiene una frase o palabra clave no reconocida.
 case a?s =< 4
-Error en la línea 1401: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1440: El comando contiene una frase o palabra clave no reconocida.
 case a?s >=5 .and. a?s <= 9     
-Error en la línea 1403: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1442: El comando contiene una frase o palabra clave no reconocida.
 case a?s >= 10 .and. a?s <= 19
-Error en la línea 1405: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1444: El comando contiene una frase o palabra clave no reconocida.
 case a?s >19
-Error en la línea 1407: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1446: El comando contiene una frase o palabra clave no reconocida.
 IF a?s < 5
-Error en la línea 1411: El comando contiene una frase o palabra clave no reconocida.
+Error en la línea 1450: El comando contiene una frase o palabra clave no reconocida.

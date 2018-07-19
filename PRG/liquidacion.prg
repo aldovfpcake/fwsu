@@ -8,7 +8,9 @@ SET DELETED ON
 SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
-ob.Seteopat(1)
+* 6 demo
+seteo = 1
+ob.Seteopat(seteo)
 
 OPEN DATABASE SUELDOS SHARED
 ON ERROR DO errhand WITH ;
@@ -42,9 +44,14 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 5
+vmes = 7
 vano = 2018
-DO FORM liquidacion WITH " Mayo 2018",vmes,vano
+IF seteo = 6
+   VarStringDe = "Modo Demo"
+ELSE
+   VarStringDe = " "
+ENDIF      
+DO FORM liquidacion WITH " Julio 2018 " +VarStringDe ,vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

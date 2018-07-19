@@ -42,8 +42,9 @@ FOR z=1 TO ALEN(legajos)
   wtipo = 4
   liquisac(wlegajo)
   SELECT curliq
-  BROWSE
- *   actualizar()
+ * BROWSE
+  
+   actualizar()
   
 *recibo()
  next

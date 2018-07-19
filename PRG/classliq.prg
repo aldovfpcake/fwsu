@@ -114,8 +114,9 @@ Define Class LIQUIDACION As Custom
                      This.embargo 
 			    CASE This.wconextracc = 'EBGALIMENT'
 			         this.embargosal
-			
-			
+			    
+			    CASE This.wconextracc = 'NETO'
+			         this.calcneto
 			Endcase
              
             Do Case
@@ -149,8 +150,10 @@ Define Class LIQUIDACION As Custom
 	                
 	            ENDCASE
 	        CATCH TO errp
-	              this.mensaje("Error En Reemplazo En Concepto " + STR(curliq.concepto,4))
 	        
+	              IF curliq.concepto <> 150
+	                 this.mensaje("Error En Reemplazo En Concepto " + STR(curliq.concepto,4))
+	              ENDIF  
 	        
 	        ENDTRY   
            
@@ -382,6 +385,15 @@ Define Class LIQUIDACION As Custom
 
      Endproc
 
+
+     PROCEDURE calcneto
+        * UPDATE curliq SET descuento = 0 WHERE concepto = 875
+         select SUM(aporte) as br, SUM(sinaporte) as snp,SUM(IIF(CONCEPTO <> 875,descuento,0)) as des;
+         FROM curliq INTO CURSOR cnet
+         this.wimporte = (cnet.br + cnet.snp) - cnet.des    
+     
+         RETURN .t.
+     Endproc
 
 
 
@@ -763,17 +775,42 @@ Define Class LIQUIDACION As Custom
             this.mensaje("No Se puede Abrir El Archivo smv.txt")
        
       ENDTRY
-       
+        
       DO CASE  
          CASE this.waporte > SalarioMin*2
-              VarEmbargo = (this.waporte - SalarioMin)*0.20
+              VarEmbargo = (this.waporte - (SalarioMin*2))*0.20
          CASE this.waporte  < SalarioMin*2              
               VarEmbargo = (this.waporte - SalarioMin)*0.10
       ENDCASE         
       this.wimporte = VarEmbargo
+      
+      IF this.wlegajo = 814
+         * 5423.85
+         IF this.wimporte > 649.04
+            this.wimporte = 649.04    
+         ENDIF
+      ENDIF 
+      
+      IF this.wlegajo = 827
+         * 6900
+         IF this.wimporte > 4260.38
+            this.wimporte = 4260.38    
+         ENDIF
+      ENDIF
+      
+      
+          
+      
       *this.updateembargo
       
     ENDPROC
+     
+    
+
+
+
+
+
     
     PROCEDURE EMBARGOSAL
        PARAMETERS concepto
@@ -896,13 +933,15 @@ DEFINE CLASS configurar AS liquidacion
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
-       
+          CASE cpath = 6
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;D:\SUELDO-DEMO\EMPRE1;D:\SUELDO-DEMO
+                  
        ENDCASE
     Endproc
 
     PROCEDURE Abrobase
        TRY 
-         OPEN DATABASE SUELDOS
+         OPEN DATABASE SUELDOS SHARED
        CATCH TO Err
          this.mensaje ("Error No se Puede Abrir la Base De Datos")
        ENDTRY   

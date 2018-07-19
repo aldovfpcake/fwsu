@@ -6,8 +6,9 @@ VarAno = 2017
 Varlegajo = 814
 
 VarTot = 0
-*LEGAJO 765 lacha    embargo por $ 42517,81
-*LEGAJO 814 Quevedo  embargo por $ 23893,80 embargo terminado 
+*LEGAJO 827 VILLA CARLOS EMANUEL 6900
+*LEGAJO 814 QUEVEDO DIEGO
+
 clear
 FOR I = 1 TO 2
    FOR x =1 TO 12
