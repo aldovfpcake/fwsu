@@ -1,0 +1,33 @@
+Define Class lqautom as custom
+	
+           
+
+  	Procedure Init
+ 	 	   SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
+    	   SET CLASSLIB TO C:\FWSU\CLASES\RH
+       	   x = CREATEOBJECT( "configurar")
+
+       	   lq = CREATEOBJECT('liquidacion')
+   
+       	   this.lq.wmes     = 7
+           this.lq.wano     = 2018
+           ?"Clase instanciada"  
+  	Endproc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Enddefine

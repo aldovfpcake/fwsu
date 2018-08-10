@@ -288,6 +288,21 @@ Define Class LIQUIDACION As Custom
 	
 	Endproc
 	
+
+   Procedure InsertarConceptoBis
+	    Parameters ParConcepto,ParCantidad
+	    if  this.conceptoduplicado(ParConcepto) = .t.
+             INSERT INTO CURLIQ (LEGAJO,CONCEPTO,CANTIDAD,DESCUENTO,LIQUIDA);          	         
+              VALUES(this.wlegajo,ParConcepto,ParCantidad,0, this.wtipoliq)
+			 
+		 endif
+	
+	
+	Endproc
+
+
+
+
 	
 
 
@@ -718,22 +733,34 @@ Define Class LIQUIDACION As Custom
           CASE this.wmes = 5 
                SELECT  noviembre,diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (enero+febrero+marzo+abril) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro 
+               SELECT (s1+s2+s3+s4) as impvac from &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac
+               this.wpromesu = (antepro.s11+antepro.s12+lvac.s1+lvac.s2+lvac.s3+lvac.s4)/6 
                prome1 =  (aterior.noviembre + aterior.diciembre+ lust.impt)/6 
           
           CASE this.wmes = 6 
                SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT   diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
+               SELECT s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro 
+               SELECT (s1+s2+s3+s4+s5)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
+               this.wpromesu =  (antepro.s12+lvac.s1+lvac.s2+lvac.s3+lvac.s4+lvac.s5)/6
                prome1 = (lust.impt + aterior.diciembre)/6  
-                       
+                      
           CASE this.wmes = 7 
                SELECT  (enero+febrero+marzo+abril+mayo+ junio) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s1+s2+s3+s4+s5+s6)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6 
           CASE this.wmes = 8
                SELECT  (febrero+marzo+abril+mayo+ junio+ julio) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s2+s3+s4+s5+s6+s7)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6
           CASE this.wmes = 9
                SELECT  (marzo+abril+mayo+ junio+ julio+ agosto) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
+               SELECT (s3+s4+s5+s6+s7+S8)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
+               this.wpromesu = lvac.impvac/6
                prome1 =  (lust.impt)/6
           CASE this.wmes = 10
                SELECT  (abril+mayo+ junio+ julio+ agosto + setiembre ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
@@ -784,17 +811,12 @@ Define Class LIQUIDACION As Custom
       ENDCASE         
       this.wimporte = VarEmbargo
       
-      IF this.wlegajo = 814
-         * 5423.85
-         IF this.wimporte > 649.04
-            this.wimporte = 649.04    
-         ENDIF
-      ENDIF 
+     
       
       IF this.wlegajo = 827
          * 6900
-         IF this.wimporte > 4260.38
-            this.wimporte = 4260.38    
+         IF this.wimporte > 283.07
+            this.wimporte = 283.07    
          ENDIF
       ENDIF
       

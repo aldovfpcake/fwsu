@@ -51,7 +51,7 @@ IF seteo = 6
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH " Julio 2018 " +VarStringDe ,vmes,vano
+DO FORM liquidacion WITH "JULIO 2018" +VarStringDe ,vmes,vano
 READ EVENTS
 
 PROCEDURE errhand
