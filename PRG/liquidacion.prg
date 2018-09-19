@@ -9,7 +9,7 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 * 6 demo
-seteo = 1
+seteo = 6
 ob.Seteopat(seteo)
 
 OPEN DATABASE SUELDOS SHARED
@@ -44,14 +44,14 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 7
+vmes = 8
 vano = 2018
 IF seteo = 6
    VarStringDe = "Modo Demo"
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "JULIO 2018" +VarStringDe ,vmes,vano
+DO FORM liquidacion WITH "ABRIL 2018" +VarStringDe ,vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

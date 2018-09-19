@@ -1,0 +1,176 @@
+[Diagram]
+Title=Casos-Bancarios
+Database=C:\Users\ecorniola\Google Drive\Facu 2017\Inteligencia de Negocio\Trabajos Practicos\Caso Bancario\Otorgamiento-Creditos-2.xls
+
+[Dataset]
+MLClassGenerator=TMLGenDataset
+successors=1
+succ_1=View dataset 1
+
+[View dataset 1]
+MLClassGenerator=TMLGenCompViewData
+successors=2
+succ_1=Define status 1
+succ_2=Rule-based selection 1
+
+[Define status 1]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=Otorga_Credito
+input_count=5
+input_1=Ingreso
+input_2=Composición_Familiar
+input_3=Vivienda
+input_4=Servicios
+input_5=Otros_Creditos
+illus_count=0
+successors=2
+succ_1=Supervised Learning 1 (ID3)
+succ_2=Supervised Learning 2 (C4.5)
+
+[Supervised Learning 1 (ID3)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 1 (ID3)--ID3
+successors=0
+
+[Supervised Learning 1 (ID3)--ID3]
+MLClassGenerator=TMLGCompSpvTree
+SizeBeforeSplit=10
+SizeAfterSplit=2
+GoodnessThresold=0,03
+MaxDepth=5
+
+[Supervised Learning 2 (C4.5)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 2 (C4.5)--C4.5
+successors=0
+
+[Supervised Learning 2 (C4.5)--C4.5]
+MLClassGenerator=TMLGCompSpvTreeC45
+min_size_leaf=4
+p_level=0,25
+
+[Rule-based selection 1]
+MLClassGenerator=TMLGenCompISRuleBased
+rule_combination=1
+rules=1
+rule_1=Otorga_Credito_IN_[si]
+successors=1
+succ_1=Define status 2
+
+[Define status 2]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=0
+input_count=5
+input_1=Ingreso
+input_2=Composición_Familiar
+input_3=Vivienda
+input_4=Servicios
+input_5=Otros_Creditos
+illus_count=0
+successors=1
+succ_1=Kohonen-SOM 1
+
+[Kohonen-SOM 1]
+MLClassGenerator=TGenClusSOM
+rnd_generator=1
+show_anova=0
+col_count=2
+row_count=2
+normalization=1
+learning_rate=0,2
+successors=1
+succ_1=Define status 3
+
+[Define status 3]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=Cluster_SOM_1
+input_count=5
+input_1=Ingreso
+input_2=Composición_Familiar
+input_3=Vivienda
+input_4=Servicios
+input_5=Otros_Creditos
+illus_count=0
+successors=3
+succ_1=Supervised Learning 3 (ID3)
+succ_2=Supervised Learning 4 (C4.5)
+succ_3=Rule-based selection 2
+
+[Supervised Learning 3 (ID3)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 3 (ID3)--ID3
+successors=0
+
+[Supervised Learning 3 (ID3)--ID3]
+MLClassGenerator=TMLGCompSpvTree
+SizeBeforeSplit=10
+SizeAfterSplit=2
+GoodnessThresold=0,03
+MaxDepth=5
+
+[Supervised Learning 4 (C4.5)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 4 (C4.5)--C4.5
+successors=0
+
+[Supervised Learning 4 (C4.5)--C4.5]
+MLClassGenerator=TMLGCompSpvTreeC45
+min_size_leaf=4
+p_level=0,25
+
+[Rule-based selection 2]
+MLClassGenerator=TMLGenCompISRuleBased
+rule_combination=0
+rules=2
+rule_1=Cluster_SOM_1_IN_[c_som_2_1]
+rule_2=Cluster_SOM_1_IN_[c_som_2_2]
+successors=1
+succ_1=Define status 4
+
+[Define status 4]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=0
+input_count=3
+input_1=Vivienda
+input_2=Servicios
+input_3=Otros_Creditos
+illus_count=0
+successors=1
+succ_1=Cont to disc 1
+
+[Cont to disc 1]
+MLClassGenerator=TGenFCC2D
+successors=1
+succ_1=Define status 5
+
+[Define status 5]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=Cluster_SOM_1
+input_count=3
+input_1=c2d_Vivienda_1
+input_2=c2d_Servicios_1
+input_3=c2d_Otros_Creditos_1
+illus_count=0
+successors=1
+succ_1=Supervised Learning 5 (Naive bayes)
+
+[Supervised Learning 5 (Naive bayes)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 5 (Naive bayes)--Naive bayes
+successors=0
+
+[Supervised Learning 5 (Naive bayes)--Naive bayes]
+MLClassGenerator=TMLGCompNaiveBayes
+show_cond_dist=1
+use_laplacian=1
+lambda_laplacian=1
+model_description=0
+

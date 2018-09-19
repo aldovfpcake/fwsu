@@ -1,0 +1,34 @@
+SET DELETED on
+SELECT tabhoras
+GO top
+BROWSE FOR saldif > 1000
+BROWSE FOR saldif < -1000
+
+
+SCAN
+ 
+    IF saldif <-120 
+       positivo = saldif * -1
+       horas =  INT(positivo/valcicta) 
+       thoras = horcta - horas
+       IF thoras < -1
+          thoras = 1
+       ENDIF   
+       replace horcta WITH thoras
+    ENDIF
+    
+    IF saldif > 10 
+       horas = INT(saldif/valcicta)
+       thoras = horcta - horas
+       IF thoras > 100
+          thoras = 99
+       ENDIF
+       ? STR(leg,3) + " " + STR(thoras,3)
+       replace horcta  WITH thoras 
+    ENDIF
+   
+    IF saldif < valcicta .AND. saldif > 1
+       replace horcta WITH (horcta+1)
+    ENDIF 
+
+endscan

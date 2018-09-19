@@ -1,0 +1,49 @@
+[Diagram]
+Title=Default title
+Database=C:\FTA\inteligencia de negocios\practico\Libro2.xls
+
+[Dataset]
+MLClassGenerator=TMLGenDataset
+successors=1
+succ_1=View dataset 1
+
+[View dataset 1]
+MLClassGenerator=TMLGenCompViewData
+successors=1
+succ_1=Define status 1
+
+[Define status 1]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=Categoria
+input_count=7
+input_1=Categoria
+input_2=Moneda
+input_3=RatingVendedor
+input_4=Duracion
+input_5=DiaSemana
+input_6=PrecioInicial
+input_7=PrecioCierre
+illus_count=8
+illus_1=RatingVendedor
+illus_2=Duracion
+illus_3=PrecioInicial
+illus_4=PrecioCierre
+illus_5=Competitiva?
+illus_6=Categoria
+illus_7=Moneda
+illus_8=DiaSemana
+successors=1
+succ_1=Supervised Learning 1 (C4.5)
+
+[Supervised Learning 1 (C4.5)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 1 (C4.5)--C4.5
+successors=0
+
+[Supervised Learning 1 (C4.5)--C4.5]
+MLClassGenerator=TMLGCompSpvTreeC45
+min_size_leaf=5
+p_level=0.25
+

@@ -1,0 +1,8 @@
+[Diagram]
+Title=Default title
+Database=C:\FTA\inteligencia de negocios\practico\Libro2.xls
+
+[Dataset]
+MLClassGenerator=TMLGenDataset
+successors=0
+

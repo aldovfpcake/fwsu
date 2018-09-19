@@ -1,0 +1,86 @@
+[Diagram]
+Title=Redes-Bayesianas
+Database=C:\FTA\inteligencia de negocios\practico\subastas-c.xls
+
+[Dataset]
+MLClassGenerator=TMLGenDataset
+successors=1
+succ_1=View dataset 1
+
+[View dataset 1]
+MLClassGenerator=TMLGenCompViewData
+successors=1
+succ_1=Define status 1
+
+[Define status 1]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=subasta
+input_count=5
+input_1=RatingVendedor
+input_2=Duracion
+input_3=PrecioInicial
+input_4=PrecioCierre
+input_5=Competitiva?
+illus_count=5
+illus_1=RatingVendedor
+illus_2=Duracion
+illus_3=PrecioInicial
+illus_4=PrecioCierre
+illus_5=Competitiva?
+successors=1
+succ_1=Cont to disc 1
+
+[Cont to disc 1]
+MLClassGenerator=TGenFCC2D
+successors=1
+succ_1=View dataset 2
+
+[View dataset 2]
+MLClassGenerator=TMLGenCompViewData
+successors=1
+succ_1=Define status 2
+
+[Define status 2]
+MLClassGenerator=TMLGenFSDefStatus
+target_count=1
+target_1=subasta
+input_count=8
+input_1=Categoria
+input_2=Moneda
+input_3=DiaSemana
+input_4=c2d_RatingVendedor_1
+input_5=c2d_Duracion_1
+input_6=c2d_PrecioInicial_1
+input_7=c2d_PrecioCierre_1
+input_8=c2d_Competitiva?_1
+illus_count=8
+illus_1=Categoria
+illus_2=Moneda
+illus_3=DiaSemana
+illus_4=c2d_RatingVendedor_1
+illus_5=c2d_Duracion_1
+illus_6=c2d_PrecioInicial_1
+illus_7=c2d_PrecioCierre_1
+illus_8=c2d_Competitiva?_1
+successors=1
+succ_1=Supervised Learning 1 (Naive bayes)
+
+[Supervised Learning 1 (Naive bayes)]
+MLClassGenerator=TMLGCompOneInstance
+embedded_spv=1
+embedded_section=Supervised Learning 1 (Naive bayes)--Naive bayes
+successors=1
+succ_1=View dataset 3
+
+[Supervised Learning 1 (Naive bayes)--Naive bayes]
+MLClassGenerator=TMLGCompNaiveBayes
+show_cond_dist=0
+use_laplacian=1
+lambda_laplacian=1
+model_description=1
+
+[View dataset 3]
+MLClassGenerator=TMLGenCompViewData
+successors=0
+

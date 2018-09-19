@@ -1,0 +1,8 @@
+CREATE TABLE f:\sueldos\empre1 lagardi (legajo n(4),knm n(10,2),kmcien n(10,2),kmsur2 n(10,2),kmsur4 n(10,2),ctrld n(2),fres n(2),cruce n(2))
+
+ALTER TABLE f:\sueldos\empre1\tablatec ADD COLUMN COMD N(2)
+ALTER TABLE f:\sueldos\empre1\tablatec ADD ADJ  N(2)
+ALTER TABLE f:\sueldos\empre1\tablatec ADD FER  N(1)
+ALTER TABLE f:\sueldos\empre1\tablatec ADD ENF  N(2)
+ALTER TABLE f:\sueldos\empre1\tablatec ADD AUS  N(2)
+SueldosChoferesmensualTecsan-8-18.xls
