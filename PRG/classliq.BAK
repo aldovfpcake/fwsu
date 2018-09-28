@@ -1451,25 +1451,25 @@ DEFINE CLASS VACACIONES As Custom
         ENDIF
      ENDPROC
      
-     PROCEDURE caludiasvac
-       	parameters a?s
+     PROCEDURE calcudiasvac
+       	parameters ans
        	dias = 0
-		IF a?s  = 0
+		IF ans  = 0
    		   RETURN dias
 		endif   
 
 		do case
- 		   case a?s =< 4
+ 		   case ans =< 4
                 dias  = 14
-  		   case a?s >=5 .and. a?s <= 9     
+  		   case ans >=5 .and. ans <= 9     
         		dias = 21   
-   		  case a?s >= 10 .and. a?s <= 19
+   		  case ans >= 10 .and. ans <= 19
         		dias = 28
-   			case a?s >19
+   			case ans >19
         		dias = 35
 		ENDCASE
 		
-		IF a?s < 5
+		IF ans < 5
 		  dias = 14
 		ENDIF  
 		

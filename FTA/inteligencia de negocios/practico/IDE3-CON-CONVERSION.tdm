@@ -1,8 +1,0 @@
-[Diagram]
-Title=IDE3-CONVERSION
-Database=C:\FTA\inteligencia de negocios\practico\subastas-c.xls
-
-[Dataset]
-MLClassGenerator=TMLGenDataset
-successors=0
-

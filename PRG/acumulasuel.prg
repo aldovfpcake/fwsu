@@ -1,13 +1,14 @@
 SET CLASSLIB TO c:\fwsu\clases\rh.vcx
 SET EXCLUSIVE OFF
-*SET PATH TO F:\sueldos\empre1
-SET PATH TO C:\SUERUT\EMPRE1
+SET PATH TO F:\sueldos\empre1
+*SET PATH TO C:\SUERUT\EMPRE1
 SET DELETED ON
 ws = CREATEOBJECT("abretabla")
 ws.optabla(7,2018)
 *ws.acumulasuel()
 ws.acumulasinvacaciones()
-*ws.acumulasinenfermedad()
+ws.optabla(7,2018)
+ws.acumulasinenfermedad()
 USE SBR18
 *replace ALL octubre WITH 0
 browse

@@ -1453,27 +1453,27 @@ DEFINE CLASS VACACIONES As Custom
      
      PROCEDURE calcudiasvac
        	parameters ans
-       	dias = 0
+       	Vcdiasv = 0
 		IF ans  = 0
-   		   RETURN dias
+   		   RETURN Vcdiasv
 		endif   
 
 		do case
  		   case ans =< 4
-                dias  = 14
+                Vcdiasv  = 14
   		   case ans >=5 .and. ans <= 9     
-        		dias = 21   
+        		Vcdiasv = 21   
    		  case ans >= 10 .and. ans <= 19
-        		dias = 28
+        		Vcdiasv = 28
    			case ans >19
-        		dias = 35
+        		Vcdiasv = 35
 		ENDCASE
 		
 		IF ans < 5
-		  dias = 14
+		  Vcdiasv = 14
 		ENDIF  
 		
-		RETURN dias
+		RETURN Vcdiasv
      
      ENDPROC
      
