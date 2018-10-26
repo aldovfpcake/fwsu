@@ -2,8 +2,9 @@ SET PATH TO F:\SUELDOS\EMPRE1
 SET DELETED ON
 SET EXCLUSIVE OFF  
 SET CLASSLIB TO c:\fwsu\clases\rh
-x = CREATEOBJECT("legajoper")
+x  = CREATEOBJECT("legajoper")
 tb = CREATEOBJECT("abretabla")
+sl = CREATEOBJECT("sueldosfijos")
 tb.optabla(6,2018)
 SELECT 0
 USE SUELDOSFIJOS 

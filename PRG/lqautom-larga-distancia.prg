@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 8
+ lq.wmes     = 9
  lq.wano     = 2018
 
  LOCAL varLeg
@@ -26,7 +26,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "82018"
+ archliq= "92018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = lagardi.legajo
  lq.wtipoliq = 3
@@ -38,7 +38,7 @@ x.Seteopat(1)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,59,15,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,64,15,3) 
  
- IF lq.wtipoliq <> 9
+ IF lq.wmes <> 9
    lq.feriadonotra
  ENDIF
  
@@ -92,7 +92,7 @@ x.Seteopat(1)
  
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
- REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+* REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
  grabarliq()
  return
 
@@ -112,7 +112,7 @@ return
  FUNCTION GRABARLIQ
  ********************
  
- SELECT legajo,concepto FROM &ARCHLIQ WHERE legajo = curliq.legajo AND concepto = curliq.concepto;
+ SELECT legajo,concepto FROM &ARCHLIQ WHERE legajo = lq.wlegajo AND concepto = curliq.concepto AND liquida = 3;
  INTO CURSOR EXISTE
  IF EOF()
        SELECT CURLIQ
@@ -122,10 +122,10 @@ return
             
        
        ENDSCAN 
-       ? "SUELDO GRABADO....." + STR(curliq.legajo,4)
+       ? "SUELDO GRABADO....." + STR(lq.wlegajo,4)
  ELSE
  
-      ? "YA EXISTE LIQUIDACION EN ....=" + STR(curliq.legajo,4)  
+      ? "YA EXISTE LIQUIDACION EN ....=" + STR(lq.wlegajo,4)  
  
  ENDIF
  

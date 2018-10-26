@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 8
+ lq.wmes     = 9
  lq.wano     = 2018
 
  LOCAL varLeg
@@ -26,7 +26,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "82018"
+ archliq= "92018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
@@ -46,7 +46,7 @@ x.Seteopat(1)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,59,15,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,64,15,3) 
  
- IF lq.wtipoliq <> 9
+ IF lq.wmes <> 9
    lq.feriadonotra
  ENDIF
  

@@ -6,9 +6,9 @@ SET CLASSLIB TO C:\FWSU\CLASES\RH
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
-
+clear
 SELECT tabhoras
-
+GO top
 SCAN
 
    DO liquidacion-automatica

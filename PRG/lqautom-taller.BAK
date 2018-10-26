@@ -6,12 +6,12 @@ SET CLASSLIB TO C:\FWSU\CLASES\RH
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
-
+clear
 SELECT tabhoras
 
 SCAN
 
-   DO liquidacion-automatica WITH tabhoras.leg,tabhoras.horcta,tabhoras.horcien,tabhoras.parfer
+   DO liquidacion-automatica
    SELECT tabhoras
 
 

@@ -88,8 +88,8 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
- REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
-* grabarliq()
+* REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ grabarliq()
  return
  
  
