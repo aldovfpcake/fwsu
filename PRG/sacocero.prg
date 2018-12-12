@@ -1,9 +1,11 @@
 SET PROCEDURE TO c:\fwsu\prg\classliq
+SET PATH TO C:\SUERUT\EMPRE1
+
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
-ob.Seteopat(1)
-liquida = "52018"
+
+liquida = "102018"
 *SELECT legajo,aporte,sinaporte,descuento,liquida from;
  &liquida WHERE aporte+sinaporte+descuento = 0
  
- DELETE FROM 92018 WHERE aporte+sinaporte+descuento = 0 
+ DELETE FROM &liquida WHERE aporte+sinaporte+descuento = 0 

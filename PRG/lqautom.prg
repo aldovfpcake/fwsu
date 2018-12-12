@@ -34,7 +34,7 @@ FOR z=1 TO ALEN(legajos)
   xb = CREATEOBJECT("lqsac")
   xb.wano = 2018
   xb.wlegajo = wlegajo
-  xb.wtiposac = 1
+  xb.wtiposac = 2
   xb.liquisac
   SELECT curliq
   replace aporte WITH (xb.WMEJOR)/2
@@ -129,7 +129,7 @@ SELECT curliq
 ?"*************"
  
 SCAN
-   INSERT INTO f:\sueldos\empre1\62018 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
+   INSERT INTO f:\sueldos\empre1\122018 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
    (curliq.legajo,curliq.concepto,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,4)
 
 ENDSCAN

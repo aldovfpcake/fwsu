@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 9
+ lq.wmes     = 11
  lq.wano     = 2018
 
  LOCAL varLeg
@@ -26,7 +26,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "92018"
+ archliq= "112018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
@@ -88,7 +88,7 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-* REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
  grabarliq()
  return
  
@@ -148,7 +148,7 @@ x.Seteopat(1)
  DiferSueldo = dif  
  SELECT tabhoras
     rec = RECNO()
-    UPDATE tabhoras set saldif   = dif;
+    UPDATE tabhoras set valferiado = neto - saldif;
                         WHERE leg = vpersolinea.legajo
   GO rec 
  
@@ -169,7 +169,7 @@ x.Seteopat(1)
        SCAN
        		INSERT INTO &ARCHLIQ(legajo,concepto,descrip,cantidad,aporte,sinaporte,descuento,liquida) VALUES;
       	    (lq.wlegajo,CURLIQ.CONCEPTO,CURLIQ.DESCRIP,CURLIQ.CANTIDAD,CURLIQ.APORTE,CURLIQ.SINAPORTE,CURLIQ.DESCUENTO,3)
-            WAIT WINDOW "Grabado"
+             ?"Grabando"
        
        ENDSCAN 
  

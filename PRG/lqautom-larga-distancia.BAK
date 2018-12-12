@@ -14,9 +14,10 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 9
+ *** cargar mes y año
+ lq.wmes     = 11
  lq.wano     = 2018
-
+**************************************
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
  fechapago = " "
@@ -26,7 +27,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "92018"
+ archliq= "112018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = lagardi.legajo
  lq.wtipoliq = 3
@@ -51,7 +52,7 @@ x.Seteopat(1)
  ENDIF
  
  IF lagardi.cargapel <> 0
-    insertar(12,0)
+    insertar(12,7)
     insertar(26,0)
  
  ENDIF
@@ -112,7 +113,7 @@ return
  FUNCTION GRABARLIQ
  ********************
  
- SELECT legajo,concepto FROM &ARCHLIQ WHERE legajo = curliq.legajo AND concepto = curliq.concepto;
+ SELECT legajo,concepto FROM &ARCHLIQ WHERE legajo = lq.wlegajo AND concepto = curliq.concepto AND liquida = 3;
  INTO CURSOR EXISTE
  IF EOF()
        SELECT CURLIQ

@@ -1,3 +1,6 @@
+*PARAMETERS emp
+*WAIT WINDOW STR(emp,1)
+*CLOSE databases
 SET TALK OFF
 SET EXCLUSIVE OFF
 SET DATE ITALIAN
@@ -9,8 +12,16 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 * 6 demo
-seteo = 1
-ob.Seteopat(2)
+emp = 2
+DO case
+   CASE emp = 1
+	    seteo = 1
+   		ob.Seteopat(1)
+   CASE emp = 2
+        seteo = 2
+   		ob.Seteopat(2)
+ENDCASE
+   		
 
 OPEN DATABASE SUELDOS SHARED
 ON ERROR DO errhand WITH ;
@@ -44,14 +55,14 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 10
+vmes = 11
 vano = 2018
 IF seteo = 6
    VarStringDe = "Modo Demo"
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "OCTUBRE 2018" +VarStringDe ,vmes,vano
+DO FORM liquidacion WITH "NOVIEMBRE 2018" +VarStringDe ,vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

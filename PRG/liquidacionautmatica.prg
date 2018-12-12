@@ -68,6 +68,8 @@ SELECT curliq
 REQUERY()
 SELECT SUM(aporte) + SUM(sinaporte) - SUM(descuento) as neto;
 FROM curliq  GROUP BY legajo INTO CURSOR net
+SELECT tabhoras
+replace saldif WITH net.neto
 ?net.neto
 ?"diferencia......=" + STR(df,10,2)
 BROWSE

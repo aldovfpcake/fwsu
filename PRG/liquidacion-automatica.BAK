@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 8
+ lq.wmes     = 11
  lq.wano     = 2018
 
  LOCAL varLeg
@@ -26,7 +26,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "82018"
+ archliq= "112018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
@@ -46,7 +46,7 @@ x.Seteopat(1)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,59,15,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,64,15,3) 
  
- IF lq.wtipoliq <> 9
+ IF lq.wmes <> 9
    lq.feriadonotra
  ENDIF
  
@@ -85,10 +85,10 @@ x.Seteopat(1)
  SELECT * FROM personal WHERE legajo = lq.wlegajo INTO CURSOR vpersolinea
  
  SELECT curliq
-* verdif()
+ verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-* REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
  grabarliq()
  return
  
@@ -148,7 +148,7 @@ x.Seteopat(1)
  DiferSueldo = dif  
  SELECT tabhoras
     rec = RECNO()
-    UPDATE tabhoras set saldif   = dif;
+    UPDATE tabhoras set valferiado = neto - saldif;
                         WHERE leg = vpersolinea.legajo
   GO rec 
  
@@ -169,7 +169,7 @@ x.Seteopat(1)
        SCAN
        		INSERT INTO &ARCHLIQ(legajo,concepto,descrip,cantidad,aporte,sinaporte,descuento,liquida) VALUES;
       	    (lq.wlegajo,CURLIQ.CONCEPTO,CURLIQ.DESCRIP,CURLIQ.CANTIDAD,CURLIQ.APORTE,CURLIQ.SINAPORTE,CURLIQ.DESCUENTO,3)
-            WAIT WINDOW "Grabado"
+             ?"Grabando"
        
        ENDSCAN 
  

@@ -60,7 +60,7 @@ FOR zjw= 1 TO 50
    
    df = wsueldototal - net.neto
    
-   IF df  < 10  
+   IF df  < 80  
       exit
    endif
 NEXT     

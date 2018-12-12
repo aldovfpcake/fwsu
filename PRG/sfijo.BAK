@@ -1,0 +1,5 @@
+SET PROCEDURE TO c:\fwsu\prg\classliq
+ob = CREATEOBJECT("configurar")
+ob.Seteopat(1)
+SELECT p.legajo,p.nombre,s.sueldo as sldo FROM personal p;
+INNER JOIN sueldosfijos s ON s.legajo = p.legajo INTO CURSOR sfijo readwrite

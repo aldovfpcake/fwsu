@@ -4,22 +4,25 @@ SET EXCLUSIVE OFF
 SET DELETED ON
 *CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
-
+* 750 pedraza pablo
+*
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 *borrar()
-ver()
+*ver()
 
 USE f:\sueldos\empre1\lagardi again
-
-*SCAN
-*   IF lagardi.legajo = 558
-*     DO lqautom-larga-distancia
-*  ENDIF
+BROWSE
+SCAN
+     
+     IF legajo = 701 
+        DO lqautom-larga-distancia
+     ENDIF
+    SELECT lagardi
    *DELETE FROM f:\sueldos\empre1\92018 WHERE legajo = lagardi.legajo .and. liquida = 3
 *   *?"Eliminando ........:" +STR(lagardi.legajo,4) 
 
-*ENDSCAN
+ENDSCAN
 
 ***************
 FUNCTION borrar

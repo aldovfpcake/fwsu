@@ -8,9 +8,9 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 clear
 SELECT tabhoras
-
+GO top
 SCAN
-
+   ?TABHORAS.LEG
    DO liquidacion-automatica
    SELECT tabhoras
 

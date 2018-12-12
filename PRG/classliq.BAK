@@ -300,7 +300,7 @@ Define Class LIQUIDACION As Custom
 	
 	Endproc
 
-
+ 
 
 
 	
@@ -948,9 +948,9 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 1
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
           CASE cpath = 2
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS  
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES  
           CASE cpath = 3
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\SUERUT\EMPRE3;F:\SUELDOS                 
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\SUERUT\EMPRE3;F:\SUELDOS;F:\SUELDOS\EMPRESA-3                 
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
           CASE cpath = 5
@@ -1453,27 +1453,27 @@ DEFINE CLASS VACACIONES As Custom
      
      PROCEDURE calcudiasvac
        	parameters ans
-       	dias = 0
+       	Vcdiasv = 0
 		IF ans  = 0
-   		   RETURN dias
+   		   RETURN Vcdiasv
 		endif   
 
 		do case
  		   case ans =< 4
-                dias  = 14
+                Vcdiasv  = 14
   		   case ans >=5 .and. ans <= 9     
-        		dias = 21   
+        		Vcdiasv = 21   
    		  case ans >= 10 .and. ans <= 19
-        		dias = 28
+        		Vcdiasv = 28
    			case ans >19
-        		dias = 35
+        		Vcdiasv = 35
 		ENDCASE
 		
 		IF ans < 5
-		  dias = 14
+		  Vcdiasv = 14
 		ENDIF  
 		
-		RETURN dias
+		RETURN Vcdiasv
      
      ENDPROC
      
