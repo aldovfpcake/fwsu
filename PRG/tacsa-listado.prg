@@ -4,5 +4,7 @@ SET DELETED ON
 CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
-x.Seteopat(1)
+x.Seteopat(2)
 DO FORM listafm
+DO FOXYPREVIEWER.APP
+REPORT FORM SUELDOSTACSA PREVIEW

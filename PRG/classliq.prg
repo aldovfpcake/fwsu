@@ -54,11 +54,11 @@ Define Class LIQUIDACION As Custom
 			This.wacumula(i) = 0
 		Endfor
 		
-		IF this.wmes = 12 .and. this.wtipoliq = 3
-		   IF this.wlegajo <> 755
-		      this.cargodiacam
-		 ENDIF     
-		ENDIF    
+		*IF this.wmes = 12 .and. this.wtipoliq = 3
+		*   IF this.wlegajo <> 755
+		*      this.cargodiacam
+		*   ENDIF     
+		*ENDIF    
 		
 		
 		Select curliq
@@ -655,10 +655,10 @@ Define Class LIQUIDACION As Custom
     LOCAL EXTCOP
     EXTCOP = 0
     SELECT CURLIQ
-	IF EOF()
-      RETURN .T.
+	*IF EOF()
+    *  RETURN .T.
 
-	ENDIF
+	*ENDIF
     SCAN 
        IF buconcepto = curliq.concepto
           EXTCOP = 1
@@ -845,8 +845,8 @@ Define Class LIQUIDACION As Custom
        IF concepto = 153
           VarTotalSueldo = ((this.waporte -this.wtotaporneg ) - this.wtotdescue) 
        ENDIF   
-	   WAIT WINDOW STR(this.waporte,7,2) + ' ' + str(this.wtotdescue,7,2)
-       WAIT WINDOW STR(this.wcant,2)
+	   *WAIT WINDOW STR(this.waporte,7,2) + ' ' + str(this.wtotdescue,7,2)
+       *WAIT WINDOW STR(this.wcant,2)
        VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
        this.wimporte  = VarEmbargo
     
@@ -1277,8 +1277,8 @@ DEFINE CLASS VISUREC AS Custom
   
    
    PROCEDURE veorec
-      x = CREATEOBJECT('CONFIGURAR') 
-      x.seteopat(1)
+     * x = CREATEOBJECT('CONFIGURAR') 
+     * x.seteopat(1)
     
      *TRY
          *IF .NOT. USED(this.archivo)
