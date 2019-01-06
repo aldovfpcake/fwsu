@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 11
+ lq.wmes     = 12
  lq.wano     = 2018
 
  LOCAL varLeg
@@ -26,7 +26,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "112018"
+ archliq= "122018"
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
@@ -35,8 +35,8 @@ x.Seteopat(1)
  lq.cargobase
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,5,1,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,6,1,3) 
- lq.InsertarConceptoBis(59,25)
- lq.InsertarConceptoBis(64,25)
+ lq.InsertarConceptoBis(59,tabhoras.comida)
+ lq.InsertarConceptoBis(64,tabhoras.comida)
  lq.InsertarConceptoBis(6,tabhoras.horcien)
  lq.InsertarConceptoBis(5,tabhoras.horcta)
  IF tabhoras.parfer <> 0
@@ -85,11 +85,11 @@ x.Seteopat(1)
  SELECT * FROM personal WHERE legajo = lq.wlegajo INTO CURSOR vpersolinea
  
  SELECT curliq
- verdif()
+* verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
- *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
- grabarliq()
+REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ *grabarliq()
  return
  
  

@@ -15,7 +15,7 @@ USE f:\sueldos\empre1\lagardi again
 BROWSE
 SCAN
      
-     IF legajo = 701 
+     IF legajo = 784 
         DO lqautom-larga-distancia
      ENDIF
     SELECT lagardi

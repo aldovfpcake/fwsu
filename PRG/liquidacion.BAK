@@ -12,7 +12,7 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 * 6 demo
-emp = 1
+emp = 2
 DO case
    CASE emp = 1
 	    seteo = 1

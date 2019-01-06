@@ -54,11 +54,11 @@ Define Class LIQUIDACION As Custom
 			This.wacumula(i) = 0
 		Endfor
 		
-		IF this.wmes = 12 .and. this.wtipoliq = 3
-		   IF this.wlegajo <> 755
-		      this.cargodiacam
-		 ENDIF     
-		ENDIF    
+		*IF this.wmes = 12 .and. this.wtipoliq = 3
+		*   IF this.wlegajo <> 755
+		*      this.cargodiacam
+		*   ENDIF     
+		*ENDIF    
 		
 		
 		Select curliq

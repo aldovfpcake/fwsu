@@ -15,7 +15,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 11
+ lq.wmes     = 12
  lq.wano     = 2018
 **************************************
  LOCAL varLeg
@@ -85,6 +85,10 @@ x.Seteopat(1)
  SELECT * FROM personal WHERE legajo = lq.wlegajo INTO CURSOR vpersolinea
  
  SELECT curliq
+ SELECT * FROM curliq ORDER BY concepto INTO CURSOR curliq readwrite 
+ 
+ lq.liquida
+ 
 * verdif()
  
  
@@ -93,7 +97,7 @@ x.Seteopat(1)
  
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-* REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
  grabarliq()
  return
 
