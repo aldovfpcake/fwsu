@@ -36,7 +36,7 @@ SCAN
     dia = SUBSTR(fecha,7,2)
     mes = SUBSTR(fecha,5,2)
     ano = SUBSTR(fecha,1,4) 
-    remu = "00"+ STR(sb,5)+"0"
+    remu = "0"+ STR(sb,5)+"00"
     ?remu
     IF categoria = "SERENO"
        vcateg = "06"

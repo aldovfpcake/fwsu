@@ -33,7 +33,7 @@ cad = '33-60724391-3'+CHR(9)+ STR(treg,4)
  *                                  123456789-123    
  SET DEVICE TO FILE C:\BANK.TXT
  
- @0,0  say '33-60724391-9' picture "99-99999999-9"
+ @0,0  say '33-60724391-3' picture "99-99999999-9"
  @0,13 say CHR(9)  
  @0,14 say LTRIM(STR(treg,4))
 lin = 1

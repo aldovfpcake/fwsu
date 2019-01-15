@@ -4,8 +4,8 @@ SET PATH TO C:\SUERUT\EMPRE1
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 
-liquida = "102018"
+liquida = "122018"
 *SELECT legajo,aporte,sinaporte,descuento,liquida from;
  &liquida WHERE aporte+sinaporte+descuento = 0
  
- DELETE FROM &liquida WHERE aporte+sinaporte+descuento = 0 
+ DELETE FROM &liquida WHERE aporte+sinaporte+descuento = 0 .AND.  LEGAJO <> 19

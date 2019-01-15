@@ -8,7 +8,7 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 lg = CREATEOBJECT("legajoper")
-ms = 11
+ms = 12
 an = 2018
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)

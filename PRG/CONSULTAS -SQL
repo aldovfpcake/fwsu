@@ -1,0 +1,45 @@
+CONSULTA -1
+SELECT P.LEGAJO,P.NOMBRE,S.CONCEPTO FROM PERSONAL AS P INNER JOIN 122018 S ON P.LEGAJO = S.LEGAJO WHERE S.CONCEPTO=20
+
+CONSULTA 2
+select count(categoria) ,categoria,seccion  from personal where activo = "A" group by  categoria ,seccion
+
+CONSULTA 3
+select count(seccion), seccion , count(sexo),sexo from personal where activo = "A" group by  seccion,sexo
+
+CONSULTA 4
+*************************************
+ENCUESTA GRAN BS AS
+**********************************
+select count(seccion), seccion,sexo  from personal where activo = "A"  AND depart <> "LA BOCA"group by  seccion,sexo
+
+CONSULTA 5
+ENCUESTA BS AS POR HORAS
+select count(s.cantidad),sum(aporte)  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 group by  seccion,sexo
+
+*valida
+select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 order by  seccion,sexo
+
+horas pagas no trabajdas
+
+select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 8  .or. s.concepto = 20 .or. concepto = 31 order by  seccion,sexo
+
+*************************************************
+ENCUESTA CAPITAL FEDERAL
+*******************************
+select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart ="LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 order by  seccion,sexo
+
+horas pagas no trabajdas
+
+select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart ="LA BOCA" .and. s.concepto= 8  .or. s.concepto = 20 .or. concepto = 31 order by  seccion,sexo
+
+enfermedad
+select  count( p.legajo) , sum(s.cantidad) from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart ="LA BOCA" .and. s.concepto= 31  group by p.legajo ,p.sexo
+
+ausentes
+
+
+********************************
+CONTRIBUCIONES DE JUBILACION
+*****************************
+Select   p.legajo , p.nombre, sum(aporte), round(sum(aporte)*0.1253,2) as jub  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"    group by p.legajo,p.nombre 
