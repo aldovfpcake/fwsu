@@ -11,9 +11,14 @@ x.Seteopat(1)
 .AND. DEPART  = "LA BOCA" GROUP BY PROVINCIA ORDER BY PROVINCIA
 
 SELECT  legajo,calcedad(fechanaci) as edad ,sexo, estudios ;
-FROM PERSONAL WHERE ACTIVO ="A" .AND. DEPART = "LA BOCA" .AND. BETWEEN(calcedad(fechanaci),46,84)ORDER BY edad,estudios INTO CURSOR lis;
+FROM PERSONAL WHERE ACTIVO ="A" .AND. DEPART = "LA BOCA" .AND. BETWEEN(calcedad(fechanaci),46,90)ORDER BY edad,estudios INTO CURSOR lis;
 
-select COUNT(legajo),estudios FROM lis GROUP BY estudios
+
+
+*SELECT  legajo,calcedad(fechanaci) as edad ,sexo, estudios ;
+FROM PERSONAL WHERE ACTIVO ="A" .AND. DEPART = "LA BOCA" ORDER BY edad,estudios INTO CURSOR lis;
+
+select COUNT(legajo),estudios,sexo FROM lis GROUP BY estudios,sexo
 
 
 

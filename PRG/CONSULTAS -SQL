@@ -16,6 +16,14 @@ select count(seccion), seccion,sexo  from personal where activo = "A"  AND depar
 CONSULTA 5
 ENCUESTA BS AS POR HORAS
 select count(s.cantidad),sum(aporte)  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 group by  seccion,sexo
+****************nueva******************
+select t.legajo, s.cantidad  from tareas t inner join 12019 s on s.legajo = t.legajo into cursor informe
+
+******************** nueva informe por enfermedad*******************************************
+select t.legajo, s.concepto, s.cantidad ,t.zona ,t.sexo from tareas t inner join 22019 s on s.legajo = t.legajo  where s.concepto =43  .and. zona = 1
+********************************************************************************************
+
+
 
 *valida
 select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 order by  seccion,sexo
@@ -43,3 +51,36 @@ ausentes
 CONTRIBUCIONES DE JUBILACION
 *****************************
 Select   p.legajo , p.nombre, sum(aporte), round(sum(aporte)*0.1253,2) as jub  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"    group by p.legajo,p.nombre 
+
+--2
+
+Select   p.legajo , p.nombre, p.cuil,sum(aporte), round(sum(aporte)*0.1253,2) as jub  from personal p inner join 12018 s on p.legajo = s.legajo where activo = "A" .AND. S.CONCEPTO = 26    group by p.legajo,p.nombre,p.cuil
+
+
+
+
+
+****************************
+insert por ganancias
+*************************
+insert into 12019(legajo,concepto,descrip,descuento,liquida) values (?,130,"Imp.Ganancias 4ta",?,2)
+
+
+**************************
+informe costo
+*********************
+
+INSERT INTO INFORME(legajo,nombre,bruto,viat,bas) select legajo,nombre,bruto,viat,bas from consulta
+
+select p.legajo,p.nombre,sum(s.aporte) as bruto ,sum(s.sinaporte) as viat,sum(iif(s.concepto=1,s.aporte,0)) as bas from personal p inner join 102017 s on s.legajo = p.legajo where p.zonadesf = 1 group by p.legajo,p.nombre into cursor info
+
+***************
+borra concepto de sueldo
+************************
+
+delete from 12019 where legajo = ? .and. concepto = 4
+
+
+
+
+select t.legajo, s.cantidad from tareas t inner join 12019 s on s.legajo = t.legajo where concepto = 31 .or. concepto = 7  

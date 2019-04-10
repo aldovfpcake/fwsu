@@ -14,19 +14,19 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 12
- lq.wano     = 2018
+ lq.wmes     = 3
+ lq.wano     = 2019
 
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
  fechapago = " "
  monto = " "
  nombremes = " "
- ano = 2018
+ ano = 2019
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "122018"
+ archliq= "32019"
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
@@ -43,6 +43,14 @@ x.Seteopat(1)
     lq.InsertarConceptoBis(8,tabhoras.parfer)
  
  ENDIF
+ 
+ IF tabhoras.diasnotra <> 0
+    lq.InsertarConceptoBis(4,tabhoras.diasnotra)
+ 
+ ENDIF
+ 
+ 
+ 
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,59,15,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,64,15,3) 
  
@@ -88,8 +96,12 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
- *grabarliq()
+REPORT FORM  RECIBOSUELDOAUTOM PREVIEW  TO PRINTER PROMPT   
+*grabarliq()
+* grabatabla()
+*  grabacincuenta()
+*  grabacien() 
+* grabaferi()
  return
  
  
@@ -176,6 +188,66 @@ REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW
  ENDIF
  
  
+ *************************
+ FUNCTION GRABATABLA
+ **********************
+ SELECT curliq
+ SUM aporte+sinaporte -descuento TO neto
  
  
+ SELECT vpersolinea.legajo FROM basehoras WHERE legajo = vpersolinea.legajo INTO CURSOR VERSIESTA
+ IF EOF()
+    INSERT INTO basehoras(legajo,nombre,sueldoneto) VALUES (vpersolinea.legajo,vpersolinea.nombre,neto)
+ ELSE   
+   UPDATE basehoras SET sueldoneto = neto;
+   WHERE LEGAJO = VPERSOLINEA.LEGAJO
+ ENDIF   
  
+ 
+   
+   **************************
+   FUNCTION grabacincuenta
+   **************************
+   LOCAL valhsci
+   SELECT curliq
+   SUM aporte+sinaporte -descuento TO netocin
+   
+   SELECT vpersolinea.legajo,sueldoneto FROM basehoras WHERE legajo = vpersolinea.legajo INTO CURSOR VERSIESTA
+   
+   valhsci =  netocin - versiesta.sueldoneto
+    
+   UPDATE basehoras SET horcincuen = valhsci WHERE BASEHORAS.LEGAJO = VPERSOLINEA.LEGAJO
+   ? _TALLY
+   RETURN 
+ 
+    **************************
+   FUNCTION grabacien
+   **************************
+   LOCAL valhsci
+   SELECT curliq
+   SUM aporte+sinaporte -descuento TO netocin
+   
+   SELECT vpersolinea.legajo,sueldoneto FROM basehoras WHERE legajo = vpersolinea.legajo INTO CURSOR VERSIESTA
+   
+   valhsci =  netocin - versiesta.sueldoneto
+    
+   UPDATE basehoras SET horascien = valhsci WHERE BASEHORAS.LEGAJO = VPERSOLINEA.LEGAJO
+   ? _TALLY
+   RETURN 
+   
+   
+   
+    **************************
+   FUNCTION grabaferi
+   **************************
+   LOCAL valhsci
+   SELECT curliq
+   SUM aporte+sinaporte -descuento TO netocin
+   
+   SELECT vpersolinea.legajo,sueldoneto FROM basehoras WHERE legajo = vpersolinea.legajo INTO CURSOR VERSIESTA
+   
+   valhsci =  netocin - versiesta.sueldoneto
+    
+   UPDATE basehoras SET valorfer = valhsci WHERE BASEHORAS.LEGAJO = VPERSOLINEA.LEGAJO
+   ? _TALLY
+   RETURN 

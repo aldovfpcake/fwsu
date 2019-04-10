@@ -15,9 +15,9 @@ USE f:\sueldos\empre1\lagardi again
 BROWSE
 SCAN
      
-     IF legajo = 784 
+    
         DO lqautom-larga-distancia
-     ENDIF
+    
     SELECT lagardi
    *DELETE FROM f:\sueldos\empre1\92018 WHERE legajo = lagardi.legajo .and. liquida = 3
 *   *?"Eliminando ........:" +STR(lagardi.legajo,4) 

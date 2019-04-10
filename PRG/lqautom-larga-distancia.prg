@@ -15,19 +15,23 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 12
- lq.wano     = 2018
+ lq.wmes     = 3
+ lq.wano     = 2019
 **************************************
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
  fechapago = " "
  monto = " "
  nombremes = " "
- ano = 2018
+ ano = 2019
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "122018"
+ ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
+ 
+ archliq= "32019"
+ 
+ ************************
  lq.wdisplaynove = .t.
  lq.wlegajo  = lagardi.legajo
  lq.wtipoliq = 3
@@ -72,6 +76,7 @@ x.Seteopat(1)
  
  
  SELECT * FROM curliq ORDER BY concepto INTO CURSOR curliq readwrite 
+ 
  lq.liquida
  
  **********************
@@ -87,8 +92,9 @@ x.Seteopat(1)
  SELECT curliq
  SELECT * FROM curliq ORDER BY concepto INTO CURSOR curliq readwrite 
  
- lq.liquida
- 
+ if lq.wlegajo <> 825
+    lq.liquida
+ endif
 * verdif()
  
  
@@ -97,7 +103,7 @@ x.Seteopat(1)
  
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
- *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+ REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
  grabarliq()
  return
 

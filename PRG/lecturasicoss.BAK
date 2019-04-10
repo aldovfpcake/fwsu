@@ -2,28 +2,28 @@ SET DATE ITALIAN
 SET SYSFORMATS ON
 SET DELETED ON
 loFS = CREATEOBJECT("Scripting.FileSystemObject")
-loFile= loFS.OpenTextFile("C:\suerut\presentacion\RUTA12SICOSS10B.TXT", 1)
+loFile= loFS.OpenTextFile("C:\suerut\presentacion-2\ruta12.txt", 1)
 CLEAR
-*borrar()
-VarFchingreso = CTOD('01-04-2018')
-VarFchegreso  = CTOD('30-04-2018')
+borrar()
+VarFchingreso = CTOD('01-02-2019')
+VarFchegreso  = CTOD('28-02-2019')
 *SET STEP ON 
 Vartotal = 0
 DO WHILE NOT loFile.AtEndOfStream
   lcLine = loFile.ReadLine()
-   VarContrato  =SUBSTR(lcline,65,3)
-   VarSinaporte =SUBSTR(lcline,439,12)
+   VarContrato  =SUBSTR(lcline,59,3)
+   VarSinaporte =SUBSTR(lcline,74,6)
    ?Varsinaporte 
    Vartotal = Vartotal + VAL(VarSinaporte) 
    IF VarContrato = "102"
       ?SUBSTR(lcline,1,42) 
       VarCuil    = SUBSTR(lcline,1,11)
       VarNombre  = SUBSTR(lcline,12,30)
-      VarSueldo  = SUBSTRC(lcline,880,8)
+      VarSueldo  = SUBSTRC(lcline,74,6)
       VarDoc1    = SUBSTRC(VarCuil,3,8)
       
       * + " " + Nombre..:"+VarNombre + " "+ "Sueldo...:"+VarSueldo
-      *insertar()      
+      insertar()      
    ENDIF
   
   

@@ -1,0 +1,8 @@
+SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
+SET EXCLUSIVE OFF
+SET DELETED ON
+CLOSE TABLES all
+*SET PATH TO c:\suerut\empre1
+x=CREATEOBJECT('configurar')
+x.Seteopat(2)
+DO FORM listafm WITH 2

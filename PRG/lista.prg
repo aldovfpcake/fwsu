@@ -5,4 +5,4 @@ CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
-DO FORM listafm
+DO FORM listafm WITH 1

@@ -60,14 +60,17 @@ SELECT curliq
 *INDEX on STR(concepto,4) TO  c:\x-curl
 *SET INDEX TO f:\sueldos\x-curl
 SET EXCLUSIVE OFF
-vmes = 1
+************************** mes y año de liquidacion
+PRIVATE vmes,vano
+vmes = 3
 vano = 2019
+*********************************************************
 IF seteo = 6
    VarStringDe = "Modo Demo"
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "ENERO 2019" +VarStringDe ,vmes,vano
+DO FORM liquidacion WITH "MARZO 2019" +VarStringDe ,vmes,vano
 READ EVENTS
 
 PROCEDURE errhand

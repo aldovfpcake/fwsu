@@ -12,7 +12,7 @@ x.Seteopat(1)
 *ver()
 
 USE f:\sueldos\empre1\lagardi again
-BROWSE
+*BROWSE
 SCAN
      
     

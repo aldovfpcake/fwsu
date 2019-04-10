@@ -5,6 +5,6 @@ CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
 x.Seteopat(2)
-DO FORM listafm
+DO FORM listafm WITH 2
 DO FOXYPREVIEWER.APP
 REPORT FORM SUELDOSTACSA PREVIEW

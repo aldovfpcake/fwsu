@@ -836,7 +836,7 @@ Define Class LIQUIDACION As Custom
     
     PROCEDURE EMBARGOSAL
        PARAMETERS concepto
-       LOCAL VarTotalSueldo,VarEmbargo
+       Private VarTotalSueldo,VarEmbargo
        STORE 0 TO VarTotalSueldo,VarEmbargo
        IF concepto = 150
        	  VarTotalSueldo = (this.waporte -this.wtotaporneg)+ this.wtotsinapor
@@ -1273,33 +1273,42 @@ DEFINE CLASS VISUREC AS Custom
    archivo = "  "
    legajo  = 0
    liquida = 0
+   mes  = 0
+   ano   = 0
    cancelar = .t.
+
+   PROCEDURE init
+      
+        this.mes =  month(date())
+        this.ano =  year(date())
+
+
+   ENDPROC
   
    
    PROCEDURE veorec
-     * x = CREATEOBJECT('CONFIGURAR') 
-     * x.seteopat(1)
-    
-     *TRY
-         *IF .NOT. USED(this.archivo)
-         *     SELECT 0
-         *     USE (this.archivo) ALIAS liqsu
-         *ENDIF     
           varchivo = this.archivo 
           SELECT * FROM (varchivo)  WHERE legajo=this.legajo;
          .and. liquida = this.liquida ORDER BY concepto INTO cursor recibo READWRITE
-         
-         
-    *CATCH TO e
-         
-    *     MESSAGEBOX ( "Error",0,"NO SE ENENCUENTRA EL ARCHIVO ERROR N�" + " " + CURDIR()+ STR(ERROR(),4),0,"AT" )
-    *     this.cancelar = .f.
-    *     FINALLY  
-    *ENDTRY
-   
-   
+    
    ENDPROC   
    
+   PROCEDURE Mesatras
+     
+     IF this.mes = 1
+        this.mes = 12
+        this.ano = this.ano - 1    
+    ELSE
+       this.mes = this.mes - 11
+    ENDIF   
+  ENDPROC
+   
+
+  
+
+    
+
+
  
 
 ENDDEFINE
