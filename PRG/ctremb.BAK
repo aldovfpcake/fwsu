@@ -3,17 +3,17 @@ SET DELETED ON
 SET EXCLUSIVE OFF
 SET PATH TO F:\SUELDOS\EMPRE1
 VarAno = 2017
-Varlegajo = 814
+Varlegajo = 701
 
 VarTot = 0
-*LEGAJO 765 lacha    embargo por $ 42517,81
-*LEGAJO 814 Quevedo  embargo por $ 23893,80 embargo terminado 
+*LEGAJO 701 MARCELO SALVAGGIO 
+
 clear
 FOR I = 1 TO 2
    FOR x =1 TO 12
       archivo = IIF(x<= 6, STR(x,1)+STR(varano,4),STR(x,2)+STR(varano,4))
       IF FILE(archivo+".dbf")
-        SELECT SUM(IIF(CONCEPTO = 126,DESCUENTO,0))AS emb FROM &archivo WHERE LEGAJO = Varlegajo INTO CURSOR SUELDO
+        SELECT SUM(IIF(CONCEPTO = 126 .OR. CONCEPTO = 875,DESCUENTO,0))AS emb FROM &archivo WHERE LEGAJO = Varlegajo INTO CURSOR SUELDO
         IF .NOT. EOF()
            SELECT legajo,periodo,pagado FROM ctremb WHERE legajo = Varlegajo .and. periodo = archivo;
            INTO CURSOR existe
@@ -44,8 +44,8 @@ SELECT ctremb
 Vartot =0
 SUM importe TO VarTot FOR legajo = Varlegajo .AND. pagado = .f.
 ? "Total General Retenido............ = " + STR(Vartot,10,2)
-*?"lacha total a Retener ......$ 42517.81"
-VarFalta = 23893.80 - Vartot
+
+VarFalta = 308838.69 - Vartot
 ?"Falta Retener...............$" + STR(VarFalta,10,2) 
  
 

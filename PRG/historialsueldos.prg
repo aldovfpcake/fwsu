@@ -8,8 +8,8 @@ CREATE CURSOR sueldo (haber n(10,2),sinaporte n(10,2),descuento n(10,2),neto n(1
 clear
 varano = 0
 *historial de sueldos a partir del año (varano)
-varano = 2018
-vvlegajo = 760
+varano = 2017
+vvlegajo = 666
 clear
 
 FOR I = 1 TO 11

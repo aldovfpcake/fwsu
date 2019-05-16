@@ -836,7 +836,7 @@ Define Class LIQUIDACION As Custom
     
     PROCEDURE EMBARGOSAL
        PARAMETERS concepto
-       LOCAL VarTotalSueldo,VarEmbargo
+       Private VarTotalSueldo,VarEmbargo
        STORE 0 TO VarTotalSueldo,VarEmbargo
        IF concepto = 150
        	  VarTotalSueldo = (this.waporte -this.wtotaporneg)+ this.wtotsinapor
@@ -1010,6 +1010,16 @@ DEFINE CLASS montoescrito as Custom
 	   	    ***********************		
 			
 			parameters letras,nn
+			
+			LOCAL MayorC
+			MayorC = 0
+			
+			IF nn > 100000
+			   MayorC = nn 
+			   nn = nn-100000
+			ENDIF   
+					
+			
 			dimension nombre [28]
 			store "uno"        to nombre[1]
 			store "dos"        to nombre [2]
@@ -1040,16 +1050,16 @@ DEFINE CLASS montoescrito as Custom
 			store "noventa  "  to nombre [27]
 			store "ciento   "  to nombre [28]
 
-		  
-
-
+		    
 			store space(20) to gracia,nuni,centena,unimil,parcial,decemil
 			store space(3) to nrgral
 			store space(2) to cc,dec,unid,vn,vmil,wdec
 			store 0  to cientos,mil,integro,deci
 			integro = int(nn)
 			deci    = ((nn - integro)*100)
-           
+            
+            SET STEP ON 
+             
 			if deci = 0
 			   parcial = ' '
 			else
@@ -1060,7 +1070,7 @@ DEFINE CLASS montoescrito as Custom
 			   nrgral  = str(integro,4)
 			else 
 			   if integro > 100000
-				  nrgral = str(integro,6) 
+				  nrgral = str(integro,7) 
 			   else
 				  nrgral   = str(integro,5)
 			   endif
@@ -1102,7 +1112,14 @@ DEFINE CLASS montoescrito as Custom
 					decenamil  = substr(nrgral,1,1)+ "0"		 
 													
 					unidademil = " "
-					bnum       = substr(nrgral,2,1)
+					*****************VERIFICAR ***************
+					IF nn > 100000
+						bnum       = substr(nrgral,4,1)
+					ELSE
+					    bnum       = substr(nrgral,2,1)
+					ENDIF
+					****************************************    
+										
 					if bnum <> "0"
 					  unidademil = nombre[val(bnum)]
 					endif
@@ -1132,22 +1149,6 @@ DEFINE CLASS montoescrito as Custom
 				endif
 				*wait window decemil
 			endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			if mil = 4
 			   vmil= substr(nrgral,1,1)
@@ -1280,7 +1281,7 @@ DEFINE CLASS VISUREC AS Custom
    PROCEDURE init
       
         this.mes =  month(date())
-        this.ano =  year(date()
+        this.ano =  year(date())
 
 
    ENDPROC
@@ -1299,7 +1300,7 @@ DEFINE CLASS VISUREC AS Custom
         this.mes = 12
         this.ano = this.ano - 1    
     ELSE
-       this.mes = this.mes - 1
+       this.mes = this.mes - 11
     ENDIF   
   ENDPROC
    

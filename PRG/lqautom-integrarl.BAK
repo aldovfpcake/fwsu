@@ -9,5 +9,5 @@ REPLACE ALL ENF       WITH 0
 REPLACE ALL DIASNOTRA WITH 0
 DO "c:\fwsu\prg\lqautom-taller.prg"
 *SELECT tabhoras
-SELECT basehoras
-browse
+*SELECT basehoras
+*browse
