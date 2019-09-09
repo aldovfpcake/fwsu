@@ -6,7 +6,7 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO rh 
-ms = 3
+ms = 7
 an = 2019
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
@@ -16,10 +16,11 @@ rp = CREATEOBJECT('reportesueldo')
 rp.distinta = 0
 rp.filtro = 0
 rp.vistapre = 10
+*SET STEP ON 
 rp.reporte
 *rp.descuentolegal
 obas= CREATEOBJECT('asiento')
-obas.validar
+*obas.validar
 obas.generar
 DO FOXYPREVIEWER.APP 
 SELECT * FROM sue3 ORDER BY seccion,chapa INTO CURSOR sue3

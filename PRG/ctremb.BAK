@@ -9,7 +9,7 @@ VarTot = 0
 *LEGAJO 701 MARCELO SALVAGGIO 
 
 clear
-FOR I = 1 TO 2
+FOR I = 1 TO 3
    FOR x =1 TO 12
       archivo = IIF(x<= 6, STR(x,1)+STR(varano,4),STR(x,2)+STR(varano,4))
       IF FILE(archivo+".dbf")

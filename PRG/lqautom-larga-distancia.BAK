@@ -15,7 +15,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 4
+ lq.wmes     = 8
  lq.wano     = 2019
 **************************************
  LOCAL varLeg
@@ -29,12 +29,12 @@ x.Seteopat(1)
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "42019"
+ archliq= "82019"
  
  ************************
  lq.wdisplaynove = .t.
  lq.wlegajo  = lagardi.legajo
- lq.wtipoliq = 3
+ lq.wtipoliq  = 3
  lq.buscolegajo
  lq.cargobase
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,5,1,3)
@@ -70,8 +70,23 @@ x.Seteopat(1)
     insertar(68,lagardi.fres)
  ENDIF
  
+ IF lagardi.cruce <> 0
+    insertar(69,lagardi.cruce)
+ ENDIF
+ 
+ 
+ 
+ 
  Varcantkil = lagardi.knm + lagardi.kmcien
+ IF lagardi.kmsur2 <> 0
+    Varcantkil = Varcantkil-lagardi.kmsur2
+ ENDIF    
+ 
  insertar(70,Varcantkil)
+ 
+ IF lagardi.kmsur2 <> 0
+    insertar(400,lagardi.kmsur2)
+ ENDIF   
   
  
  
@@ -92,9 +107,13 @@ x.Seteopat(1)
  SELECT curliq
  SELECT * FROM curliq ORDER BY concepto INTO CURSOR curliq readwrite 
  
- if lq.wlegajo <> 825
-    lq.liquida
- endif
+ IF lq.wlegajo <> 825 
+     IF lq.wlegajo <>838
+        IF lq.wlegajo <> 701  
+           lq.liquida
+        ENDIF
+     ENDIF 
+ ENDIF
 * verdif()
  
  
@@ -103,8 +122,9 @@ x.Seteopat(1)
  
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
- REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
- *grabarliq()
+REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+*grabarliq()
+*borrar()
  return
 
 
@@ -135,8 +155,30 @@ return
        ENDSCAN 
        ? "SUELDO GRABADO....." + STR(lq.wlegajo,4)
  ELSE
- 
-      ? "YA EXISTE LIQUIDACION EN ....=" + STR(lq.wlegajo,4)  
+       SELECT CURLIQ
+       SCAN
+           UPDATE &ARCHLIQ SET legajo    = lq.wlegajo,;
+                               concepto  = curliq.concepto,;
+                               descrip   = curliq.descrip,;
+                               cantidad  = curliq.cantidad,;
+                               aporte    = curliq.aporte,;
+                               sinaporte = curliq.sinaporte,;
+                               descuento = curliq.descuento,;
+                               liquida   = curliq.liquida;
+                               WHERE legajo = lq.wlegajo .and. liquida = 3
+       
+         ? " ACTUALIZANDO SUELDO....." + STR(lq.wlegajo,4)
+    
+  
+       ENDSCAN   
  
  ENDIF
+ SELECT EXISTE
+ USE
  
+ 
+ ***********************************
+ FUNCTION BORRAR
+ **************************************
+ DELETE FROM &ARCHLIQ WHERE legajo = lq.wlegajo .and. liquida = 3 
+ ?"BORRANDO LIQUIDACION.................." + STR(lq.wlegajo,4)

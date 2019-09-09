@@ -163,7 +163,7 @@ Define Class LIQUIDACION As Custom
            
             * SE USA POR COMAPTIBILIDAD
            * 
-            IF curliq.concepto = 150 .or. curliq.concepto = 153
+            IF curliq.concepto = 150 .or. curliq.concepto = 153 .or. curliq.concepto = 873
                this.embargosal(curliq.concepto)
             ENDIF
             IF curliq.concepto = 405
@@ -208,6 +208,10 @@ Define Class LIQUIDACION As Custom
             
 			Store 0 To This.wdivide,This.wporciento,This.wmultiplica,wvalorfin,this.wcant,this.wimporte
 		Endscan
+        
+    
+
+
 
 
 	Endproc
@@ -720,7 +724,7 @@ Define Class LIQUIDACION As Custom
                SELECT   enero,febrero,marzo  FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                SELECT s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro
-               SELECT s1,s2,s3 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
+               SELECT  s1,s2,s3 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
                prome1 = (aterior.octubre + aterior.noviembre + aterior.diciembre + lust.enero + lust.febrero + lust.marzo)/6
                this.wpromesu =  (antepro.s10+antepro.s11+antepro.s12+encurso.s1+encurso.s2+encurso.s3)/6
   
@@ -845,11 +849,17 @@ Define Class LIQUIDACION As Custom
        IF concepto = 153
           VarTotalSueldo = ((this.waporte -this.wtotaporneg ) - this.wtotdescue) 
        ENDIF   
+	   
+       IF concepto = 873
+          VarTotalSueldo = ((this.waporte -this.wtotaporneg)+ this.wtotsinapor) -this.wtotdescue
+       ENDIF
+
 	   *WAIT WINDOW STR(this.waporte,7,2) + ' ' + str(this.wtotdescue,7,2)
        *WAIT WINDOW STR(this.wcant,2)
+      
        VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
        this.wimporte  = VarEmbargo
-    
+       
     ENDPROC
     
     PROCEDURE EXISTEVAC
@@ -1506,5 +1516,4 @@ DEFINE CLASS VACACIONES As Custom
 
 
 
-
-
+   

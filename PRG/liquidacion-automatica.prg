@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 4
+ lq.wmes     = 8
  lq.wano     = 2019
 
  LOCAL varLeg
@@ -27,7 +27,7 @@ x.Seteopat(1)
  fecpjub = " "
  DiferSueldo = 0
 *****************************archivo de liquidación
- archliq= "42019"
+ archliq= "82019"
  *****************************************************************w
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
@@ -98,12 +98,12 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-*REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
+REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
 grabarliq()
 * grabatabla()
-*  grabacincuenta()
-*  grabacien() 
-* grabaferi()
+* grabacincuenta()
+* grabacien() 
+ *grabaferi()
  return
  
  

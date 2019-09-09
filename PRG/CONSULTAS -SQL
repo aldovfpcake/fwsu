@@ -23,7 +23,18 @@ select t.legajo, s.cantidad  from tareas t inner join 12019 s on s.legajo = t.le
 select t.legajo, s.concepto, s.cantidad ,t.zona ,t.sexo from tareas t inner join 22019 s on s.legajo = t.legajo  where s.concepto =43  .and. zona = 1
 ********************************************************************************************
 
+*******insertar tareas************
+INSERT INTO TAREAS(legajo,nombre,categoria) SELECT legajo,;
+nombre,categoria FROM personal WHERE legajo =880
 
+**** Encuesta Dotación*********************************************
+
+SELECT  p.legajo ,p.nombre,p.cuil,t.tarea,p.fechaing FROM personal p  LEFT JOIN  tareas t ON p.legajo = t.legajo WHERE  p.activo = "A" .and. p.depart <> "LA BOCA" 
+
+***dotacion bs.as.***************************************
+SELECT count(t.legajo), t.tarea FROM personal p  LEFT JOIN  tareas t ON p.legajo = t.legajo WHERE  p.activo = "A" .and. p.depart <> "LA BOCA"  .and. p.categoria <> "DIRECTOR" group by t.tarea
+
+***************************************************************************************
 
 *valida
 select  p.legajo,s.cantidad,s.aporte  from personal p inner join 122018 s on p.legajo = s.legajo where activo = "A"  AND depart <>"LA BOCA" .and. s.concepto= 5  .or. s.concepto =6 order by  seccion,sexo

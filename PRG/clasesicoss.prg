@@ -1,0 +1,438 @@
+DEFINE CLASS SICOSS AS Custom
+  cuil        = " "
+  nombre      = " "
+  conyuge     = 0
+  hijos       = 0
+  situacion   = 0
+  condicion   = 0  
+  actividad   = 0
+  zonageograf = 0
+  prtajeadsgs = 0
+  modadcontra = 0 
+  codigobraso = 0
+  aderentes   = 0
+  remutotal   = 0
+  remuimpo1   = 0 
+  asgfamliar  = "000000.00"
+  imptvolu    = "000000.00" 
+  impadicobso = "000000.00"                   
+  impsegsoc   = "002000.00"
+  impExcobsoc = "000000.00"
+  provincialo = REPLICATE(" ",50)
+  *remuimpo2 base calculo contribuciones patronales
+  *
+  remuimpo2  ="000000000.00"
+  *remuimpo3 base calculo fne y inssjp
+  remuimpo3  = "000000000.00"
+  remuimpo4  = "000000000.00"
+  codsiniest = "00"
+  reduccion  = "F"
+  capitalrec = "000000.00" 
+  tipoempres ="1" 
+  aporteadob = "000000.00"
+  *            123456789
+  regimen    ="1"
+  stuacionre ="01"
+  diainic1   ="01"
+  stuacionr2 ="00"
+  diainic2   ="00"           
+  stuacionr3 ="00"
+  dianic3    ="00"
+  *            123456789-12
+  sueldoadi  = "000000000.00" 
+  sac        = "000000000.00" 
+  horasExtra = "000000000.00"
+  zonadesfav = "        0.00"
+  vacaciones = "        0.00"
+  cantdiastr = "       30"  
+  remuimpon5 = "000000000.00" 
+  convenci   = "1"
+  * remu6 docentes
+  remunerac6 = "000000000.00"
+  tipooper   = "0"
+  adicional  = "000000000.00"
+  premios    = "000000000.00"
+  remunera8  = "000000000.00"
+*               123456789  
+  remunera7  ="000000000.00" 
+  canthoras  ="000"
+  cocptonore = "000000000.00" 
+  maternidad = "000000000.00"
+  rectifremu = "000000.00"
+  remunera9  = "000000000.00"
+  contribtar = "000000.00"
+  *             123456789                   
+  horastraba = "000"
+  segurovida ="1"
+  importedet = "000000000.00"
+               
+  
+  procedure  SetNombre(nom)
+   IF LEN(nom) < 30
+      dif = 30-LEN(nom)
+      *this.nombre = ALLTRIM (nom)+ SPACE(dif)
+       this.nombre = nom +REPLICATE(" ",dif) 
+      return 
+   ENDIF  
+  
+   IF LEN(nom) > 30
+      this.nombre = SUBSTR(nom,1,30)
+   ELSE    
+      this.nombre = nom
+   ENDIF
+  
+ endproc
+
+  PROCEDURE SetSituaret(situ)
+    IF LEN(situ)<2 
+      this.situacion = "0"+situ
+    ELSE
+      this.situacion = situ
+    ENDIF 
+  endproc
+  
+  PROCEDURE SetCondicion(cond)
+    IF LEN(ALLTRIM(cond)) < 2
+       this.condicion = "0"+cond
+    ELSE   
+       this.condicion = ALLTRIM(cond)
+    ENDIF
+  endproc 
+  
+  PROCEDURE SetActividad(act)
+     IF LEN(ALLTRIM(act)) < 3
+        dif = 3-LEN(ALLTRIM(act))
+        
+        this.actividad  = ALLTRIM(REPLICATE("0",dif)+ALLTRIM(act))
+      ELSE
+         this.actividad = ALLTRIM(act) 
+      ENDIF
+  endproc
+
+  PROCEDURE SetZonageograf(zona)
+      IF LEN(alltrim(zona))<2 
+         dif = 2-LEN(alltrim(zona))
+         this.zonageograf = REPLICATE("0",dif)+zona
+      ELSE
+         this.zonageograf = zona   
+      ENDIF
+  
+  endproc 
+  
+  PROCEDURE SetPrtajeadsgs(pornc)
+      
+      IF pornc = 0
+         this.prtajeadsgs = "00,00"
+      ELSE   
+         this.prtajeadsgs = STR(pornc,5,2)
+      ENDIF   
+  endproc
+  
+  PROCEDURE SetModadcontra(modct)
+       
+       IF LEN(modct) < 3
+          dif = 3 - LEN(modct)
+          this.modadcontra = REPLICATE("0",dif)+modct
+       ELSE       
+          this.modadcontra = modct
+       ENDIF    
+  endproc
+
+  PROCEDURE SetCodigobraso(codobra) 
+       
+       IF LEN(codobra) < 6  
+          dif = 6 - LEN(codobra)
+          this.codigobraso = REPLICATE("0",dif)+codobra
+       ELSE
+          this.codigobraso = codobra
+       ENDIF   
+   endproc
+
+   PROCEDURE SetAderentes(aderen) 
+       
+       IF aderen = "0"
+          this.aderentes ="00"
+          return 
+       ENDIF 
+       IF LEN(aderen)< 2
+          dif = 2-LEN(aderen)
+          this.aderentes = REPLICATE("0",dif)+aderen
+       ELSE    
+          this.aderentes = aderen 
+       ENDIF   
+   endproc
+
+   PROCEDURE SetRemutotal(remtot)
+       
+       IF remtot = "0" 
+          this.remutotal = "0.00"
+       ENDIF
+       
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remutotal = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remutotal = remtot
+       ENDIF    
+    ENDPROC
+    
+    PROCEDURE SetRemuimpo1(remtot)
+       
+       IF remtot = "0" 
+          this.remuimpo1 = "0.00"
+       ENDIF
+       
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remuimpo1 = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remuimpo1 = remtot
+       ENDIF    
+    ENDPROC
+    
+    PROCEDURE SetAsgfamliar()
+    
+           this.asgfamliar="000000.00"
+    ENDPROC                 
+    
+    PROCEDURE SetImpsegsoc (remtot) 
+       IF remtot = "0" 
+          this.impsegsoc = "000000.00"
+       ENDIF                
+           
+       IF LEN(remtot) < 9   
+          dif = 9 - LEN(remtot)
+          this.impsegsoc = REPLICATE("0",dif)+remtot
+       ELSE
+          this.impsegsoc = remtot
+       ENDIF    
+     ENDPROC
+    
+     PROCEDURE SetProvincialo(locald)
+        
+       IF EMPTY(locald)  
+          this.provincialo = REPLICATE(" ",50)
+       ENDIF   
+     
+       IF LEN(locald) < 50
+          dif = LEN(locald)
+          this.provincialo = locald+REPLICATE(" ",dif)
+       ENDIF
+       
+       IF LEN(locald) > 50   
+          this.provincialo = locald 
+       ENDIF
+    
+    
+     ENDPROC 
+    
+     PROCEDURE SetRemuimpo2(remtot)  
+        IF remtot = "0" 
+          this.remuimpo2 = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remuimpo2 = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remuimpo2 = remtot
+       ENDIF
+     ENDPROC 
+    
+     PROCEDURE SetRemuimpo3(remtot)  
+        IF remtot = "0" 
+          this.remuimpo3 = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remuimpo3 = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remuimpo3 = remtot
+       ENDIF
+     ENDPROC 
+     
+     PROCEDURE SetRemuimpo4(remtot)  
+        IF remtot = "0" 
+          this.remuimpo4 = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remuimpo4 = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remuimpo4 = remtot
+       ENDIF
+     ENDPROC 
+    
+     PROCEDURE Setstuacionre(aderen) 
+       
+       IF LEN(aderen)< 2
+          dif = 2-LEN(aderen)
+          this.aderentes = REPLICATE("0",dif)+aderen
+       ELSE    
+          this.aderentes = aderen 
+       ENDIF   
+     ENDPROC
+     
+      PROCEDURE Setdiainic1(aderen) 
+       
+       IF LEN(aderen)< 2
+          dif = 2-LEN(aderen)
+          this.diainic1 = REPLICATE("0",dif)+aderen
+       ELSE    
+          this.diainic1 = aderen 
+       ENDIF   
+     endproc
+    
+      PROCEDURE Setstuacionr2(aderen)
+      
+       IF LEN(aderen)< 2
+          dif = 2-LEN(aderen)
+          this.stuacionr2 = REPLICATE("0",dif)+aderen
+       ELSE    
+          this.stuacionr2 = aderen 
+       ENDIF
+      endproc
+      
+      PROCEDURE Setsueldoadi(remtot)  
+        IF remtot = "0" 
+          this.sueldoadi = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.sueldoadi = REPLICATE("0",dif)+remtot
+       ELSE
+          this.sueldoadi = remtot
+       ENDIF
+     ENDPROC 
+      
+     PROCEDURE Setsac(remtot)  
+        IF remtot = "0" 
+          this.sac = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.sac = REPLICATE("0",dif)+remtot
+       ELSE
+          this.sac = remtot
+       ENDIF
+     ENDPROC 
+      
+     PROCEDURE SethorasExtra(remtot)  
+        IF remtot = "0" 
+          this.horasExtra = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.horasExtra = REPLICATE("0",dif)+remtot
+       ELSE
+          this.horasExtra = remtot
+       ENDIF
+     ENDPROC 
+      
+     PROCEDURE Setvacaciones(remtot)  
+        IF remtot = "0" 
+          this.vacaciones = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.vacaciones = REPLICATE("0",dif)+remtot
+       ELSE
+          this.vacaciones = remtot
+       ENDIF
+     ENDPROC 
+    
+     PROCEDURE Setremuimpon5(remtot)  
+        IF remtot = "0" 
+          this.remuimpon5 = "000000000.00"
+          *                  123456789-12  
+        ENDIF                
+           
+        IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.remuimpon5 = REPLICATE("0",dif)+remtot
+        ELSE
+           this.remuimpon5 = remtot
+        ENDIF
+     ENDPROC 
+
+     PROCEDURE Setcanthoras(remtot)  
+        IF remtot = "0" 
+          this.canthoras = "000"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 3   
+          dif = 3- LEN(remtot)
+          this.canthoras = REPLICATE("0",dif)+remtot
+       ELSE
+          this.canthoras = remtot
+       ENDIF
+     ENDPROC 
+      
+     PROCEDURE Setcocptonore(remtot)  
+        IF remtot = "0" 
+          this.cocptonore = "00000000.00"
+          *                 123456789-12  
+       ENDIF                
+           
+       IF LEN(remtot) < 12   
+          dif = 12 - LEN(remtot)
+          this.cocptonore = REPLICATE("0",dif)+remtot
+       ELSE
+          this.cocptonore = remtot
+       ENDIF
+     ENDPROC
+      
+     PROCEDURE Setremunera9(remtot)  
+        IF remtot = "0" 
+          this.remunera9 = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+       
+       IF LEN(ALLTRIM(remtot)) < 12
+          
+          dif = 12 - LEN(remtot)
+          this.remunera9 = REPLICATE("0",dif)+remtot
+       ELSE
+          this.remunera9 = remtot
+       ENDIF
+     ENDPROC
+      
+     PROCEDURE Setremunera8(remtot)  
+        IF remtot = "0" 
+          this.remunera8 = "000000000.00"
+          *                 123456789-12  
+       ENDIF                
+       ?LEN(alltrim(remtot))
+       ?remtot
+               
+       IF LEN(ALLTRIM(remtot)) < 12   
+          ?"paso..."
+          dif = 12 - LEN(ALLTRIM(remtot))
+          this.remunera8 = REPLICATE("0",dif)+ALLTRIM(remtot)
+          ?this.remunera8
+       ELSE
+          this.remunera8 = remtot
+       ENDIF
+      ENDPROC  
+      
+      
+      
+      
+    
+    
+    
+ENDDEFINE

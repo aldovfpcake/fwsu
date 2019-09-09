@@ -12,6 +12,7 @@ x.Seteopat(1)
 *ver()
 
 USE f:\sueldos\empre1\lagardi again
+*SET FILTER TO LEGAJO = 838
 *BROWSE
 SCAN
      
