@@ -14,7 +14,7 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 8
+ lq.wmes     = 10
  lq.wano     = 2019
 
  LOCAL varLeg
@@ -27,7 +27,7 @@ x.Seteopat(1)
  fecpjub = " "
  DiferSueldo = 0
 *****************************archivo de liquidación
- archliq= "82019"
+ archliq= "102019"
  *****************************************************************w
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
@@ -99,11 +99,11 @@ x.Seteopat(1)
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
 REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
-grabarliq()
+ grabarliq()
 * grabatabla()
-* grabacincuenta()
+*  grabacincuenta()
 * grabacien() 
- *grabaferi()
+*  grabaferi()
  return
  
  
@@ -213,10 +213,11 @@ grabarliq()
    LOCAL valhsci
    SELECT curliq
    SUM aporte+sinaporte -descuento TO netocin
-   
+    ?"Grabando horas al 50% " + STR(vpersolinea.legajo,4)
    SELECT vpersolinea.legajo,sueldoneto FROM basehoras WHERE legajo = vpersolinea.legajo INTO CURSOR VERSIESTA
    
    valhsci =  netocin - versiesta.sueldoneto
+   ?"Valor Hora 50%" + STR(valhsci,4)
     
    UPDATE basehoras SET horcincuen = valhsci WHERE BASEHORAS.LEGAJO = VPERSOLINEA.LEGAJO
    ? _TALLY

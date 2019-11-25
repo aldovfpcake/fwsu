@@ -8,7 +8,7 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 x  = CREATEOBJECT("legajoper")
 *tb = CREATEOBJECT("abretabla")
 *tb.optabla(7,2019)
-USE 82019 ALIAS LIQUIDA again
+USE 92019 ALIAS LIQUIDA again
 ob = CREATEOBJECT("configurar")
 ob.Seteopat(1)
 

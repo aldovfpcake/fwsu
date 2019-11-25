@@ -15,7 +15,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 8
+ lq.wmes     = 11
  lq.wano     = 2019
 **************************************
  LOCAL varLeg
@@ -29,7 +29,7 @@ x.Seteopat(1)
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "82019"
+ archliq= "112019"
  
  ************************
  lq.wdisplaynove = .t.
@@ -108,12 +108,13 @@ x.Seteopat(1)
  SELECT * FROM curliq ORDER BY concepto INTO CURSOR curliq readwrite 
  
  IF lq.wlegajo <> 825 
-     IF lq.wlegajo <>838
-        IF lq.wlegajo <> 701  
-           lq.liquida
-        ENDIF
-     ENDIF 
- ENDIF
+    IF lq.wlegajo <>838
+       IF lq.wlegajo <> 875  
+          lq.liquida
+       ENDIF  
+    ENDIF
+ ENDIF 
+ 
 * verdif()
  
  

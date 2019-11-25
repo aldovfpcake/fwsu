@@ -632,7 +632,8 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654
+          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654;
+          	   .OR. RECSU.CONCEPTO = 876
           	       
           	       
           	   ELSE
@@ -666,7 +667,7 @@ Define Class LIQUIDACION As Custom
     SCAN 
        IF buconcepto = curliq.concepto
           EXTCOP = 1
-          EXIT 
+          RETURN .F. 
        ENDIF
     ENDSCAN
     
@@ -739,7 +740,8 @@ Define Class LIQUIDACION As Custom
                SELECT  (enero+febrero+marzo+abril) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust 
                SELECT s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro 
                SELECT (s1+s2+s3+s4) as impvac from &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac
-               this.wpromesu = (antepro.s11+antepro.s12+lvac.s1+lvac.s2+lvac.s3+lvac.s4)/6 
+               *this.wpromesu = (antepro.s11+antepro.s12+lvac.s1+lvac.s2+lvac.s3+lvac.s4)/6 
+               this.wpromesu = (aterior.noviembre + aterior.diciembre+ lust.impt)/6
                prome1 =  (aterior.noviembre + aterior.diciembre+ lust.impt)/6 
           
           CASE this.wmes = 6 
@@ -817,13 +819,7 @@ Define Class LIQUIDACION As Custom
       
      
       
-      IF this.wlegajo = 827
-         * 6900
-         IF this.wimporte > 283.07
-            this.wimporte = 283.07    
-         ENDIF
-      ENDIF
-      
+          
       
           
       
@@ -1434,7 +1430,7 @@ ENDDEFINE
 
 DEFINE CLASS VACACIONES As Custom
    	 legajo      = 0
-   	 Ano         = 0
+   	 anovac         = 0
      Desde       = CTOD("  /  /    ")
      hasta       = CTOD("  /  /    ")
      dias        = 0
@@ -1442,14 +1438,14 @@ DEFINE CLASS VACACIONES As Custom
      registradas = 0
      PROCEDURE Existe
        SELECT desde,hasta,dias,sueldos,ano FROM vacaci;
-       WHERE legajo = this.legajo  .and. ano = this.ano INTO CURSOR existe;
+       WHERE legajo = this.legajo  .and. ano = this.anovac INTO CURSOR existe;
       
        if NOT eof()
           this.desde        = existe.desde
           this.hasta        = existe.hasta
           this.dias         = existe.dias
           this.sueldos      = existe.sueldos
-          this.ano          = existe.ano
+          this.anovac       = existe.ano
           this.registradas  = 1
       
        endif
@@ -1462,7 +1458,7 @@ DEFINE CLASS VACACIONES As Custom
         this.existe
         IF this.registradas = 0
            INSERT INTO vacaci (legajo,ano,desde,hasta,dias,sueldos);
-           VALUES (this.legajo,this.ano,this.desde,this.hasta,this.dias,this.sueldos)
+           VALUES (this.legajo,this.anovac,this.desde,this.hasta,this.dias,this.sueldos)
            
            
         ELSE

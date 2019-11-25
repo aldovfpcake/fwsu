@@ -91,7 +91,19 @@ borra concepto de sueldo
 
 delete from 12019 where legajo = ? .and. concepto = 4
 
+create talbe interf(idregistro c(2),cuit n(11),ideenvio c(15),periodo n(6),tipoliq c(1),numroliq n(5),diasbase c(2),cantrab n(6))
 
 
 
 select t.legajo, s.cantidad from tareas t inner join 12019 s on s.legajo = t.legajo where concepto = 31 .or. concepto = 7  
+
+
+Tabla-Afip
+
+4517611074701121
+
+Correo Argentino
+Rodríguez Peña 1846
+Santos Lugares (1676), Buenos Aires
+0810-777-7787
+Lunes a viernes de 10 a 18 hs.
