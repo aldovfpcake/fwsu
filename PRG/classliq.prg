@@ -35,6 +35,7 @@ Define Class LIQUIDACION As Custom
 	wtotdescue    = 0
 	wdisplaynove  = .f.
 	Wpromesu      = 0
+	Wempresa      = 0
 	Procedure Init
 		Set Date Italian
 		Set Century On
@@ -54,10 +55,14 @@ Define Class LIQUIDACION As Custom
 			This.wacumula(i) = 0
 		Endfor
 		
-		IF this.wmes = 12 .and. this.wtipoliq = 3
-		   IF this.wlegajo <> 755
-		      this.cargodiacam
-		   ENDIF     
+
+	    IF this.wmes = 12 .and. this.wtipoliq = 3
+		   IF this.wempresa = 1
+              IF this.wlegajo <> 755
+		         this.cargodiacam
+		      ENDIF
+           ENDIF
+
 		ENDIF    
 		
 		
@@ -958,7 +963,7 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 3
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS;F:\SUELDOS\EMPRESA-3                 
           CASE cpath = 4
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
           CASE cpath = 6

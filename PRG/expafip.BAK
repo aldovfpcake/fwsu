@@ -23,12 +23,12 @@ s.Setactividad(ACTIVIDAD)
  IF LEN(ALLTRIM(modalidad))=2
         VarModalidad = "0"+ALLTRIM(modalidad)
  ENDIF 
- excedentesaportes = "002000,00"
+ excedentesaportes = "000000,00"
  excedentesobrasoc = "000000,00" 
  provincialocalidad = ""
  aporteadicionalobrs="000000.00"
  
- tipoempresa= "4"
+ tipoempresa= "1"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)
   vvbas  = sac+horasextra+basico+vacaciones+premios

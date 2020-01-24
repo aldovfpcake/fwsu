@@ -667,7 +667,7 @@ Define Class LIQUIDACION As Custom
     SCAN 
        IF buconcepto = curliq.concepto
           EXTCOP = 1
-          EXIT 
+          RETURN .F. 
        ENDIF
     ENDSCAN
     
@@ -819,13 +819,7 @@ Define Class LIQUIDACION As Custom
       
      
       
-      IF this.wlegajo = 814
-         * 6900
-         *IF this.wimporte > 283.07
-         this.wimporte = 1027.11    
-        * ENDIF
-      ENDIF
-      
+          
       
           
       

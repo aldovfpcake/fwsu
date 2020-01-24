@@ -12,6 +12,6 @@ Varlegajo = VAL(VVARCHI)
 
 *SELECT legajo,nombre,documento FROM personal WHERE legajo = Varlegajo INTO TABLE lper
 *SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2018 INTO CURSOR lvc
-SELECT l.legajo,l.nombre,l.documento,s.desde,s.hasta,s.dias,s.ano FROM personal l INNER JOIN vacaci s ON l.legajo = Varlegajo AND s.ano = 2018 into CURSOR vacaciones
+SELECT l.legajo,l.nombre,l.documento,s.desde,s.hasta,s.dias,s.ano FROM personal l INNER JOIN vacaci s ON l.legajo = Varlegajo AND s.legajo =Varlegajo  AND s.ano = 2019 into CURSOR vacaciones
 DO FOXYPREVIEWER.APP 
 REPORT FORM vacformu2 PREVIEW 

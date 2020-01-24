@@ -21,7 +21,7 @@ x.Seteopat(1)
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
  lq.wmes     = 12
- lq.wano     = 2018
+ lq.wano     = 2019
 **************************************
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
@@ -77,8 +77,8 @@ x.Seteopat(1)
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
  *REPORT FORM  RECIBOSUELDOAUTOM TO FILE AVER
-  borrar()
- * grabarliq()
+ * borrar()
+ grabarliq()
   
  return
 

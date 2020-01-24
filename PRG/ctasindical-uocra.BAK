@@ -8,7 +8,7 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 lg = CREATEOBJECT("legajoper")
-ms = 9
+ms = 12
 an = 2019
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
@@ -18,13 +18,14 @@ inner join liquida s on s.legajo = p.legajo group by p.cuil
 GROUP BY l.legajo
 *SELECT p.cuil,SUM( l.aporte),p.fechaing,p.codipos,p.categoria FROM personal p INNER JOIN liquida l ON p.legajo = l.legajo;
 GROUP BY p.cuil
-SELECT lg.pasocuil(p.cuil)as cuil,p.fechaing,p.codipos,p.categoria,SUM( l.aporte)sb FROM personal p INNER JOIN liquida l;
+SELECT lg.pasocuil(p.cuil)as cuil,p.fechaing,p.codipos,p.categoria,SUM(l.aporte)sb FROM personal p INNER JOIN liquida l;
 ON p.legajo = l.legajo  GROUP BY p.cuil,p.fechaing,p.codipos,p.categoria INTO CURSOR sldo
 BROWSE
 
 
 fso = CreateObject('Scripting.FileSystemObject')
 tf = fso.CreateTextFile("c:\uocra.txt",.t.)
+clear
 SCAN
     ano = " "
     mes = " "
@@ -36,7 +37,11 @@ SCAN
     dia = SUBSTR(fecha,7,2)
     mes = SUBSTR(fecha,5,2)
     ano = SUBSTR(fecha,1,4) 
-    remu = "0"+ STR(sb,5)+"00"
+    IF sb < 100000
+       remu = "0"+ STR(sb,5)+"00"
+    ELSE
+       remu = ALLTRIM(STR(sb,7))+"0"
+    ENDIF
     ?remu
     IF categoria = "SERENO"
        vcateg = "06"
@@ -49,3 +54,4 @@ SCAN
 ENDSCAN
 
 tf.Close
+

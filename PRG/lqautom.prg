@@ -14,7 +14,7 @@ CLEAR
 SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
-ob.Seteopat(1)
+ob.Seteopat(2)
 warchlq = "B92014"
 wconcep = 18
 *wlegajo = legajo
@@ -34,7 +34,7 @@ FOR z=1 TO ALEN(legajos)
   xb = CREATEOBJECT("lqsac")
   xb.wano = 2019
   xb.wlegajo = wlegajo
-  xb.wtiposac = 1
+  xb.wtiposac = 2
   xb.liquisac
   SELECT curliq
   replace aporte WITH (xb.WMEJOR)/2
@@ -59,7 +59,7 @@ FUNCTION liquisac
 *********************
 PARAMETERS wleg
 lq = CREATEOBJECT('liquidacion')
-lq.wmes     = 6
+lq.wmes     = 12
 lq.wano     = 2019
 lq.wtipoliq = 4
 lq.wlegajo = wleg
@@ -129,7 +129,7 @@ SELECT curliq
 ?"*************"
  
 SCAN
-   INSERT INTO f:\sueldos\empre1\62019 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
+   INSERT INTO f:\sueldos\empre2\122019 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
    (curliq.legajo,curliq.concepto,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,4)
 
 ENDSCAN

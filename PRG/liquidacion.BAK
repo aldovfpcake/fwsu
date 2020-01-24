@@ -62,15 +62,15 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 11
-vano = 2019
+vmes = 1
+vano = 2020
 *********************************************************
 IF seteo = 6
    VarStringDe = "Modo Demo"
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "NOVIEMBRE 2019" +VarStringDe ,vmes,vano
+DO FORM liquidacion WITH "ENERO 2020" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

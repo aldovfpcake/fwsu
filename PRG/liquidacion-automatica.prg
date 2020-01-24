@@ -14,9 +14,11 @@ x.Seteopat(1)
  
  
  lq = CREATEOBJECT('liquidacion')
- lq.wmes     = 10
- lq.wano     = 2019
 
+**********************************************************periodo de liquidacion
+ lq.wmes     = 12
+ lq.wano     = 2019
+**********************************************************************************
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
  fechapago = " "
@@ -27,12 +29,13 @@ x.Seteopat(1)
  fecpjub = " "
  DiferSueldo = 0
 *****************************archivo de liquidación
- archliq= "102019"
+ archliq= "122019"
  *****************************************************************w
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
  **tabhoras.leg
  lq.wtipoliq = 3
+ lq.wempresa = 1
  lq.buscolegajo
  lq.cargobase
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,5,1,3)
@@ -98,7 +101,7 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
+*REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
  grabarliq()
 * grabatabla()
 *  grabacincuenta()

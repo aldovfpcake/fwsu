@@ -7,7 +7,7 @@ SET ESCAPE ON
 *SET PATH TO c:\suerut\empre1
 
 x=CREATEOBJECT('configurar')
-x.Seteopat(1)
+x.Seteopat(2)
 
  
  CREATE CURSOR CURLIQ (legajo n(4),concepto n(4),descrip c(35),cantidad n(8,2),aporte n(10,2),sinaporte n(10,2),descuento n(10,2),liquida n(2))
@@ -21,7 +21,7 @@ x.Seteopat(1)
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
  lq.wmes     = 12
- lq.wano     = 2018
+ lq.wano     = 2019
 **************************************
  LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
