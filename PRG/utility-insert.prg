@@ -1,11 +1,12 @@
 SET PATH TO \\fileserver\f\sueldos\empre1
-USE lagardi again
+SET EXCLUSIVE OFF
+USE maper again
 
 PRIVATE tabla,arreglo,reg,CardInsert,tabla,linea,valores,CadUpdate
 linea     = " "
 valores   = " "
 CadUpdate = " "
-tabla = "lagardi"
+tabla = "maper"
 CadUpd = " "
 reg = AFIELDS(arreglo)
 FOR i=1 TO reg

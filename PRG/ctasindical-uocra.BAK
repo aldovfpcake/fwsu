@@ -8,8 +8,8 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 lg = CREATEOBJECT("legajoper")
-ms = 12
-an = 2019
+ms = 1
+an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 *select p.cuil,sum(s.aporte),p.fechaing,p.codipos,p.categoria from personal p;
@@ -40,7 +40,7 @@ SCAN
     IF sb < 100000
        remu = "0"+ STR(sb,5)+"00"
     ELSE
-       remu = ALLTRIM(STR(sb,7))+"0"
+       remu = ALLTRIM(STR(sb,7))+"00"
     ENDIF
     ?remu
     IF categoria = "SERENO"

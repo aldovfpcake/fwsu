@@ -35,6 +35,7 @@ Define Class LIQUIDACION As Custom
 	wtotdescue    = 0
 	wdisplaynove  = .f.
 	Wpromesu      = 0
+	Wempresa      = 0
 	Procedure Init
 		Set Date Italian
 		Set Century On
@@ -54,10 +55,14 @@ Define Class LIQUIDACION As Custom
 			This.wacumula(i) = 0
 		Endfor
 		
-		IF this.wmes = 12 .and. this.wtipoliq = 3
-		   IF this.wlegajo <> 755
-		      this.cargodiacam
-		   ENDIF     
+
+	    IF this.wmes = 12 .and. this.wtipoliq = 3
+		   IF this.wempresa = 1
+              IF this.wlegajo <> 755
+		         this.cargodiacam
+		      ENDIF
+           ENDIF
+
 		ENDIF    
 		
 		
@@ -163,7 +168,7 @@ Define Class LIQUIDACION As Custom
            
             * SE USA POR COMAPTIBILIDAD
            * 
-            IF curliq.concepto = 150 .or. curliq.concepto = 153 .or. curliq.concepto = 873
+            IF curliq.concepto = 150 .or. curliq.concepto = 153 .or. curliq.concepto = 873 .or. curliq.concepto = 877
                this.embargosal(curliq.concepto)
             ENDIF
             IF curliq.concepto = 405
@@ -632,13 +637,13 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654;
-          	   .OR. RECSU.CONCEPTO = 876
-          	       
-          	       
+          	      .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654;
+          	      .OR. RECSU.CONCEPTO = 876 .OR.CONCEPTO = 303
           	   ELSE
-            		INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCRIP,CANTIDAD,APORTE,SINAPORTE,DESCUENTO,LIQUIDA);
-            		VALUES(this.wlegajo,RECSU.CONCEPTO,RECSU.DESCRIP,RECSU.CANTIDAD,RECSU.APORTE,RECSU.SINAPORTE,RECSU.DESCUENTO,this.wtipoliq)
+            	    IF EXTCOP.CONCEPTO <> 303
+            		  INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCRIP,CANTIDAD,APORTE,SINAPORTE,DESCUENTO,LIQUIDA);
+            		  VALUES(this.wlegajo,RECSU.CONCEPTO,RECSU.DESCRIP,RECSU.CANTIDAD,RECSU.APORTE,RECSU.SINAPORTE,RECSU.DESCUENTO,this.wtipoliq)
+          	        ENDIF
           	   ENDIF
           	 ENDIF
             SELECT EXTCOP
@@ -958,11 +963,14 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 3
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS;F:\SUELDOS\EMPRESA-3                 
           CASE cpath = 4
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;H:\SUELDOS\EMPRE1;H:\SUELDOS     
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
           CASE cpath = 6
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;D:\SUELDO-DEMO\EMPRE1;D:\SUELDO-DEMO
+          CASE cpath = 7
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE3
+                
                   
        ENDCASE
     Endproc

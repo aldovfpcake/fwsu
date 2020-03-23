@@ -4,12 +4,23 @@ SET ESCAPE ON
 SET PATH TO F:\SUELDOS\EMPRE1
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\KMS-DICIEMBRE-2019.XLS"
+
+
+MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\averq.xls"
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
+oExcel.sheets(1).Select
+oExcel.Workbooks.Open(miExcel)
+oExcel.Sheets(1).Select
+
+*DO borra
+
 STORE 0 TO  VarKNM, VarKMCIEN, VarKMSUR2, VarKMSUR4, VarCTRLD, VarFRES, VarCRUCE, VarCARGAPEL 
-Clear
-FOR i=18 TO 50
+CLEAR
+ 
+
+ 
+FOR i=14 TO 47                 
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -17,7 +28,9 @@ FOR i=18 TO 50
     VarCtrld      = oExcel.Cells(i,11).value  
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
-      
+    *****************VERIFICAR
+    VarCARGAPEL   = 1
+    **************************
     IF .not. ISNULL(Varlegajo)
             
             ?Varlegajo
@@ -65,4 +78,17 @@ endif
 ? 'Línea de código con error: ' + mess1
 ? 'Número de línea del error: ' + LTRIM(STR(mlineno))
 ? 'Programa con error: ' + mprog
+
+
+**************************
+PROCEDURE borra
+*************************
+UPDATE lagardi SET knm   = 0,;
+ kmcien = 0,; 
+ kmsur2= 0,;
+ kmsur4 = 0,;  
+ ctrld = 0,; 
+ fres  = 0,;
+ cruce = 0,;
+ cargapel= 0;
 

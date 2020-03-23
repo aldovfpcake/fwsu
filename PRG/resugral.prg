@@ -3,5 +3,6 @@ SET DELETED ON
 *CLOSE TABLES all
 SET EXCLUSIVE OFF
 x=CREATEOBJECT('configurar')
-x.Seteopat(2)
+CLOSE TABLES all
+x.Seteopat(1)
 DO FORM resugral

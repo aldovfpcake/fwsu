@@ -7,13 +7,13 @@ objm =CREATEOBJECT("montoescrito")
 PUBLIC nombremes,vano
 ob.Seteopat(2)
 ********************************
-vleg = 248
-vfechapago = "21-01-2020"
-vmes = 1
-vano = 2020
-vfecpjub = "11-12-2019"
+vleg = 247
+vfechapago = "04-10-2019"
+vmes = 9
+vano = 2019
+vfecpjub = "13-01-2020"
 vmonto = " "
-arch  = "12020"
+arch  = "92019"
 banco = "HSBC"
 ************************
 
@@ -22,9 +22,9 @@ nombremes = objm.nombremes(vmes)
 ano  = vano
 fecpjub = vfecpjub
 SELECT * FROM PERSONAL WHERE LEGAJO = vleg INTO CURSOR VPERSOLINEA
-SELECT * FROM &arch WHERE LEGAJO = vleg .AND. LIQUIDA=1 ORDER BY CONCEPTO  INTO CURSOR "CURLIQ"
+SELECT * FROM &arch WHERE LEGAJO = vleg .AND. LIQUIDA=3 ORDER BY CONCEPTO  INTO CURSOR "CURLIQ"
 SUM TO impor aporte+sinaporte -descuento
 monto = objm.monto(" ",impor)
 * monto = " "
 *DO FOXYPREVIEWER.APP  
-REPORT FORM c:\fwsu\forms\recibosueldo-tacsa  TO PRINTER PROMPT NODIALOG PREVIEW
+REPORT FORM c:\fwsu\forms\recibosueldo-tacsa-fdo  TO PRINTER PROMPT NODIALOG PREVIEW

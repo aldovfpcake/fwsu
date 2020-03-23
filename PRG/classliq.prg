@@ -168,7 +168,7 @@ Define Class LIQUIDACION As Custom
            
             * SE USA POR COMAPTIBILIDAD
            * 
-            IF curliq.concepto = 150 .or. curliq.concepto = 153 .or. curliq.concepto = 873
+            IF curliq.concepto = 150 .or. curliq.concepto = 153 .or. curliq.concepto = 873 .or. curliq.concepto = 877
                this.embargosal(curliq.concepto)
             ENDIF
             IF curliq.concepto = 405
@@ -637,13 +637,12 @@ Define Class LIQUIDACION As Custom
           	
           	IF EXTCOP.CONCEPTO = 0 
           	   IF RECSU.CONCEPTO = 130 .OR. RECSU.CONCEPTO = 99 .OR. RECSU.CONCEPTO = 123 .OR. RECSU.CONCEPTO = 16 .OR. RECSU.CONCEPTO = 142;
-          	   .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654;
-          	   .OR. RECSU.CONCEPTO = 876
-          	       
-          	       
+          	      .OR. RECSU.CONCEPTO = 175 .OR. RECSU.CONCEPTO = 9 .OR. RECSU.CONCEPTO = 121 .OR. RECSU.CONCEPTO = 653 .OR. RECSU.CONCEPTO = 654;
+          	      .OR. RECSU.CONCEPTO = 876 .OR. RECSU.CONCEPTO = 303
           	   ELSE
-            		INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCRIP,CANTIDAD,APORTE,SINAPORTE,DESCUENTO,LIQUIDA);
-            		VALUES(this.wlegajo,RECSU.CONCEPTO,RECSU.DESCRIP,RECSU.CANTIDAD,RECSU.APORTE,RECSU.SINAPORTE,RECSU.DESCUENTO,this.wtipoliq)
+            	      INSERT INTO CURLIQ (LEGAJO,CONCEPTO,DESCRIP,CANTIDAD,APORTE,SINAPORTE,DESCUENTO,LIQUIDA);
+            		  VALUES(this.wlegajo,RECSU.CONCEPTO,RECSU.DESCRIP,RECSU.CANTIDAD,RECSU.APORTE,RECSU.SINAPORTE,RECSU.DESCUENTO,this.wtipoliq)
+          	        
           	   ENDIF
           	 ENDIF
             SELECT EXTCOP
@@ -820,12 +819,13 @@ Define Class LIQUIDACION As Custom
          CASE this.waporte  < SalarioMin*2              
               VarEmbargo = (this.waporte - SalarioMin)*0.10
       ENDCASE         
+      
+      if this.wlegajo = 814
+         if VarEmbargo > 6035.06
+            	VarEmbargo = 6035.06
+         endif 
+      endif
       this.wimporte = VarEmbargo
-      
-     
-      
-          
-      
           
       
       *this.updateembargo
@@ -968,6 +968,9 @@ DEFINE CLASS configurar AS liquidacion
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
           CASE cpath = 6
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;D:\SUELDO-DEMO\EMPRE1;D:\SUELDO-DEMO
+          CASE cpath = 7
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE3
+                
                   
        ENDCASE
     Endproc

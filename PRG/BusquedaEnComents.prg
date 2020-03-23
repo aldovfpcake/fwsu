@@ -1,2 +1,2 @@
-SELECT * FROM coments WHERE coments LIKE "17-10-2019"
-*SELECT * FROM coments WHERE legajo = 652
+*SELECT * FROM coments WHERE coments LIKE "Vacaciones liquidadas dias..: 28 03-01-2020"
+SELECT * FROM coments WHERE legajo = 837

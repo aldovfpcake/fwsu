@@ -27,7 +27,8 @@ s.Setactividad(ACTIVIDAD)
  excedentesobrasoc = "000000,00" 
  provincialocalidad = ""
  aporteadicionalobrs="000000.00"
- 
+ *  1 empresa inciso b
+ *  4 empresa inciso  a
  tipoempresa= "1"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)

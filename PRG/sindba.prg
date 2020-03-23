@@ -4,9 +4,9 @@ SET DELETED ON
 CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
-Varmes = 12
-Varano = 2019
-x.Seteopat(1)
+Varmes = 2
+Varano = 2020
+x.Seteopat(3)
 SET CLASSLIB TO rh 
 Obtabla = CREATEOBJECT("abretabla")
 Obtabla.optabla(Varmes,Varano)

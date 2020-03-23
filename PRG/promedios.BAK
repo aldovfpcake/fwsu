@@ -15,9 +15,14 @@ Varleg = 248
 *CREATE CURSOR MESPROM(N,10,2),NOM(C,12)
 TOTAL = 0
 FOR I =1 TO 6
-    arch = STR(VarMes,2) + "2019"
-    
-    VarMes = VarMes -1
+    IF I <= 5
+      arch = STR(VarMes,2) + "2019"
+      VarMes = VarMes -1
+    ELSE
+      Varmes = 1
+      arch = STR(VarMes,2) + "2020"  
+      VarMes = VarMes +1
+    ENDIF  
     SELECT SUM(IIF(concepto = 199 .or. concepto =18 .or. concepto =1,0,aporte)) as su FROM &arch WHERE legajo = VarLeg;
     INTO CURSOR sutemp
     ? arch +" "+ STR(sutemp.su,10,2)

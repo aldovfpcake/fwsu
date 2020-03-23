@@ -26,7 +26,7 @@ SUM sntecob TO wtotal
 WAIT "presione"
 GO top
 remplazo()  
-cad = '33-60724391-9'+CHR(9)+ STR(treg,4)
+cad = '30-51640352-3'+CHR(9)+ STR(treg,4)
 
 
 *SET DEVICE TO FILE F:\ALDO\BANCO\BANK.TXT

@@ -7,7 +7,10 @@ Varlegajo = 701
 
 VarTot = 0
 *LEGAJO 701 MARCELO SALVAGGIO 
-
+*
+*LEGAJO 814 QUEVEDO DIEGO ALBERTO $ 6035.06
+*
+*
 clear
 FOR I = 1 TO 3
    FOR x =1 TO 12
