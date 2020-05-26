@@ -2,9 +2,20 @@
 SET PROCEDURE TO C:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
 Obj.SeteoPat(1)
-arch = "22020"
+LOCAL arch,liq,x,vi,VarFichero
+arch = "42020"
 liq = arch
 X = FILETOSTR("C:\FWSU\PRG\CRVI.PRG")
+
+VarFichero= arch+".dbf"
+?VarFichero
+
+IF .NOT. FILE(VarFichero)
+   WAIT WINDOW "El Fichero No Existe"
+   COPY FILE liq.dbf TO &VarFichero
+ENDIF   
+
+
 ********************
 *ESTA CADENA QUEDA FIJA
 CADBU = "12014"

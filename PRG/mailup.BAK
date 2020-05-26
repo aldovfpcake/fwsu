@@ -1,0 +1,8 @@
+GO top
+SCAN
+   UPDATE f:\sueldos\empre1\personal SET email=xlresults.email WHERE NOT EMPTY(xlresults.email)
+   SELECT Xlresults
+   ? Xlresults.legajo
+   
+   
+endscan

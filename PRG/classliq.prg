@@ -135,8 +135,15 @@ Define Class LIQUIDACION As Custom
                      wvalorfin = this.wimporte
               
             Endcase             
-          
             
+            if curliq.concepto = 241
+               *set step on
+               this.prhoras
+               wvalorfin = this.wimporte/30
+
+            endif
+
+
             Try 
 	            DO Case
 	               CASE this.wmodocarg   = 'CANTIDAD'
@@ -730,8 +737,8 @@ Define Class LIQUIDACION As Custom
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                SELECT s10,s11,s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro
                SELECT  s1,s2,s3 FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR encurso 
-               prome1 = (aterior.octubre + aterior.noviembre + aterior.diciembre + lust.enero + lust.febrero + lust.marzo)/6
-               this.wpromesu =  (antepro.s10+antepro.s11+antepro.s12+encurso.s1+encurso.s2+encurso.s3)/6
+                       prome1 =  (antepro.s10+antepro.s11+antepro.s12+encurso.s1+encurso.s2+encurso.s3)/6
+               this.wpromesu  =  (antepro.s10+antepro.s11+antepro.s12+encurso.s1+encurso.s2+encurso.s3)/6
   
               *IF ultimosue.ultimo > prome1
               *   prome1 = ultimosue.ultimo
@@ -820,11 +827,7 @@ Define Class LIQUIDACION As Custom
               VarEmbargo = (this.waporte - SalarioMin)*0.10
       ENDCASE         
       
-      if this.wlegajo = 814
-         if VarEmbargo > 6035.06
-            	VarEmbargo = 6035.06
-         endif 
-      endif
+      
       this.wimporte = VarEmbargo
           
       
@@ -916,6 +919,40 @@ Define Class LIQUIDACION As Custom
     ENDPROC
        
     
+
+    PROCEDURE PRHORAS
+
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 102019 where legajo = this.wlegajo;
+        into cursor oct
+       
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 112019 where legajo = this.wlegajo;
+        into cursor nov
+               
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 122019 where legajo = this.wlegajo;
+        into cursor dic
+        
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 12020 where legajo = this.wlegajo;
+        into cursor ene
+        
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 22020 where legajo = this.wlegajo;
+        into cursor feb
+
+        Select sum(iif(concepto=5 .or. concepto = 6,aporte,0)) as horimp from 32020 where legajo = this.wlegajo;
+        into cursor mar
+       
+         ?oct.horimp
+        
+        this.wimporte = (oct.horimp+nov.horimp+dic.horimp+ene.horimp+feb.horimp+mar.horimp)/6         
+
+
+
+
+
+    ENDPROC
+
+
+
+
     
      
 Enddefine
@@ -961,7 +998,7 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 2
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES  
           CASE cpath = 3
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS;F:\SUELDOS\EMPRESA-3                 
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRESA-3;F:\SUELDOS;C:\FWSU\CLASES                 
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5

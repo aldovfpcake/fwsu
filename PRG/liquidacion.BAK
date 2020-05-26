@@ -12,7 +12,7 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 * 6 demo
-emp = 2
+emp = 1
 DO case
    CASE emp = 1
 	    seteo = 1
@@ -62,7 +62,7 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 3
+vmes = 5
 vano = 2020
 *********************************************************
 IF seteo = 6
@@ -70,7 +70,7 @@ IF seteo = 6
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "MARZO 2020" +VarStringDe ,vmes,vano,emp
+DO FORM liquidacion WITH "MAYO 2020" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

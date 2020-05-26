@@ -19,16 +19,17 @@ DO WHILE EMPTY(VVARCHI)
    VVARCHI = INPUTBOX("Ingrese dias de vacaciones","Ingrese",VVARCHI,5600)
 ENDDO
 MESES[1] = "MARZO"
-MESES[2] = "ABRIL"
-MESES[3] = "MAYO"
-MESES[4] = "JUNIO"
-MESES[5] = "JULIO"
-MESES[6] = "AGOSTO"
+MESES[2] = "FEBRERO"
+MESES[3] = "ENERO"
+MESES[4] = "DICIEMBRE"
+MESES[5] = "NOVIEMBRE"
+MESES[6] = "OCTUBRE"
 xs =  CREATEOBJECT("detalleliqvac",Varlegajo,1)
 VardiasVac = VAL(VVARCHI)
-Vartotal    = informe.s3+  informe.s4 + informe.s5+ informe.s6+ informe.s7+informe.s8
-VarPromedio = ROUND((informe.s3+ informe.s4+ informe.s5+ informe.s6+ informe.s7+informe.s8)/6,2)
-MODIFY REPORT detallevac
+Vartotal    = informe.s12+  informe.s11 + informe.s10+ informe2.s1+ informe2.s2+informe2.s3
+VarPromedio = ROUND((informe.s12+  informe.s11 + informe.s10+ informe2.s1+ informe2.s2+informe2.s3)/6,2)
+*MODIFY REPORT detallevac
+DO FOXYPREVIEWER.APP
 REPORT FORM detallevac NOCONSOLE  PREVIEW 
 RELEASE MESES,VardiasVac,Vartotal,VarPromedio
 *CLOSE TABLES ALL

@@ -6,13 +6,13 @@ ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\averq.xls"
+MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver4.xls"
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
 oExcel.Workbooks.Open(miExcel)
 oExcel.Sheets(1).Select
-
+clear
 *DO borra
 
 STORE 0 TO  VarKNM, VarKMCIEN, VarKMSUR2, VarKMSUR4, VarCTRLD, VarFRES, VarCRUCE, VarCARGAPEL 
@@ -20,7 +20,7 @@ CLEAR
  
 
  
-FOR i=14 TO 47                 
+FOR i=3 TO 10              
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -29,7 +29,7 @@ FOR i=14 TO 47
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
     *****************VERIFICAR
-    VarCARGAPEL   = 1
+    VarCARGAPEL   = 0
     **************************
     IF .not. ISNULL(Varlegajo)
             

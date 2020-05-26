@@ -31,4 +31,4 @@ lnSuccess = SQLExec( m.lnSQLHand, m.lcSQLCmd, [xlResults] )
 
 SQLDisconnect(m.lnSQLHand)
 
-BROWSE TITLE ALIAS()
+BROWSE 

@@ -9,21 +9,30 @@ SET CLASSLIB TO rh
 
 LOCAL VarMes,VarLeg 
 clear
-VarMes = 12
-Varleg = 248
+VarMes = 4
+Varleg = 247
 
 *CREATE CURSOR MESPROM(N,10,2),NOM(C,12)
 TOTAL = 0
+LOCAL VarPaso , Varmes
+************
+Varmes = 3
+************** 
+VarPaso = 0
 FOR I =1 TO 6
-    IF I <= 5
-      arch = STR(VarMes,2) + "2019"
-      VarMes = VarMes -1
+    IF I > 3
+       IF Varpaso = 0
+          Varmes = 12
+          VarPaso = 1
+        Endif   
+        arch = STR(VarMes,2) + "2019"
+        VarMes = VarMes -1
     ELSE
-      Varmes = 1
-      arch = STR(VarMes,2) + "2020"  
-      VarMes = VarMes +1
+        
+        arch = STR(VarMes,2) + "2020"  
+        VarMes = VarMes -1
     ENDIF  
-    SELECT SUM(IIF(concepto = 199 .or. concepto =18 .or. concepto =1,0,aporte)) as su FROM &arch WHERE legajo = VarLeg;
+    SELECT SUM(IIF(concepto = 199 .or. concepto =18 .or. concepto =1 .or.concepto = 304 .or. concepto = 204,0,aporte)) as su FROM &arch WHERE legajo = VarLeg;
     INTO CURSOR sutemp
     ? arch +" "+ STR(sutemp.su,10,2)
     TOTAL = total+ sutemp.su

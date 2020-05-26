@@ -1,3 +1,4 @@
+
 SET DATE ITALIAN
 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
 SET CENTURY ON
@@ -12,9 +13,10 @@ ENDDO
 Varlegajo = VAL(VVARCHI)
 
 SELECT legajo,nombre,documento FROM personal WHERE legajo = Varlegajo INTO CURSOR lper
-SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2019 INTO CURSOR lvc
+SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2018 INTO CURSOR lvc
 SELECT l.legajo,l.nombre,l.documento,s.desde,s.hasta,s.dias,s.ano FROM lper l INNER JOIN lvc s ON l.legajo = s.legajo;
 into CURSOR vacaciones
 *DO FOXYPREVIEWER.APP 
-REPORT FORM FORMVAC  TO PRINTER PROMPT NODIALOG PREVIEW 
- 
+FOR i = 1 TO 2
+REPORT FORM FORMVAC TO PRINTER
+NEXT 

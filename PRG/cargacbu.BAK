@@ -1,0 +1,31 @@
+SET DATE ITALIAN
+SET SYSFORMATS ON
+SET DELETED ON
+SET PATH TO F:\SUELDOS\EMPRE1
+loFS = CREATEOBJECT("Scripting.FileSystemObject")
+loFile = GETFILE()
+loFile= loFS.OpenTextFile((loFile), 1)
+local Cuil,cbu
+clear
+DO WHILE NOT loFile.AtEndOfStream
+    lcLine = loFile.ReadLine()
+    Cuil   = substr(lcline,1,11)
+    lt =LEN(lcLine)
+    ?cuil   
+    ?substr(Cuil,1,2)+"-" +substr(cuil,3,10)+"-"+substr(Cuil,11,1)
+    pos =RAT("/",lcLine)
+    cbu =SUBSTR(lcLine,pos+1,22)
+    buscar(Cuil,Cbu)
+ENDDO 	
+loFile.Close()
+
+********************
+FUNCTION BUSCAR
+******************
+PARAMETERS VarCuil,cbu
+
+SELECT legajo,nombre FROM personal WHERE cuil = VarCuil;
+into CURSOR existe
+?existe.nombre
+RETURN .t.
+
