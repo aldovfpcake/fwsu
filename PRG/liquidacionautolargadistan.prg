@@ -12,15 +12,11 @@ x.Seteopat(1)
 *ver()
 
 USE f:\sueldos\empre1\lagardi again
-*SET FILTER TO LEGAJO = 608
-*BROWSE
 SCAN
-       IF INLIST(lagardi.legajo,718,827,855,874,879,849,890,887)
-            DO lqautom-larga-distancia
-       ENDIF 
+       
+       DO lqautom-larga-distancia
+       
     SELECT lagardi
-   *DELETE FROM f:\sueldos\empre1\92018 WHERE legajo = lagardi.legajo .and. liquida = 3
-*   *?"Eliminando ........:" +STR(lagardi.legajo,4) 
 
 ENDSCAN
 

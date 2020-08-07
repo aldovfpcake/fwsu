@@ -6,7 +6,7 @@ ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver4.xls"
+MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver7.xls"
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
@@ -20,7 +20,7 @@ CLEAR
  
 
  
-FOR i=14 TO 49               
+FOR i=13 TO 46         
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -29,7 +29,7 @@ FOR i=14 TO 49
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
     *****************VERIFICAR
-    VarCARGAPEL   = 0
+    VarCARGAPEL   = 1
     **************************
     IF .not. ISNULL(Varlegajo)
             
@@ -49,7 +49,7 @@ FOR i=14 TO 49
     STORE 0 TO  VarKNM, VarKMCIEN, VarKMSUR2, VarKMSUR4, VarCTRLD, VarFRES, VarCRUCE, VarCARGAPEL 
 
 NEXT
-
+WAIT WINDOW "Proceso Terminado"
 
 
 

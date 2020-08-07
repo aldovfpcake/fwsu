@@ -1,0 +1,6 @@
+SET STEP on
+Error en la línea 18: La instrucción no está en un procedimiento.
+lb = CREATEOBJECT("excelafip")
+Error en la línea 19: La instrucción no está en un procedimiento.
+lb.openlibro
+Error en la línea 20: La instrucción no está en un procedimiento.

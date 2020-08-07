@@ -1,8 +1,11 @@
 SET DATE ITALIAN
 SET SYSFORMATS ON
 SET DELETED ON
+x=CREATEOBJECT('configurar')
+x.Seteopat(1)
+
 loFS = CREATEOBJECT("Scripting.FileSystemObject")
-loFile= loFS.OpenTextFile("C:\suerut\presentacion\RUTA12SICOSS112019.txt", 1)
+loFile= loFS.OpenTextFile(GETFILE(), 1)
 *loFile= loFS.OpenTextFile("C:\suerut\presentacion-2\30-51640352-3_201908_EXPRESO RUTA 12 DE SALOMON CAN.txt", 1)
 CLEAR
 borrar()

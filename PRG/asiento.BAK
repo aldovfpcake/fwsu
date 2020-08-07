@@ -6,7 +6,7 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO rh 
-ms = 3
+ms = 5
 an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)

@@ -1,0 +1,119 @@
+Private poExcel, poBook, poActiveSheet
+
+Local laSheets[1], lcCursor, lcCursors, lcFile, lcTabla, lnSheet, lnSheets
+
+Select  *												;
+	From(Home() + "Samples\Northwind\Customers")	;
+	Into Cursor curCustomers NOFILTER
+
+Select  *												;
+	From(Home() + "Samples\Northwind\Employees")	;
+	Into Cursor curEmployees NOFILTER
+
+lcCursors = "curCustomers,curEmployees"
+lnSheets  = Getwordcount(m.lcCursors, ",")
+
+Dimension m.laSheets[m.lnSheets]
+For lnSheet = 1 To m.lnSheets
+	laSheets[m.lnSheet] = Getwordnum(m.lcCursors, m.lnSheet, ",")
+Endfor
+
+poExcel			= Createobject("Excel.Application")
+poBook			= m.poExcel.Workbooks.Add()
+poExcel.Visible	= .F.
+
+Do While m.poExcel.Sheets.Count < m.lnSheets
+	m.poExcel.Sheets.Add
+Enddo
+
+For lnSheet = 1 To m.lnSheets
+	lcCursor = m.laSheets[m.lnSheet]
+	Do Cursor2Sheet With m.lcCursor, m.lnSheet
+	lcTabla = Substr(m.lcCursor, 4)
+	Use In Select(m.lcTabla)
+	Use In Select(m.lcCursor)
+Endfor
+
+lcFile				  = Set('DEFAULT') + Sys(2003) + "\Planillas\Cli_Empl"
+poExcel.DisplayAlerts = .F.
+
+If Val(m.poExcel.Version) > 11
+	m.poBook.SaveAs(m.lcFile, 51)
+Else
+	m.poBook.SaveAs(m.lcFile)
+Endif
+
+m.poExcel.ActiveWindow.Close(2)
+m.poExcel.Quit
+
+poBook		  = Null
+poActiveSheet = Null
+poExcel		  = Null
+
+Release	m.poBook
+Release	m.poActiveSheet
+Release	m.poExcel
+
+Wait Clear
+
+Return
+*
+*------------------------------------------------------------------------------------------
+*
+Procedure Cursor2Sheet(tcCursor, tnSheet)
+
+Local lcTitleRange, lnField, lnlnFields
+
+Wait Window "Generando la Planilla Excel desde " + m.tcCursor Nowait
+
+lnlnFields = Fcount(m.tcCursor)
+
+m.poExcel.Sheets(m.tnSheet).Activate
+poActiveSheet = m.poExcel.ActiveSheet
+
+Select(m.tcCursor)
+Scan
+	For lnField = 1 To m.lnlnFields
+		poActiveSheet.Cells(Recno(m.tcCursor), m.lnField) = Evaluate(Field(m.lnField, m.tcCursor))
+	Endfor
+Endscan
+Go Bottom In(m.tcCursor)
+poActiveSheet.Cells(Recno(m.tcCursor) + 1, 1)	= "Fin de la planilla."
+
+*!* Formato de columnas título
+m.poActiveSheet.Rows("1:1").Insert
+For lnField = 1 To m.lnlnFields
+	poActiveSheet.Cells(1, m.lnField) = Proper(Field(m.lnField, m.tcCursor))
+Endfor
+lcTitleRange = "A1:" + ColNum2Letter(m.lnlnFields) + "1"
+With m.poActiveSheet.Range(m.lcTitleRange)
+	.HorizontalAlignment = -4108			&& xlCenter &&Alinear al centro *
+	.VerticalAlignment	 = -4108			&& xlCenter
+	.Font.Bold			 = .T.
+	.Font.Size			 = 10
+	.Font.Name			 = "Arial"
+Endwith
+
+*!* Ajustando celdas
+m.poActiveSheet.Columns().AutoFit
+poActiveSheet.Name = Substr(m.tcCursor, 4)
+
+Return
+
+Endproc
+*
+*------------------------------------------------------------------------------------------
+*
+Function ColNum2Letter(tnColNum As Integer) As String
+
+Local lcColumns, lcLetter, lnBreak
+lnBreak	  = Int(m.tnColNum / 26) - Iif(Mod(m.tnColNum, 26) = 0, 1, 0)
+lcColumns = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
+lcLetter  = Getwordnum(m.lcColumns, m.lnBreak, ",") + Chr(Mod(m.tnColNum, 26) + Iif(Mod(m.tnColNum, 26) = 0, 90, 64))
+
+Return m.lcLetter
+
+Endfunc
+*
+*------------------------------------------------------------------------------------------
+*

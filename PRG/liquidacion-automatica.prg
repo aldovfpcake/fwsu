@@ -16,7 +16,7 @@ x.Seteopat(1)
  lq = CREATEOBJECT('liquidacion')
 
 **********************************************************periodo de liquidacion
- lq.wmes     = 4
+ lq.wmes     = 7
  lq.wano     = 2020
 **********************************************************************************
  LOCAL varLeg
@@ -29,7 +29,7 @@ x.Seteopat(1)
  fecpjub = " "
  DiferSueldo = 0
 *****************************archivo de liquidación
- archliq= "42020"
+ archliq= "72020"
  *****************************************************************w
  lq.wdisplaynove = .t.
  lq.wlegajo  = tabhoras.leg
@@ -40,8 +40,8 @@ x.Seteopat(1)
  lq.cargobase
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,5,1,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,6,1,3) 
- lq.InsertarConceptoBis(59,tabhoras.comida)
- lq.InsertarConceptoBis(64,tabhoras.comida)
+ lq.InsertarConceptoBis(401,tabhoras.comida)
+ lq.InsertarConceptoBis(403,tabhoras.comida)
  lq.InsertarConceptoBis(6,tabhoras.horcien)
  lq.InsertarConceptoBis(5,tabhoras.horcta)
  IF tabhoras.parfer <> 0
@@ -65,12 +65,12 @@ x.Seteopat(1)
  
  IF tabhoras.enf <>0
      IF tabhoras.enf >= 30
-        DELETE FROM CURLIQ WHERE CONCEPTO = 25 .OR. CONCEPTO = 64 
+        DELETE FROM CURLIQ WHERE CONCEPTO = 401 .OR. CONCEPTO = 403
      ELSE
         lq.InsertarConceptoBis(4,tabhoras.enf)
         lq.InsertarConceptoBis(31,tabhoras.enf)
-        UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.ENF) WHERE CONCEPTO = 59 
-        UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.ENF) WHERE CONCEPTO = 64 
+        UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.ENF) WHERE CONCEPTO = 401 
+        UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.ENF) WHERE CONCEPTO = 403 
      ENDIF
      
  ENDIF
@@ -78,8 +78,8 @@ x.Seteopat(1)
  
  IF tabhoras.aus <> 0
     lq.InsertarConceptoBis(7,tabhoras.aus) 
-    UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.AUS) WHERE CONCEPTO = 59 
-    UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.AUS) WHERE CONCEPTO = 64 
+    UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.AUS) WHERE CONCEPTO = 401
+    UPDATE CURLIQ SET CANTIDAD = (25 -TABHORAS.AUS) WHERE CONCEPTO = 403 
  
  
  ENDIF
@@ -101,12 +101,12 @@ x.Seteopat(1)
 * verdif()
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-*REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
+REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
 grabarliq()
- *grabatabla()
-*  grabacincuenta()
-* grabacien() 
-*  grabaferi()
+* grabatabla()
+* grabacincuenta()
+ *grabacien() 
+* grabaferi()
  return
  
  

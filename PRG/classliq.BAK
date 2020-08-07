@@ -756,12 +756,13 @@ Define Class LIQUIDACION As Custom
                prome1 =  (aterior.noviembre + aterior.diciembre+ lust.impt)/6 
           
           CASE this.wmes = 6 
+               SET STEP ON 
                SELECT  (enero+febrero+marzo+abril+mayo ) as impt FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lust
                SELECT   diciembre FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR aterior
                SELECT  (marzo) as ultimo FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR ultimosue
                SELECT s12 FROM &waanter WHERE legajo = this.wlegajo INTO CURSOR antepro 
                SELECT (s1+s2+s3+s4+s5)as impvac FROM &wlustro WHERE legajo = this.wlegajo INTO CURSOR lvac 
-               this.wpromesu =  (antepro.s12+lvac.s1+lvac.s2+lvac.s3+lvac.s4+lvac.s5)/6
+               this.wpromesu =  (antepro.s12+ lvac.impvac)/6
                prome1 = (lust.impt + aterior.diciembre)/6  
                       
           CASE this.wmes = 7 
@@ -827,7 +828,13 @@ Define Class LIQUIDACION As Custom
               VarEmbargo = (this.waporte - SalarioMin)*0.10
       ENDCASE         
       
-      
+      if this.wlegajo = 701
+         if VarEmbargo > 45254.69
+            VarEmbargo = 45254.69
+         endif
+      endif      
+
+
       this.wimporte = VarEmbargo
           
       
@@ -998,7 +1005,7 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 2
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES  
           CASE cpath = 3
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRESA-3;F:\SUELDOS                 
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRESA-3;F:\SUELDOS;C:\FWSU\CLASES                 
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5

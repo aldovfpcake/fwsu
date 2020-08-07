@@ -3,7 +3,7 @@ SET PROCEDURE TO C:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
 Obj.SeteoPat(1)
 LOCAL arch,liq,x,vi,VarFichero
-arch = "52020"
+arch = "72020"
 liq = arch
 X = FILETOSTR("C:\FWSU\PRG\CRVI.PRG")
 

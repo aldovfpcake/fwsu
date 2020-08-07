@@ -31,7 +31,7 @@ cad = '33-60724391-3'+CHR(9)+ STR(treg,4)
 
 *SET DEVICE TO FILE F:\ALDO\BANCO\BANK.TXT
  *                                  123456789-123    
- SET DEVICE TO FILE C:\BANK.TXT
+ SET DEVICE TO FILE C:\BANKTACSA.TXT
  
  @0,0  say '33-60724391-9' picture "99-99999999-9"
  @0,13 say CHR(9)  

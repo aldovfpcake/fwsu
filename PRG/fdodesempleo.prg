@@ -7,7 +7,7 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 LOCAL ms,an,artxt
-ms = 4
+ms = 3
 an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)

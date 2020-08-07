@@ -1,6 +1,7 @@
-SET PATH TO \\fileserver\f\sueldos\empre1
+*SET PATH TO \\fileserver\f\sueldos\empre1
 SET EXCLUSIVE OFF
-USE maper again
+OPEN DATABASE k:\lsafip\lsafip.dbc shared
+USE Concuser again
 
 PRIVATE tabla,arreglo,reg,CardInsert,tabla,linea,valores,CadUpdate
 linea     = " "
