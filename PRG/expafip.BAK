@@ -3,7 +3,7 @@
 SET PROCEDURE TO c:\fwsu\prg\clasesicoss
 SET POINT TO ","
 fso = CreateObject('Scripting.FileSystemObject')
-tf = fso.CreateTextFile('c:\testfile2.txt', .t.)
+tf = fso.CreateTextFile('c:\sueldos\testfile.txt', .t.)
 s= CREATEOBJECT("sicoss")
 SELECT sue3
 SCAN 
@@ -29,7 +29,7 @@ s.Setactividad(ACTIVIDAD)
  aporteadicionalobrs="000000.00"
  *  1 empresa inciso b
  *  4 empresa inciso  a
- tipoempresa= "4"
+ tipoempresa= "1"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)
   vvbas  = sac+horasextra+basico+vacaciones+premios

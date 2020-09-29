@@ -6,6 +6,10 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO reporte
-Hoja = CREATEOBJECT("exel")
-Hoja.openlibro
-Hoja.getfechapago
+MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver88.xls"
+oExcel = CreateObject("Excel.Application")
+oExcel.Workbooks.Open(MiArchivoExcel)
+oExcel.sheets(1).Select
+oExcel.Workbooks.Open(miExcel)
+oExcel.Sheets(1).Select
+WAIT WINDOW "libro abierto"

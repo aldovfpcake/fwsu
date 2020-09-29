@@ -7,15 +7,15 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 LOCAL ms,an,artxt
-ms = 6
-an = 2020
+ms = 10
+an = 2019
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
  UPDATE repcab SET mes = op.nombres(ms),;
                       ano = an
 
- IF ms =< 10 .and. an = 2019
+ IF ms =< 11 .and. an = 2019
     rp.fdodes  =0.12
  ELSE
     rp.fdodes = 0.08
@@ -31,10 +31,11 @@ rp = CREATEOBJECT('reportesueldo')
  WAIT WINDOW STR(VV,12,2)
  COUNT FOR sntecob <>0 TO treg
  DO FOXYPREVIEWER.APP
+ *MODIFY REPORT detalle-fdo
  REPORT FORM detalle-fdo preview
   
  
- arttxt = "c:\fondo-desempleo-"+STR(ms,2)+"-"+STR(an,4)
+ arttxt = "c:\sueldos\fondo-desempleo-"+STR(ms,2)+"-"+STR(an,4)
  
   SET DEVICE TO FILE (arttxt)
  

@@ -9,4 +9,4 @@ rh = CREATEOBJECT('legajoper')
 x.Seteopat(1)
 
 SELECT LEGAJO,NOMBRE,FECHAING,rh.calcuant(DATE(),fechaing)as antg,depart,rh.calcuant(DATE(),fechanaci)as edad ;
-FROM personal WHERE CATEGORIA = "CONDUCTOR 1RAC" .AND. ACTIVO = "A"
+FROM personal WHERE CATEGORIA = "CONDUCTOR 1RAC" .AND. ACTIVO = "A" ORDER BY edad,antg

@@ -4,7 +4,7 @@ SET DELETED ON
 CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
-Varmes = 6
+Varmes = 8
 Varano = 2020
 x.Seteopat(1)
 *7 Ester

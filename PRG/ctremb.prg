@@ -12,6 +12,10 @@ VarTot = 0
 *
 *
 clear
+
+ fso = CreateObject('Scripting.FileSystemObject')
+ tf = fso.CreateTextFile('c:\sueldos\testfile.txt', .t.)
+       
 FOR I = 1 TO 3
    FOR x =1 TO 12
       archivo = IIF(x<= 6, STR(x,1)+STR(varano,4),STR(x,2)+STR(varano,4))
@@ -32,10 +36,10 @@ FOR I = 1 TO 3
            ENDIF
         
         ENDIF
-                        
-        ?archivo + "  " + STR(sueldo.emb,10,2)  + " " + TRANSFORM(existe.pagado)
-         
-        VarTot = VarTot +sueldo.emb   
+            ?archivo + "  " + STR(sueldo.emb,10,2)  + " " + TRANSFORM(existe.pagado)
+            linea =archivo + " , " + STR(sueldo.emb,10,2)  + ", " + TRANSFORM(existe.pagado)
+            tf.writeline(linea)
+            VarTot = VarTot +sueldo.emb   
      ENDIF
    NEXT
   
@@ -47,11 +51,12 @@ SELECT ctremb
 Vartot =0
 SUM importe TO VarTot FOR legajo = Varlegajo .AND. pagado = .f.
 ? "Total General Retenido............ = " + STR(Vartot,10,2)
-
+linea = "Total General Retenido............ = " + STR(Vartot,10,2)
+tf.writeline(linea)
 VarFalta = 308838.69 - Vartot
 ?"Falta Retener...............$" + STR(VarFalta,10,2) 
- 
-
+tf.writeline(linea)
+tf.Close
 
 
 CLOSE TABLES

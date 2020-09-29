@@ -1,8 +1,9 @@
+PARAMETERS empresa
 SET PROCEDURE TO c:\FWSU\prg\CLASSLIQ
 SET DELETED ON
 *CLOSE TABLES all
 SET EXCLUSIVE OFF
 x=CREATEOBJECT('configurar')
 CLOSE TABLES all
-x.Seteopat(2)
+x.Seteopat(empresa)
 DO FORM resugral

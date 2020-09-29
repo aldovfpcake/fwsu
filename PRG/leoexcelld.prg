@@ -6,7 +6,7 @@ ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
 
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver7.xls"
+MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver88.xls"
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
@@ -20,7 +20,7 @@ CLEAR
  
 
  
-FOR i=13 TO 46         
+FOR i=14 TO 47         
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value

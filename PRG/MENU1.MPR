@@ -1,12 +1,12 @@
 *       *********************************************************
 *       *                                                         
-*       * 07/18/17              MENU1.MPR               15:39:43  
+*       * 09/10/20              MENU1.MPR               14:48:47  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
 *       * Author's Name                                           
 *       *                                                         
-*       * Copyright (C) 2017 Company Name                         
+*       * Copyright (C) 2020 Company Name                         
 *       * Address                                                 
 *       * City,     Zip                                           
 *       *                                                         
@@ -26,16 +26,22 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _4yu0xki55 OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
+DEFINE PAD _5uy0vr00c OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _4yu0xki56 OF _MSYSMENU PROMPT "LISTADOS" COLOR SCHEME 3 ;
+DEFINE PAD _5uy0vr00d OF _MSYSMENU PROMPT "LISTADOS" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _4yu0xki57 OF _MSYSMENU PROMPT "LISTADO" COLOR SCHEME 3 ;
-	KEY ALT+L, ""
-ON SELECTION PAD _4yu0xki55 OF _MSYSMENU DO LIQUIDACION
-ON PAD _4yu0xki56 OF _MSYSMENU ACTIVATE POPUP listados
-ON SELECTION PAD _4yu0xki57 OF _MSYSMENU DO LISTA
+DEFINE PAD _5uy0vr00e OF _MSYSMENU PROMPT "SALIDA" COLOR SCHEME 3 ;
+	KEY ALT+S, ""
+ON SELECTION PAD _5uy0vr00c OF _MSYSMENU DO LIQUIDACION
+ON PAD _5uy0vr00d OF _MSYSMENU ACTIVATE POPUP listados
+ON SELECTION PAD _5uy0vr00e OF _MSYSMENU CLEAR EVENTS
 
 DEFINE POPUP listados MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF listados PROMPT "Resumen General"
-ON SELECTION BAR 1 OF listados do  resugral
+DEFINE BAR 2 OF listados PROMPT "Planilla -Sdldos"
+DEFINE BAR 3 OF listados PROMPT "Planilla Sld tacsa"
+DEFINE BAR 4 OF listados PROMPT "Resumen Ge Tacsa"
+ON SELECTION BAR 1 OF listados do  resugral with 1
+ON SELECTION BAR 2 OF listados do lista
+ON SELECTION BAR 3 OF listados do lista2
+ON SELECTION BAR 4 OF listados do resugral with  2

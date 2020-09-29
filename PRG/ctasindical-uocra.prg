@@ -8,7 +8,7 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 lg = CREATEOBJECT("legajoper")
-ms = 6
+ms = 8
 an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
@@ -24,7 +24,7 @@ BROWSE
 
 
 fso = CreateObject('Scripting.FileSystemObject')
-tf = fso.CreateTextFile("c:\uocra.txt",.t.)
+tf = fso.CreateTextFile("c:\sueldos\uocra.txt",.t.)
 clear
 SCAN
     ano = " "

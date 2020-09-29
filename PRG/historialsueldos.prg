@@ -1,16 +1,16 @@
 SET TALK OFF
 SET DELETED ON
-SET PATH TO F:\SUELDOS\EMPRE1
+*SET PATH TO F:\SUELDOS\EMPRE1
 *SET PATH TO C:\SUERUT\EMPRE3
-*SET PATH TO F:\SUELDOS\EMPRE2
+SET PATH TO F:\SUELDOS\EMPRE2
 SET EXCLUSIVE OFF
 
 CREATE CURSOR sueldo (haber n(10,2),sinaporte n(10,2),descuento n(10,2),neto n(10,2),km n(10,2),ctrol n(10,2),mes n(2),tipo n(2),ano n(4)) 
 clear
 varano = 0
 *historial de sueldos a partir del año (varano)
-varano = 2018
-vvlegajo = 810
+varano = 1993
+vvlegajo = 98
 clear
 
 FOR I = 1 TO 11

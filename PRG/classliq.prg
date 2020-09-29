@@ -829,8 +829,8 @@ Define Class LIQUIDACION As Custom
       ENDCASE         
       
       if this.wlegajo = 701
-         if VarEmbargo > 26299.69
-            VarEmbargo = 26299.69
+         if VarEmbargo > 3794.69
+            VarEmbargo = 3794.69
          endif
       endif      
 
@@ -1011,7 +1011,7 @@ DEFINE CLASS configurar AS liquidacion
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
           CASE cpath = 6
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;D:\SUELDO-DEMO\EMPRE1;D:\SUELDO-DEMO
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\suerut\demo;F:\sueldos
           CASE cpath = 7
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE3
                 
