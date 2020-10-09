@@ -25,10 +25,16 @@ DO case
    		ob.Seteopat(3)
    CASE emp = 6
         ob.Seteopat(6)    
+   CASE emp = 8
+        ob.Seteopat(8)    
+
+   
 ENDCASE
    		
 
 OPEN DATABASE SUELDOS SHARED
+*OPEN DATABASE C:\SUERUT\DEMO\SUELDOS
+
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 

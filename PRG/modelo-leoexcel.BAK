@@ -10,7 +10,6 @@ Endif
 Local loExcel As Excel.Application
 loExcel = Createobject("Excel.application")
 
-
 m.loExcel.Workbooks.Open(miExcel)
 m.loExcel.Sheets(1).Select
 

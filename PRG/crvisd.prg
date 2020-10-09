@@ -5,8 +5,23 @@ SET EXCLUSIVE OFF
 SET SQLBUFFERING ON
 SET SAFETY OFF
 SELECT 0
-OPEN DATABASE f:\sueldos\sueldos
+
+
+
+
+
+
+
+
+
+
+
+
+
+*OPEN DATABASE f:\sueldos\sueldos
 *archivo = "f:\sueldos\empre1\62014"
+OPEN DATABASE c:\suerut\demo\sueldos
+*
 USE &archivo
 CREATE SQL VIEW  curliq as;
 SELECT legajo, concepto, tipoconcep, valoruni,  cantidad,; 

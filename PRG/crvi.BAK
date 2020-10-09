@@ -1,18 +1,28 @@
 PARAMETERS archivo
 CLOSE tables
-SET PROCEDURE TO T:\FWSU\PRG\CLASSLIQ
-Obj = CREATEOBJECT('configurar')
-Obj.SeteoPat
 SET muLtilocks on
 SET EXCLUSIVE OFF
 SET SQLBUFFERING ON
 SET SAFETY OFF
 SELECT 0
-OPEN DATABASE f:\sueldos\sueldos
+
+
+
+
+
+
+
+
+
+
+
+
+
+*OPEN DATABASE f:\sueldos\sueldos
 *archivo = "f:\sueldos\empre1\62014"
-fsu = "f:\sueldos\empre1\"+archivo
-WAIT WINDOW fsu
-USE &fsu
+OPEN DATABASE c:\suerut\demo\sueldos
+*
+USE &archivo
 CREATE SQL VIEW  curliq as;
 SELECT legajo, concepto, tipoconcep, valoruni,  cantidad,; 
 aporte, sinaporte, descuento, liquida, recibo, descrip, orden FROM  &archivo where legajo =?vlegajo  .and. liquida = ?vliquida;

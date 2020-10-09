@@ -1014,6 +1014,8 @@ DEFINE CLASS configurar AS liquidacion
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\suerut\demo;F:\sueldos
           CASE cpath = 7
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE3
+          CASE cpath = 8
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\DEMO      
                 
                   
        ENDCASE

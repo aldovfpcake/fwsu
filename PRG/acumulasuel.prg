@@ -4,10 +4,10 @@ SET PATH TO F:\sueldos\empre1
 *SET PATH TO C:\SUERUT\EMPRE3
 SET DELETED ON
 ws = CREATEOBJECT("abretabla")
-ws.optabla(8,2020)
+ws.optabla(9,2020)
 *ws.acumulasuel()
 ws.acumulasinvacaciones()
-ws.optabla(8,2020)
+ws.optabla(9,2020)
 ws.acumulasinenfermedad()
 USE SBR20
 *REPLACE JULIO WITH ACUMULA.IMPORTE FOR LEGAJO = 858

@@ -15,7 +15,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 6
+ lq.wmes     = 9
  lq.wano     = 2020
  lq.wempresa  = 1
 **************************************
@@ -30,7 +30,7 @@ x.Seteopat(1)
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "72020"
+ archliq= "92020"
  
  ************************
  lq.wdisplaynove = .t.
@@ -127,9 +127,9 @@ x.Seteopat(1)
  
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
-REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
-grabarliq()
-*borrar()
+*REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
+*grabarliq()
+borrar()
  return
 
 

@@ -1,6 +1,6 @@
 fso = CreateObject('Scripting.FileSystemObject')
 tf = fso.CreateTextFile('F:\sueldos\EMPRE1\testfileb.txt', .t.)
-lega = 858
+lega = 816
 SELECT * FROM sbr20 WHERE legajo = lega  INTO CURSOR informe
 i=3
 FOR I= 3 TO FCOUNT()
