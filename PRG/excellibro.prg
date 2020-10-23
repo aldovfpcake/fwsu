@@ -1,24 +1,29 @@
+*PARAMETERS Varlegajo
 SET DEFAULT TO C:\SUERUT\EMPRE1
 SET CLASSLIB TO c:\fwsu\clases\rh
+SET DELETED ON
 MiArchivoExcel = "c:\suerut\libro-sueldo-digital-afip\librob.xlsx"
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
 oExcel.Workbooks.Open(MiArchivoExcel)
 fso = CreateObject('Scripting.FileSystemObject')
-tf = fso.CreateTextFile('c:\sueldos\ls.txt', .t.)
+*tf = fso.CreateTextFile('c:\sueldos\ls.txt', .t.)
+ tf = fso.OpenTextFile("c:\sueldos\ls.txt",8,0)
+
+
 oExcel.Sheets(1).Select
 
 linea =   oExcel.Range("J9").value
 tf.Writeline(linea)
 oExcel.Sheets(2).Select
-VarLegajo = 195
+VarLegajo = 890
 datper(VarLegajo)
 xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
 FechaDePago = "20201002" 
 FormaDePago  = 3
-*oExcel.visible = .t.
+oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
 oExcel.Range("c7").Value = xl.pasocuil(datper.cuil)
 oExcel.Range("f7").Value = ALLTRIM(datper.cbu)
@@ -29,7 +34,7 @@ tf.Writeline(linea)
 *STRTOFILE(linea,"C:\sueldos\linea2.txt")
 
 oExcel.Sheets(3).Select
-*oExcel.visible = .t.
+oExcel.visible = .t.
 oExcel.Range("b5").Value = ALLTRIM("'03")
 SELECT * FROM 92020 WHERE legajo = Varlegajo.and. liquida =3  ORDER BY concepto INTO CURSOR sueldo
 fila = 5
@@ -50,8 +55,10 @@ SCAN
    IF sueldo.aporte <> 0
       oExcel.cells(fila,7) = TRANSFORM(sueldo.aporte,"999999.99")
       oExcel.cells(fila,8)="C"
-      IF sueldo.concepto = 4 .OR. sueldo.concepto = 7
+      IF sueldo.concepto = 4 .OR. sueldo.concepto = 7 .OR. sueldo.concepto = 22
          oExcel.cells(fila,8)="D"
+         VarSue = sueldo.aporte * -1
+         oExcel.cells(fila,7) = TRANSFORM(VarSue,"999999.99")
       ENDIF
    ENDIF
    IF sueldo.sinaporte <> 0
@@ -123,7 +130,7 @@ ENDIF
 linea = oExcel.Range("AW5").value
 tf.Writeline(linea)
 tf.close 
-*oExcel.visible = .t.
+oExcel.visible = .t.
 
 
 

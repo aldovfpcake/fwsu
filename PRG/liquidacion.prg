@@ -59,7 +59,7 @@ lSuccess=CURSORSETPROP("Buffering", 3, "curliq")
 IF lSuccess = .f.
     =MESSAGEBOX("Operation NOT successful!",0,"Operation Status")
 ENDIF
-_screen.Visible = .F.
+_screen.Visible = .f.
 SELECT * FROM CODSUEL ORDER BY CONCEPTO INTO CURSOR CONCEPTOS   
 SET EXCLUSIVE ON
 SELECT curliq
@@ -68,7 +68,7 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 9
+vmes = 10
 vano = 2020
 *********************************************************
 IF seteo = 6
@@ -76,7 +76,7 @@ IF seteo = 6
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "SETIEMBRE 2020" +VarStringDe ,vmes,vano,emp
+DO FORM liquidacion WITH "OCTUBRE 2020" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

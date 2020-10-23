@@ -29,7 +29,7 @@ s.Setactividad(ACTIVIDAD)
  aporteadicionalobrs="000000.00"
  *  1 empresa inciso b
  *  4 empresa inciso  a
- tipoempresa= "1"
+ tipoempresa= "4"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)
   vvbas  = sac+horasextra+basico+vacaciones+premios

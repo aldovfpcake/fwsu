@@ -1,0 +1,36 @@
+SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
+SET EXCLUSIVE OFF
+SET DELETED ON
+CLOSE TABLES all
+*SET PATH TO c:\suerut\empre1
+x=CREATEOBJECT('configurar')
+x.Seteopat(1)
+fso = CreateObject('Scripting.FileSystemObject')
+tf = fso.CreateTextFile('c:\sueldos\ls.txt', .t.)
+tf.close
+
+
+DIMENSION LEGAJOS[3]
+
+LEGAJOS[1]=441
+LEGAJOS[2]=442
+LEGAJOS[3]=444
+LEGAJOS[4]=445
+LEGAJOS[5]=448
+LEGAJOS[6]=449
+LEGAJOS[7]=465
+LEGAJOS[8]=484
+LEGAJOS[9]=487
+LEGAJOS[10]=525
+
+
+
+
+
+
+VarCont = 1
+FOR ND = 1 TO 10
+    DO EXCELLIBROB WITH LEGAJOS[ND],VarCont
+    VarCont= VarCont+1
+
+NEXT
