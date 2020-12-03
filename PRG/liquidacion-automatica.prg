@@ -40,7 +40,7 @@ x.Seteopat(1)
  lq.cargobase
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,5,1,3)
 * INSERT INTO curliq(legajo,concepto,cantidad,liquida)values(lq.wlegajo,6,1,3) 
- lq.InsertarConceptoBis(401,tabhoras.comida)
+*
  lq.InsertarConceptoBis(403,tabhoras.comida)
  lq.InsertarConceptoBis(6,tabhoras.horcien)
  lq.InsertarConceptoBis(5,tabhoras.horcta)
@@ -102,7 +102,7 @@ x.Seteopat(1)
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
 REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
-grabarliq()
+*grabarliq()
 * grabatabla()
 * grabacincuenta()
  *grabacien() 

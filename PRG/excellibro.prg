@@ -8,8 +8,8 @@ oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
 oExcel.Workbooks.Open(MiArchivoExcel)
 fso = CreateObject('Scripting.FileSystemObject')
-*tf = fso.CreateTextFile('c:\sueldos\ls.txt', .t.)
- tf = fso.OpenTextFile("c:\sueldos\ls.txt",8,0)
+ tf = fso.CreateTextFile('c:\sueldos\ls.txt', .t.)
+* tf = fso.OpenTextFile("c:\sueldos\ls.txt",8,0)
 
 
 oExcel.Sheets(1).Select
@@ -17,11 +17,11 @@ oExcel.Sheets(1).Select
 linea =   oExcel.Range("J9").value
 tf.Writeline(linea)
 oExcel.Sheets(2).Select
-VarLegajo = 890
+VarLegajo = 195
 datper(VarLegajo)
 xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
-FechaDePago = "20201002" 
+FechaDePago = "20201102" 
 FormaDePago  = 3
 oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
@@ -36,7 +36,10 @@ tf.Writeline(linea)
 oExcel.Sheets(3).Select
 oExcel.visible = .t.
 oExcel.Range("b5").Value = ALLTRIM("'03")
-SELECT * FROM 92020 WHERE legajo = Varlegajo.and. liquida =3  ORDER BY concepto INTO CURSOR sueldo
+*SELECT * FROM 102020 WHERE legajo = Varlegajo.and. liquida =2  ORDER BY concepto INTO CURSOR sueldo
+SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM B112020 WHERE LEGAJO =VarLegajo  .AND. LIQUIDA = 2 GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO
+BROWSE
+
 fila = 5
 SCAN
    oExcel.cells(fila,2).Value = ALLTRIM("'03")

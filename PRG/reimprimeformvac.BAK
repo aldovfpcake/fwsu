@@ -12,11 +12,17 @@ ENDDO
 
 Varlegajo = VAL(VVARCHI)
 
-SELECT legajo,nombre,documento FROM personal WHERE legajo = Varlegajo INTO CURSOR lper
-SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2018 INTO CURSOR lvc
-SELECT l.legajo,l.nombre,l.documento,s.desde,s.hasta,s.dias,s.ano FROM lper l INNER JOIN lvc s ON l.legajo = s.legajo;
+* SELECT legajo,nombre,documento,cuil FROM personal WHERE legajo = Varlegajo INTO TABLE lper
+*SELECT legajo,nombre,documento,cuil FROM personal INTO CURSOR tabla
+*SELECT legajo,nombre,documento,cuil FROM tabla WHERE legajo = Varlegajo INTO CURSOR lper
+*SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2020 INTO CURSOR lvc
+*SELECT l.legajo,l.nombre,l.documento,l.cuil,s.desde,s.hasta,s.dias,s.ano FROM lper l INNER JOIN lvc s ON l.legajo = s.legajo;
 into CURSOR vacaciones
+
+SELECT l.legajo,l.nombre,l.documento,l.cuil,s.desde,s.hasta,s.dias,s.ano FROM personal l INNER JOIN vacaci s ON l.legajo = Varlegajo AND s.legajo =Varlegajo  AND s.ano = 2020 into CURSOR vacaciones
+
+
 *DO FOXYPREVIEWER.APP 
-FOR i = 1 TO 2
-REPORT FORM FORMVAC PREVIEW  
-NEXT 
+*FOR i = 1 TO 2
+REPORT FORM FORMVAC TO PRINTER
+*NEXT 

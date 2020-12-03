@@ -64,5 +64,5 @@ s.Setactividad(ACTIVIDAD)
   tf.WriteLine(linea)
 
 ENDSCAN
-
+WAIT WINDOW "Proceso Terminado"
 tf.close

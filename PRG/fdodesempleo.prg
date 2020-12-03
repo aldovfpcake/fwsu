@@ -7,15 +7,16 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 LOCAL ms,an,artxt
-ms = 1
-an = 2019
+ms = 3
+an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
  UPDATE repcab SET mes = op.nombres(ms),;
                       ano = an
+  
  PUBLIC Vporcj
- IF ms =< 11 .and. an = 2019
+ IF ms =< 11 .and. an = 2019 .or. ms=12 .and. an = 2018
     rp.fdodes  =0.12
     Vporcj     =0.12
  ELSE

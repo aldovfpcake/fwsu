@@ -102,7 +102,7 @@ x.Seteopat(1)
  
  *SET DEVICE TO PRINTER  c:\suerut\recibos
 REPORT FORM  RECIBOSUELDOAUTOM PREVIEW     
-*grabarliq()
+grabarliq()
 * grabatabla()
 * grabacincuenta()
  *grabacien() 

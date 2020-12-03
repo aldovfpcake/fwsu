@@ -24,7 +24,7 @@ xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
 FechaDePago = "20201002" 
 FormaDePago  = 3
-oExcel.visible = .t.
+*oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
 oExcel.Range("c7").Value = xl.pasocuil(datper.cuil)
 oExcel.Range("f7").Value = ALLTRIM(datper.cbu)
@@ -36,8 +36,13 @@ tf.Writeline(linea)
 
 oExcel.Sheets(3).Select
 oExcel.Range("b5").Value = ALLTRIM("'03")
-SELECT * FROM 92020 WHERE legajo = Varlegajo.and. liquida =3  ORDER BY concepto INTO CURSOR sueldo
+SELECT * FROM B102020 WHERE legajo = Varlegajo ORDER BY concepto INTO CURSOR sueldo
 fila = 5
+
+IF EMPTY(datper.cuil)
+   MESSAGEBOX( "Error Cuil No Existe" + datper.nombre + " " + STR(Varlegajo,4),0,"AT")
+ENDIF
+
 SCAN
    oExcel.cells(fila,2).Value = ALLTRIM("'03")
    oExcel.cells(fila,3) =xl.pasocuil(datper.cuil)
@@ -52,7 +57,15 @@ SCAN
      oExcel.cells(fila,4) = sueldo.concepto
    ENDIF
    
+   IF sueldo.concepto = 8
+      oExcel.cells(fila,4) = 9
+   ELSE       
+     oExcel.cells(fila,4) = sueldo.concepto
+   ENDIF
    
+   IF SUELDO.CONCEPTO = 450
+      MESSAGEBOX( "Concepto 450" + datper.nombre + " " + STR(Varlegajo,4),0,"AT")
+   ENDIF
    
    IF sueldo.cantidad > 100
        oExcel.cells(fila,5) = "000"
@@ -154,16 +167,9 @@ RELEASE VarLegajo
 
 FUNCTION datper
 PARAMETERS xleg
-SELECT * FROM personal WHERE legajo= xleg INTO CURSOR datper
-
-
-
+SELECT * FROM bpersonal WHERE legajo= xleg INTO CURSOR datper
 
 RETURN .t.
 
 
-FUNCTION SUELDO
-PARAMETERS xleg
-SELECT * FROM 92020 WHERE legajo = xleg .and. liquida = 3 INTO CURSOR sueldo
-RETURN .t.
 

@@ -27,8 +27,12 @@ SCAN
 	x.buscocategoria
 	x.promedio
 	x.calcuvac
-    replace listap.valorva WITH (x.wimporte/24)
-
+   * replace listap.valorva WITH (x.wimporte/24)
+    
+    SELECT legajo, SUM(aporte)  as sueldo FROM 72020 WHERE legajo = listap.legajo GROUP BY legajo INTO CURSOR SU
+    replace listap.valorva WITH SU.SUELDO
+    SELECT LISTAP
+    
 ENDSCAN 
 browse
 

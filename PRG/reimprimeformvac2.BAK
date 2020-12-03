@@ -9,8 +9,8 @@ DO WHILE EMPTY(VVARCHI)
 ENDDO
 
 Varlegajo = VAL(VVARCHI)
-USE vacaci
-browse
+
+
 
 *SELECT legajo,nombre,documento FROM personal WHERE legajo = Varlegajo INTO TABLE lper
 *SELECT vacaci.legajo,vacaci.desde, vacaci.hasta,vacaci.dias,vacaci.ano FROM vacaci WHERE legajo = Varlegajo .and. ano = 2018 INTO CURSOR lvc

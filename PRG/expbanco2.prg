@@ -25,7 +25,7 @@ SUM sntecob TO wtotal
 *                    
 WAIT "presione"
 GO top
-remplazo()  
+*remplazo()  
 cad = '30-51640352-3'+CHR(9)+ STR(treg,4)
 
 
@@ -61,7 +61,7 @@ FUNCTION remplazo
 
  SELECT SUE3
  SCAN
-     SELECT LEGAJO,CUIL FROM PERSONAL WHERE LEGAJO = SUE3.CHAPA;
+     SELECT LEGAJO,CUIL FROM f:\sueldos\legajos WHERE LEGAJO = SUE3.CHAPA;
      INTO CURSOR LISTAP
      SELECT SUE3
      REPLACE  SUE3.CUIL WITH LISTAP.CUIL 

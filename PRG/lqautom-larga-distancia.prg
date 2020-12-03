@@ -1,3 +1,4 @@
+PARAMETERS Varleg
 SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
 SET CLASSLIB TO C:\FWSU\CLASES\RH
 SET EXCLUSIVE OFF
@@ -15,11 +16,11 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 9
+ lq.wmes     = 11
  lq.wano     = 2020
  lq.wempresa  = 1
 **************************************
- LOCAL varLeg
+* LOCAL varLeg
  PUBLIC fechapago,monto,nombremes,ano,banco,fecpjub,DiferSueldo
  fechapago = " "
  monto = " "
@@ -30,11 +31,11 @@ x.Seteopat(1)
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "92020"
+ archliq= "112020"
  
  ************************
  lq.wdisplaynove = .t.
- lq.wlegajo  = lagardi.legajo
+ lq.wlegajo  = Varleg
  lq.wtipoliq  = 3
  lq.buscolegajo
  lq.cargobase
@@ -49,7 +50,7 @@ x.Seteopat(1)
    lq.feriadonotra
  ENDIF
  
- IF lagardi.knm <> 0
+IF lagardi.knm <> 0
     insertar(17,lagardi.knm)
  ENDIF
  
@@ -129,6 +130,7 @@ x.Seteopat(1)
  *SET DEVICE TO PRINTER  c:\suerut\recibos
 *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
 grabarliq()
+*grabar2()
 *borrar()
  return
 
@@ -187,3 +189,14 @@ return
  **************************************
  DELETE FROM &ARCHLIQ WHERE legajo = lq.wlegajo .and. liquida = 3 
  ?"BORRANDO LIQUIDACION.................." + STR(lq.wlegajo,4)
+ 
+ 
+ *******************************
+ FUNCTION GRABAR2
+ *****************************
+ SELECT CURLIQ.LEGAJO,CURLIQ.CONCEPTO FROM &ARCHLIQ  INTO CURSOR EXISTE
+ ?  _TALLY 
+ 
+ 
+ 
+ 

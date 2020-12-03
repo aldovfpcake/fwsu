@@ -8,9 +8,9 @@ SET DELETED ON
 x=CREATEOBJECT('configurar')
 rh = CREATEOBJECT('legajoper')
 x.Seteopat(1)
-SELECT legajo,nombre,fechaing,antigant,depart,rh.calcuant(CTOD('31-12-2019'),fechaing) as antg,;
-antd(rh.calcuant(CTOD('31-12-2018'),fechaing),antigant),;
-rh.calcuvac(antd(rh.calcuant(CTOD('31-12-2019'),fechaing),antigant)),(legajo/0) as valorva;
+SELECT legajo,nombre,fechaing,antigant,depart,rh.calcuant(CTOD('31-12-2020'),fechaing) as antg,;
+antd(rh.calcuant(CTOD('31-12-2020'),fechaing),antigant),;
+rh.calcuvac(antd(rh.calcuant(CTOD('31-12-2020'),fechaing),antigant)),(legajo/0) as valorva;
 FROM personal WHERE activo = "A" INTO CURSOR listap readwrite
  BROWSE
  

@@ -23,7 +23,7 @@ SCAN
     x.wlegajo = listap.legajo
 	x.buscolegajo
 	x.wano    = 2019
-	x.wmes     = 10 
+	x.wmes     = 5
 	x.buscocategoria
 	x.promedio
 	x.calcuvac

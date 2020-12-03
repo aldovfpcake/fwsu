@@ -30,10 +30,24 @@ DO case
 
    
 ENDCASE
-   		
-
-OPEN DATABASE SUELDOS SHARED
+LOCAL ERROP   		
+ERROP = 0
+TRY
+    OPEN DATABASE SUELDOS SHARED  
 *OPEN DATABASE C:\SUERUT\DEMO\SUELDOS
+CATCH TO E
+   
+    ERROP = 1
+    MESSAGEBOX("BASE DE DATOS NO DISPONIBLE",16,"Atención")
+    FINALLY
+    CLEAR EVENTS
+    
+ENDTRY
+IF ERROP = 1
+   RETURN
+ENDIF       
+   
+    
 
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
@@ -68,7 +82,7 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 10
+vmes = 11
 vano = 2020
 *********************************************************
 IF seteo = 6
@@ -76,7 +90,7 @@ IF seteo = 6
 ELSE
    VarStringDe = " "
 ENDIF      
-DO FORM liquidacion WITH "OCTUBRE 2020" +VarStringDe ,vmes,vano,emp
+DO FORM liquidacion WITH "NOVIEMBRE 2020" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

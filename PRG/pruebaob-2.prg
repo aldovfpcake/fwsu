@@ -1,35 +1,45 @@
-SET PATH TO F:\SUELDOS\EMPRE1
+PARAMETERS vvarchi,Varlegajo,VarCtdias
+SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
+SET EXCLUSIVE OFF
 SET DELETED ON
-SET EXCLUSIVE OFF  
-SET CLASSLIB TO c:\fwsu\clases\rh
+CLOSE TABLES all
+*SET PATH TO c:\suerut\empre1
+x=CREATEOBJECT('configurar')
+x.Seteopat(1)
+SET CLASSLIB TO rh 
+
+
+
 PUBLIC xs as Object
-PUBLIC MESES[6],VardiasVac,VarPromedio,Vartotal
+PUBLIC MESES[6],VardiasVac,VarPromedio,Vartotal,VarBasico
 
 VVARCHI = " "
-DO WHILE EMPTY(VVARCHI)
-   VVARCHI = INPUTBOX("Ingrese legajo)","Ingrese",VVARCHI,5600)
-ENDDO
+*DO WHILE EMPTY(VVARCHI)
+*   VVARCHI = INPUTBOX("Ingrese legajo)","Ingrese",VVARCHI,5600)
+*ENDDO
 
-Varlegajo = VAL(VVARCHI)
+*Varlegajo = VAL(VVARCHI)
 
 
 
-VVARCHI = " "
-DO WHILE EMPTY(VVARCHI)
-   VVARCHI = INPUTBOX("Ingrese dias de vacaciones","Ingrese",VVARCHI,5600)
-ENDDO
-MESES[1] = "MARZO"
-MESES[2] = "FEBRERO"
-MESES[3] = "ENERO"
-MESES[4] = "DICIEMBRE"
-MESES[5] = "NOVIEMBRE"
+*VVARCHI = " "
+*DO WHILE EMPTY(VVARCHI)
+*   VVARCHI = INPUTBOX("Ingrese dias de vacaciones","Ingrese",VVARCHI,5600)
+*ENDDO
+MESES[1] = "MAYO"
+MESES[2] = "JUNIO"
+MESES[3] = "JULIO"
+MESES[4] = "AGOSTO"
+MESES[5] = "SETIEMBRE"
 MESES[6] = "OCTUBRE"
 xs =  CREATEOBJECT("detalleliqvac",Varlegajo,1)
-VardiasVac = VAL(VVARCHI)
-Vartotal    = informe.s12+  informe.s11 + informe.s10+ informe2.s1+ informe2.s2+informe2.s3
-VarPromedio = ROUND((informe.s12+  informe.s11 + informe.s10+ informe2.s1+ informe2.s2+informe2.s3)/6,2)
+VarBasico = xs.basico
+*VardiasVac = VAL(VVARCHI)
+VardiasVac = VarCtdias
+Vartotal    = informe.s5+  informe.s6 + informe.s7+ informe.s8+ informe.s9+informe.s10
+VarPromedio = ROUND((informe.s5+  informe.s6 + informe.s7+ informe.s8+ informe.s9+informe.s10 )/6,2)
 *MODIFY REPORT detallevac
 DO FOXYPREVIEWER.APP
-REPORT FORM detallevac NOCONSOLE  PREVIEW 
-RELEASE MESES,VardiasVac,Vartotal,VarPromedio
+REPORT FORM detallevac TO print 
+RELEASE MESES,VardiasVac,Vartotal,VarPromedio,VarBasico
 *CLOSE TABLES ALL

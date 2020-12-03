@@ -12,10 +12,11 @@ x.Seteopat(1)
 *ver()
 
 USE f:\sueldos\empre1\lagardi again
+GO top
 SCAN
-       
-       DO lqautom-larga-distancia
-       
+       ? "Largardi....:" + STR(lagardi.legajo,4)
+       DO lqautom-larga-distancia WITH lagardi.legajo
+        
     SELECT lagardi
 
 ENDSCAN

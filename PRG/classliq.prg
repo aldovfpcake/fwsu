@@ -367,12 +367,21 @@ Define Class LIQUIDACION As Custom
 	Endproc
 
 	Procedure buscolegajo
-		Select * From PERSONAL Where LEGAJO = This.wlegajo;
+		    *Select * From PERSONAL Where LEGAJO = This.wlegajo;
 			INTO Cursor CURPERSO
+		    SELECT * FROM personal WHERE activo = "A" INTO CURSOR lista
+		    SELECT * FROM lista WHERE legajo = this.wlegajo INTO CURSOR curperso
+		
+		
+		
 			
 		If CURPERSO.LEGAJO = 0
-			This.mensaje("Error legajo Inexistente en Archivo Personal " + Str(This.wlegajo,4))
-			This.wcancelar = .F.
+			*This.mensaje("Error legajo Inexistente en Archivo Personal " + Str(This.wlegajo,4))
+			*This.wcancelar = .F.
+			This.wfechaingreso  = curperso.fechaing
+			This.wantiganterior = curperso.antigant
+			This.wcategoria     = Ltrim(curperso.categoria) 
+		
 		Else
 			This.wfechaingreso  = CURPERSO.fechaing
 			This.wantiganterior = CURPERSO.antigant
@@ -384,7 +393,16 @@ Define Class LIQUIDACION As Custom
            
     
 
-	Endproc
+	ENDPROC
+	
+	PROCEDURE busconombre
+	    WAIT WINDOW "Buscando por nombre" + vpersolinea.nombre
+	    
+	
+	
+	
+	endproc
+	
 
 
 	Procedure buscocategoria
@@ -604,7 +622,12 @@ Define Class LIQUIDACION As Custom
 	ENDCASE
     RETURN wimporte             
 
-
+    PROCEDURE SACPROP
+       
+    
+    
+    
+    ENDPROC
     
 
 
