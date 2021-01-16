@@ -23,6 +23,9 @@ DO case
    CASE emp = 3
         seteo = 3
    		ob.Seteopat(3)
+   CASE emp = 5
+        seteo = 5
+   		ob.Seteopat(5)
    CASE emp = 6
         ob.Seteopat(6)    
    CASE emp = 8
@@ -32,17 +35,17 @@ DO case
 ENDCASE
 LOCAL ERROP   		
 ERROP = 0
-TRY
-    OPEN DATABASE SUELDOS SHARED  
-*OPEN DATABASE C:\SUERUT\DEMO\SUELDOS
-CATCH TO E
+*TRY
+     *OPEN DATABASE SUELDOS SHARED  
+     *OPEN DATABASE C:\SUERUT\DEMO\SUELDOS
+*CATCH TO E
    
-    ERROP = 1
-    MESSAGEBOX("BASE DE DATOS NO DISPONIBLE",16,"Atención")
-    FINALLY
-    CLEAR EVENTS
+*    ERROP = 1
+*    MESSAGEBOX("BASE DE DATOS NO DISPONIBLE",16,"Atención")
+*    FINALLY
+ *   CLEAR EVENTS
     
-ENDTRY
+*ENDTRY
 IF ERROP = 1
    RETURN
 ENDIF       
@@ -58,7 +61,7 @@ SELECT * FROM personal WHERE activo = "A" ORDER BY LEGAJO INTO CURSOR vpersoline
 *IF .NOT. USED('B92013')
 *    SELECT 0
 *    USE B92013
-*ENDIF
+*ENDI
 IF .NOT. USED('comentarios')
     SELECT 0
     USE comentarios NODATA
@@ -82,15 +85,22 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 11
-vano = 2020
+vmes = 1
+vano = 2021
 *********************************************************
+LOCAL VarStringDe
 IF seteo = 6
    VarStringDe = "Modo Demo"
 ELSE
    VarStringDe = " "
-ENDIF      
-DO FORM liquidacion WITH "NOVIEMBRE 2020" +VarStringDe ,vmes,vano,emp
+ENDIF
+
+IF seteo = 5
+   VarStringDe = "..............Sueldos En C:\suerut\empre1"
+ENDIF
+
+      
+DO FORM liquidacion WITH "ENERO 2021" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

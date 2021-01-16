@@ -1,10 +1,10 @@
 SET PROCEDURE TO c:\fwsu\prg\classliq
-SET PATH TO C:\SUERUT\EMPRE1
+SET PATH TO F:\EMPRE1
 
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 
-liquida = "102020"
+liquida = "122020"
 *SELECT legajo,aporte,sinaporte,descuento,liquida from;
  &liquida WHERE aporte+sinaporte+descuento = 0
  

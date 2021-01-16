@@ -5,23 +5,23 @@ SET PATH TO F:\SUELDOS\EMPRE1
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
-USE f:\sueldos\empre1\lagardi
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver11.xls"
-*MiArchivoExcel = GETFILE()
+USE f:\empre1\lagardi
+*MiArchivoExcel = "Z:\ALDO\AVELLANEDA-LD\aver9.xls"
+MiArchivoExcel = GETFILE()
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
 oExcel.Workbooks.Open(miExcel)
 oExcel.Sheets(1).Select
 clear
-*DO borra
+DO borra
 
 STORE 0 TO  VarKNM, VarKMCIEN, VarKMSUR2, VarKMSUR4, VarCTRLD, VarFRES, VarCRUCE, VarCARGAPEL 
 CLEAR
  
 
  
-FOR i=14 TO 47       
+FOR i=12 TO 48       
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -30,7 +30,7 @@ FOR i=14 TO 47
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
     *****************VERIFICAR
-    VarCARGAPEL   = 0
+    VarCARGAPEL   = 1
     **************************
     IF .not. ISNULL(Varlegajo)
             

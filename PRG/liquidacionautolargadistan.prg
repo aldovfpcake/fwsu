@@ -11,7 +11,7 @@ x.Seteopat(1)
 *borrar()
 *ver()
 
-USE f:\sueldos\empre1\lagardi again
+USE f:\empre1\lagardi again
 GO top
 SCAN
        ? "Largardi....:" + STR(lagardi.legajo,4)

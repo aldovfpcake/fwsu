@@ -34,7 +34,7 @@ x.Seteopat(1)
  DiferSueldo = 0
  archliq= "62020"
  lq.wdisplaynove = .t.
- lq.wlegajo  = sueldosfijos.legajo
+ lq.wlegajo  = lista.legajo
  lq.wtipoliq = 4
  lq.buscolegajo
  lq.cargobase

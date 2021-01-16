@@ -2,15 +2,15 @@ SET TALK OFF
 SET DELETED ON
 *SET PATH TO F:\SUELDOS\EMPRE1
 *SET PATH TO C:\SUERUT\EMPRE3
-SET PATH TO F:\SUELDOS\EMPRE2
+SET PATH TO F:\EMPRE1
 SET EXCLUSIVE OFF
 
 CREATE CURSOR sueldo (haber n(10,2),sinaporte n(10,2),descuento n(10,2),neto n(10,2),km n(10,2),ctrol n(10,2),mes n(2),tipo n(2),ano n(4)) 
 clear
 varano = 0
 *historial de sueldos a partir del año (varano)
-varano = 1993
-vvlegajo = 98
+varano = 2019
+vvlegajo = 796
 clear
 
 FOR I = 1 TO 11
@@ -24,7 +24,7 @@ FOR I = 1 TO 11
    IF FILE(archivo + '.dbf')
     * 1 consulta comun
     * VER CONCEPTO 14
-    * SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,CANTIDAD,0))AS KM,SUM(IIF(CONCEPTO =31,APORTE,0))AS ctrld,;
+     SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,CANTIDAD,0))AS KM,SUM(IIF(CONCEPTO =31,APORTE,0))AS ctrld,;
      SUM(IIF(CONCEPTO =130 .OR. CONCEPTO =99,0,DESCUENTO))as descuento,liquida FROM &archivo WHERE legajo = vvlegajo .and. liquida = 3 GROUP BY LIQUIDA INTO CURSOR liquida
     
     
@@ -36,7 +36,7 @@ FOR I = 1 TO 11
     * SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =17 .OR. CONCEPTO = 23,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
      SUM(DESCUENTO)as descuento,liquida FROM &archivo WHERE legajo = vvlegajo  GROUP BY liquida INTO CURSOR liquida
      
-     SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =31 .OR. CONCEPTO = 36 .OR. CONCEPTO = 42 .OR. CONCEPTO=306 .OR.CONCEPTO = 43,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
+    * SELECT SUM(aporte) as aporte ,SUM(sinaporte) as sinaporte,SUM(IIF(CONCEPTO =31 .OR. CONCEPTO = 36 .OR. CONCEPTO = 42 .OR. CONCEPTO=306 .OR.CONCEPTO = 43,APORTE,0))AS KM,SUM(IIF(CONCEPTO =14,APORTE,0))AS ctrld,;
      SUM(IIF(CONCEPTO =830,DESCUENTO,0))as bsas,SUM(IIF(CONCEPTO =870,DESCUENTO,0))as Ers,SUM(IIF(CONCEPTO =130 .OR. CONCEPTO =99,0,DESCUENTO))as descuento,liquida FROM &archivo WHERE legajo = vvlegajo .AND. LIQUIDA = 3 GROUP BY LIQUIDA INTO CURSOR liquida
      
     

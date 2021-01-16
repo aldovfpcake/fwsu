@@ -6,7 +6,7 @@ SET SQLBUFFERING ON
 SET SAFETY OFF
 SELECT 0
 
-OPEN DATABASE f:\sueldos\sueldos
+*OPEN DATABASE f:\sueldos\sueldos
 *archivo = "f:\sueldos\empre1\62014"
 *
 USE &archivo

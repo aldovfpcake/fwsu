@@ -7,7 +7,7 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 LOCAL ms,an,artxt
-ms = 3
+ms = 12
 an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
@@ -16,20 +16,22 @@ rp = CREATEOBJECT('reportesueldo')
                       ano = an
   
  PUBLIC Vporcj
- IF ms =< 11 .and. an = 2019 .or. ms=12 .and. an = 2018
+ IF ms =< 11 .and. an = 2019 .or. an = 2018
     rp.fdodes  =0.12
     Vporcj     =0.12
  ELSE
     rp.fdodes = 0.08
     Vporcj    = 0.08
  ENDIF
- WAIT WINDOW  "Fondo De Desempleo...."+STR(rp.fdodes,2,2)    
+  
+ WAIT WINDOW  "Fondo De Desempleo...."+STR(rp.fdodes,1,2)    
  
  rp.sindistincion
- DELETE FOR chapa = 255
+ DELETE FOR chapa = 255 .or. chapa = 256
   gensueldo()
             
- SELECT sue3          
+ SELECT sue3  
+       
  SUM FDODES TO VV
  WAIT WINDOW STR(VV,12,2)
  COUNT FOR sntecob <>0 TO treg
@@ -61,9 +63,9 @@ SCAN
   
 ENDSCAN	
 *@lin,0  say CHR(13)
-CLOSE ALL
+*CLOSE ALL
 SET DEVICE TO SCREEN
-CLOSE TABLES
+*CLOSE TABLES
 
 
 FUNCTION remplazo
@@ -88,9 +90,10 @@ SELECT legajo,SUM(IIF(concepto <> 18,aporte,0))as bruto FROM liquida GROUP BY le
 SUM bruto TO vv
 WAIT WINDOW  "Total bruto para fondo de Desempleo : "+ STR(vv,16,2)
 SCAN
-   UPDATE SUE3 SET SBRUTO = lista.bruto;
-          WHERE chapa = lista.legajo
-          
+   UPDATE SUE3 SET SBRUTO = lista.bruto,;
+                   FDODES = lista.bruto * Vporcj;      
+              WHERE chapa = lista.legajo
+              ?Vporcj
    SELECT lista
 
 ENDSCAN

@@ -58,7 +58,7 @@ Define Class LIQUIDACION As Custom
 
 	    IF this.wmes = 12 .and. this.wtipoliq = 3
 		   IF this.wempresa = 1
-              IF this.wlegajo <> 755
+              IF this.wlegajo <> 755 .or. this.wlegajo <> 600
 		         this.cargodiacam
 		      ENDIF
            ENDIF
@@ -1024,22 +1024,25 @@ DEFINE CLASS configurar AS liquidacion
        PARAMETERS cpath
        DO CASE
           CASE cpath = 1
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
-          CASE cpath = 2
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES  
-          CASE cpath = 3
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS;F:\empre1;f:\;
+                 this.abrobase
+               *  OPEN DATABASE f:\sueldos.dbc
+		  CASE cpath = 2
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES;F:\EMPRE2;F:\  
+                this.abrobase
+		  CASE cpath = 3
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRESA-3;F:\SUELDOS;C:\FWSU\CLASES                 
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
-          CASE cpath = 6
+               this.abrobase
+		  CASE cpath = 6
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\suerut\demo;F:\sueldos
           CASE cpath = 7
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE3
           CASE cpath = 8
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\DEMO      
-                
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\DEMO     
                   
        ENDCASE
     Endproc
@@ -1047,6 +1050,7 @@ DEFINE CLASS configurar AS liquidacion
     PROCEDURE Abrobase
        TRY 
          OPEN DATABASE SUELDOS SHARED
+          
        CATCH TO Err
          this.mensaje ("Error No se Puede Abrir la Base De Datos")
        ENDTRY   

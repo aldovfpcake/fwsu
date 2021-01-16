@@ -25,7 +25,7 @@ SUM sntecob TO wtotal
 *                    
 WAIT "presione"
 GO top
-remplazo()  
+*remplazo()  
 cad = '30-51640352-3'+CHR(9)+ STR(treg,4)
 
 

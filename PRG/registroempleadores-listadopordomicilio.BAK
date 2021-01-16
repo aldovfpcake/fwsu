@@ -18,7 +18,7 @@ FROM PERSONAL WHERE ACTIVO ="A" .AND. DEPART = "LA BOCA" .AND. BETWEEN(calcedad(
 SELECT  legajo,calcedad(fechanaci) as edad ,sexo, estudios ;
 FROM PERSONAL WHERE ACTIVO ="A" .AND. DEPART = "LA BOCA" ORDER BY edad,estudios INTO CURSOR lis;
 
-select COUNT(legajo),estudios,sexo FROM lis GROUP BY estudios,sexo
+*select COUNT(legajo),estudios,sexo FROM lis GROUP BY estudios,sexo
 
 
 

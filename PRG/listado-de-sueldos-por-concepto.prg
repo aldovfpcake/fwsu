@@ -1,0 +1,18 @@
+SET PROCEDURE TO C:\FWSU\prg\CLASSLIQ
+SET EXCLUSIVE OFF
+SET DELETED ON
+CLOSE TABLES all
+*SET PATH TO c:\suerut\empre1
+x=CREATEOBJECT('configurar')
+x.Seteopat(1)
+SET CLASSLIB TO rh 
+LOCAL ms,an,VarConcepto
+ms = 12
+an = 2020
+VarConcepto = 654
+
+op= CREATEOBJECT('abretabla')
+op.optabla(ms,an)
+
+SELECT p.legajo,p.nombre,SUM(IIF(concepto=VarConcepto,descuento,0)) as ret FROM personal p INNER join;
+liquida s ON p.legajo = s.legajo GROUP BY p.legajo,p.nombre

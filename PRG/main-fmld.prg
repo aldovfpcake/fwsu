@@ -1,4 +1,5 @@
 SET EXCLUSIVE OFF
+SET PATH TO F:\EMPRE1
 SET DELETED ON
 DO FORM c:\fwsu\forms\fmlargadistancia.scx
 READ EVENTS

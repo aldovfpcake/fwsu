@@ -16,7 +16,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 11
+ lq.wmes     = 12
  lq.wano     = 2020
  lq.wempresa  = 1
 **************************************
@@ -31,7 +31,7 @@ x.Seteopat(1)
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "112020"
+ archliq= "122020"
  
  ************************
  lq.wdisplaynove = .t.

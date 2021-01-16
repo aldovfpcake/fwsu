@@ -29,7 +29,7 @@ s.Setactividad(ACTIVIDAD)
  aporteadicionalobrs="000000.00"
  *  1 empresa inciso b
  *  4 empresa inciso  a
- tipoempresa= "4"
+ tipoempresa= "1"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)
   vvbas  = sac+horasextra+basico+vacaciones+premios
@@ -64,5 +64,5 @@ s.Setactividad(ACTIVIDAD)
   tf.WriteLine(linea)
 
 ENDSCAN
-
+WAIT WINDOW "Proceso Terminado"
 tf.close

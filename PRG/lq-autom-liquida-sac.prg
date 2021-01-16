@@ -20,7 +20,7 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 6
+ lq.wmes     = 12
  lq.wano     = 2020
 **************************************
  LOCAL varLeg
@@ -32,7 +32,7 @@ x.Seteopat(1)
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
- archliq= "62020"
+ archliq= "122020"
  lq.wdisplaynove = .t.
  lq.wlegajo  = lista.legajo
  lq.wtipoliq = 4

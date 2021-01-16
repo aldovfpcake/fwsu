@@ -8,13 +8,13 @@ SET DATE ITALIAN
 SET REPROCESS TO AUTOMATIC
 SET MULTILOCKS ON
 SET DELETED ON
-OPEN DATABASE F:\SUELDOS\SUELDOS SHARED
+OPEN DATABASE F:\SUELDOS SHARED
 CLEAR
 *SET PATH TO t:\FWSU\FORMS;t:\FWSU\PRG;F:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS
 SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 ob.Seteo
-ob.Seteopat(1)
+ob.Seteopat(2)
 warchlq = "B92014"
 wconcep = 18
 *wlegajo = legajo
@@ -34,7 +34,7 @@ FOR z=1 TO ALEN(legajos)
   xb = CREATEOBJECT("lqsac")
   xb.wano = 2020
   xb.wlegajo = wlegajo
-  xb.wtiposac = 1
+  xb.wtiposac = 2
   xb.liquisac
   SELECT curliq
   replace aporte WITH (xb.WMEJOR)/2
@@ -59,7 +59,7 @@ FUNCTION liquisac
 *********************
 PARAMETERS wleg
 lq = CREATEOBJECT('liquidacion')
-lq.wmes     = 6
+lq.wmes     = 12
 lq.wano     = 2020
 lq.wtipoliq = 4
 lq.wlegajo = wleg
@@ -103,9 +103,9 @@ return
 *************************
 FUNCTION BORRAR
 ************************
-USE f:\sueldos\empre1\b92014 exclusive
+USE f:\empre2\b92014 exclusive
 ZAP
-INDEX on STR(concepto,4) TO f:\sueldos\empre1\b92014
+INDEX on STR(concepto,4) TO f:\empre1\b92014
 use
 
 
@@ -129,7 +129,7 @@ SELECT curliq
 ?"*************"
  
 SCAN
-   INSERT INTO f:\sueldos\empre1\62020 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
+   INSERT INTO f:\empre2\122020 (legajo,concepto,aporte,sinaporte,descuento,descrip,liquida) VALUES;
    (curliq.legajo,curliq.concepto,curliq.aporte,curliq.sinaporte,curliq.descuento,curliq.descrip,4)
 
 ENDSCAN

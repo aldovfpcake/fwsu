@@ -18,28 +18,27 @@ VVARCHI = " "
 *   VVARCHI = INPUTBOX("Ingrese legajo)","Ingrese",VVARCHI,5600)
 *ENDDO
 
-*Varlegajo = VAL(VVARCHI)
-
+*Varlegajo = 
 
 
 *VVARCHI = " "
 *DO WHILE EMPTY(VVARCHI)
 *   VVARCHI = INPUTBOX("Ingrese dias de vacaciones","Ingrese",VVARCHI,5600)
 *ENDDO
-MESES[1] = "MAYO"
-MESES[2] = "JUNIO"
-MESES[3] = "JULIO"
-MESES[4] = "AGOSTO"
-MESES[5] = "SETIEMBRE"
-MESES[6] = "OCTUBRE"
+MESES[1] = "JULIO"
+MESES[2] = "AGOSTO"
+MESES[3] = "SETIEMBRE"
+MESES[4] = "OCTUBRE"
+MESES[5] = "NOVIEMBRE"
+MESES[6] = "DICIEMBRE"
 xs =  CREATEOBJECT("detalleliqvac",Varlegajo,1)
 VarBasico = xs.basico
 *VardiasVac = VAL(VVARCHI)
 VardiasVac = VarCtdias
-Vartotal    = informe.s5+  informe.s6 + informe.s7+ informe.s8+ informe.s9+informe.s10
-VarPromedio = ROUND((informe.s5+  informe.s6 + informe.s7+ informe.s8+ informe.s9+informe.s10 )/6,2)
+Vartotal    = informe.s7+ informe.s8+ informe.s9+informe.s10+informe.s11+informe.s12
+VarPromedio = ROUND(((informe.s7+ informe.s8+ informe.s9+informe.s10+informe.s11+informe.s12)/6),2)
 *MODIFY REPORT detallevac
 DO FOXYPREVIEWER.APP
-REPORT FORM detallevac TO print 
+REPORT FORM detallevac  TO PRINT
 RELEASE MESES,VardiasVac,Vartotal,VarPromedio,VarBasico
 *CLOSE TABLES ALL

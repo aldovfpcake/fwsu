@@ -5,9 +5,9 @@ SET PATH TO F:\SUELDOS\EMPRE1
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
 
-USE f:\sueldos\empre1\lagardi
-MiArchivoExcel = "F:\ALDO\AVELLANEDA-LD\aver11.xls"
-*MiArchivoExcel = GETFILE()
+USE f:\empre1\lagardi
+*MiArchivoExcel = "Z:\ALDO\AVELLANEDA-LD\aver9.xls"
+MiArchivoExcel = GETFILE()
 oExcel = CreateObject("Excel.Application")
 oExcel.Workbooks.Open(MiArchivoExcel)
 oExcel.sheets(1).Select
@@ -21,7 +21,7 @@ CLEAR
  
 
  
-FOR i=14 TO 47       
+FOR i=12 TO 48       
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
