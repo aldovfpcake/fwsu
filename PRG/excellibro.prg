@@ -17,11 +17,11 @@ oExcel.Sheets(1).Select
 linea =   oExcel.Range("J9").value
 tf.Writeline(linea)
 oExcel.Sheets(2).Select
-VarLegajo = 195
+VarLegajo = 173
 datper(VarLegajo)
 xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
-FechaDePago = "20201102" 
+FechaDePago = "20210402" 
 FormaDePago  = 3
 oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
@@ -36,8 +36,8 @@ tf.Writeline(linea)
 oExcel.Sheets(3).Select
 oExcel.visible = .t.
 oExcel.Range("b5").Value = ALLTRIM("'03")
-*SELECT * FROM 102020 WHERE legajo = Varlegajo.and. liquida =2  ORDER BY concepto INTO CURSOR sueldo
-SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM B112020 WHERE LEGAJO =VarLegajo   GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO
+* SELECT * FROM B22021 WHERE legajo = Varlegajo.and. liquida =2  ORDER BY concepto INTO CURSOR sueldo
+SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM B32021 WHERE LEGAJO =VarLegajo   GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO READWRITE
 BROWSE
 
 fila = 5
@@ -69,8 +69,15 @@ SCAN
       oExcel.cells(fila,8)="C"
    ENDIF
    IF sueldo.descuento <> 0
-      oExcel.cells(fila,7) = TRANSFORM(sueldo.descuento,"999999.99")
-      oExcel.cells(fila,8)="D"
+      IF sueldo.descuento < 0
+         Vardes = 0
+         Vardes = sueldo.descuento * -1
+         oExcel.cells(fila,7) = TRANSFORM(Vardes,"999999.99")
+         oExcel.cells(fila,8)="C"
+      ELSE
+         oExcel.cells(fila,7) = TRANSFORM(sueldo.descuento,"999999.99")
+         oExcel.cells(fila,8)="D"
+      ENDIF   
    ENDIF
    linea = oExcel.cells(fila,10).value
    tf.Writeline(linea)   

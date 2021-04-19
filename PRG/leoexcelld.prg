@@ -4,7 +4,7 @@ SET ESCAPE ON
 SET PATH TO F:\SUELDOS\EMPRE1
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
-
+CLOSE TABLES ALL
 USE f:\empre1\lagardi
 *MiArchivoExcel = "Z:\ALDO\AVELLANEDA-LD\aver9.xls"
 MiArchivoExcel = GETFILE()
@@ -21,7 +21,7 @@ CLEAR
  
 
  
-FOR i=12 TO 48       
+FOR i=10 TO 45    
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -29,6 +29,52 @@ FOR i=12 TO 48
     VarCtrld      = oExcel.Cells(i,11).value  
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
+    VarKMSUR4     = oExcel.Cells(i,7).value 
+    
+    IF .NOT. ISNULL(VarKmsur2)
+      
+    ELSE
+       VarKmsur2 = 0
+    ENDIF
+    IF .NOT. ISNULL( Varknm)
+        
+    ELSE
+        Varknm = 0
+    ENDIF
+    
+    IF .NOT. ISNULL(VarKmcien)
+         
+    ELSE
+         VarKmcien = 0
+    ENDIF
+    
+    IF .NOT. ISNULL(VarCtrld)
+         * VarCtrld*1
+    ELSE
+          VarCtrld = 0
+    ENDIF    
+    
+    IF .NOT. ISNULL(VarFres)
+         *  VarFres*1
+    ELSE
+           VarFres = 0
+    ENDIF
+    
+    IF .NOT. ISNULL(VarKMSUR4)
+           * VarCruce*1
+    ELSE
+            VarKMSUR4 = 0
+    ENDIF 
+    
+    
+    
+    
+     IF .NOT. ISNULL(VarCruce)
+           * VarCruce*1
+    ELSE
+            VarCruce = 0
+    ENDIF 
+    
     *****************VERIFICAR
     VarCARGAPEL   = 1
     **************************
@@ -51,7 +97,7 @@ FOR i=12 TO 48
 
 NEXT
 WAIT WINDOW "Proceso Terminado"
-
+oExcel.quit()
 
 
 PROCEDURE errhand

@@ -1022,20 +1022,22 @@ DEFINE CLASS configurar AS liquidacion
     
     PROCEDURE SeteoPat
        PARAMETERS cpath
+        VarBased = " "
        DO CASE
           CASE cpath = 1
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS;F:\empre1;f:\;
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;F:\SUELDOS\EMPRE1;F:\SUELDOS;F:\empre1;f:\
                  this.abrobase
-               *  OPEN DATABASE f:\sueldos.dbc
+                 VarBased = "f:\sueldos.dbc"
 		  CASE cpath = 2
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRE2;F:\SUELDOS;C:\FWSU\CLASES;F:\EMPRE2;F:\  
                 this.abrobase
 		  CASE cpath = 3
-                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;F:\SUELDOS\EMPRESA-3;F:\SUELDOS;C:\FWSU\CLASES                 
+                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE2
           CASE cpath = 4
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;I:\SUELDOS\EMPRE1;I:\SUELDOS     
           CASE cpath = 5
                SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\SUERUT\EMPRE1 
+               VarBased = "C:\SUERUT\EMPRE1\SUELDOS.DBC"
                this.abrobase
 		  CASE cpath = 6
                 SET PATH TO C:\FWSU\FORMS;C:\FWSU\PRG;C:\FWSU\CLASES;C:\suerut\demo;F:\sueldos
@@ -1048,11 +1050,13 @@ DEFINE CLASS configurar AS liquidacion
     Endproc
 
     PROCEDURE Abrobase
+     PARAMETERS VarBase
        TRY 
-         OPEN DATABASE SUELDOS SHARED
+         OPEN DATABASE &VarBase
           
        CATCH TO Err
-         this.mensaje ("Error No se Puede Abrir la Base De Datos")
+         this.mensaje ("Error No se Puede Abrir la Base De Datos ")
+         FINALLY
        ENDTRY   
 	ENDPROC
 	

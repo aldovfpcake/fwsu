@@ -23,9 +23,9 @@ tf.close
 *LEGAJOS[9]=487
 *LEGAJOS[10]=525
 
-*SELECT legajo,nombre,depart, legajo=0 as marca FROM C:\SUERUT\EMPRE1\personal WHERE activo = "A" ORDER BY depart;
+*SELECT legajo,nombre,depart, legajo*0 as marca FROM C:\SUERUT\EMPRE1\personal WHERE activo = "A" ORDER BY depart;
 INTO TABLE C:\SUERUT\EMPRE1\listafp
-*
+*BROWSE
 * familiar adicional
 *SELECT distin p.legajo,p.nombre,m.concepto,m.unidades FROM personal p INNER JOIN maper m;
 *ON p.legajo = m.legajo WHERE p.activo= "A" .AND. m.concepto = 855
@@ -39,6 +39,7 @@ USE C:\SUERUT\EMPRE1\listafp
 *REPLACE ALL MARCA WITH .F.
 *LOCATE FOR LEGAJO = 864
 *
+browse
 GO TOP
 *FOR IND = 1 TO 50
 *    IF MARCA = 0
@@ -47,24 +48,14 @@ GO TOP
 *    SKIP
 
  *NEXT
+Clear
 GO TOP
 *BROWSE FOR LEGAJO > 809
-LOCAL Contador, Sec
-Contador = 1
-Sec = 4
-
-*DO WHILE .NOT. EOF()
-*   IF marca = 0 .and. contador <=50
-*      replace marca WITH Sec
-*      Contador = Contador + 1
-*      
-*   ENDIF
-*   skip
-*ENDDO
+tabla()
 
 
 VarCont = 1
-SCAN FOR MARCA = 1
+SCAN FOR MARCA = 6
       ?LEGAJO
       
       DO EXCELLIBROB WITH LISTAFP.LEGAJO,VarCont
@@ -75,4 +66,20 @@ ENDSCAN
 ?VarCont
 
 
+**********************
+FUNCTION tabla
+*********************
+LOCAL Contador, Sec
+Contador = 1
+Sec = 6
 
+
+DO WHILE .NOT. EOF()
+  IF marca = 0 .and. contador <=40
+      replace marca WITH Sec
+      Contador = Contador + 1
+     
+   ENDIF
+   skip
+ENDDO
+RETURN .t.

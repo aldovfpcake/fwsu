@@ -7,8 +7,8 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 LOCAL ms,an,artxt
-ms = 12
-an = 2020
+ms = 1
+an = 2021
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
@@ -27,7 +27,7 @@ rp = CREATEOBJECT('reportesueldo')
  WAIT WINDOW  "Fondo De Desempleo...."+STR(rp.fdodes,1,2)    
  
  rp.sindistincion
- DELETE FOR chapa = 255 .or. chapa = 256
+ *DELETE FOR chapa = 255 .or. chapa = 256
   gensueldo()
             
  SELECT sue3  
@@ -91,9 +91,12 @@ SUM bruto TO vv
 WAIT WINDOW  "Total bruto para fondo de Desempleo : "+ STR(vv,16,2)
 SCAN
    UPDATE SUE3 SET SBRUTO = lista.bruto,;
-                   FDODES = lista.bruto * fdodes;      
+                   FDODES = lista.bruto * 0.08;      
               WHERE chapa = lista.legajo
-              ?fdodes
+              
+    IF SUE3.CHAPA = 256          
+         REPLACE SUE3.FDODES WITH lista.bruto *0.12     
+    ENDIF          
    SELECT lista
 
 ENDSCAN

@@ -8,8 +8,8 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(2)
 SET CLASSLIB TO rh 
 lg = CREATEOBJECT("legajoper")
-ms = 12
-an = 2020
+ms = 3
+an = 2021
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 *select p.cuil,sum(s.aporte),p.fechaing,p.codipos,p.categoria from personal p;

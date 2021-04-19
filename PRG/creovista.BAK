@@ -3,17 +3,17 @@ SET PROCEDURE TO C:\FWSU\PRG\CLASSLIQ
 Obj = CREATEOBJECT('configurar')
 Obj.SeteoPat(5)
 LOCAL arch,liq,x,vi,VarFichero
-arch = "12021"
+arch = "42021"
 liq = arch
 X = FILETOSTR("C:\FWSU\PRG\CRVI.PRG")
-
-VarFichero= arch+".dbf"
+CLEAR
+*VarFichero= "F:\EMPRE1\"+arch+".dbf"
 ?VarFichero
 
-IF .NOT. FILE(VarFichero)
-   WAIT WINDOW "El Fichero No Existe"
-   COPY FILE liq.dbf TO &VarFichero
-ENDIF   
+*IF .NOT. FILE(VarFichero)
+*   WAIT WINDOW "El Fichero No Existe"
+*   COPY FILE liq.dbf TO &VarFichero
+*ENDIF   
 
 
 ********************

@@ -6,15 +6,17 @@ ob = CREATEOBJECT("configurar")
 objm =CREATEOBJECT("montoescrito")
 *ob.Seteo
 PUBLIC nombremes,vano
-ob.Seteopat(2)
+ob.Seteopat(3)
+*SET PATH TO C:\SUERUT\EMPRE2
+
 ********************************
-Varlegajo = 248
-vfechapago = "04-10-2020"
-vmes = 9
-vano = 2020
-vfecpjub = "9-09-2020"
+Varlegajo = 249
+vfechapago = "19-02-2021"
+vmes = 2
+vano = 2021
+vfecpjub = "17-02-2021"
 vmonto = " "
-arch  = "92020"
+arch  = "22021"
 banco = "HSBC"
 ************************
 LOCAL Varchi as Character
@@ -26,7 +28,7 @@ nombremes = objm.nombremes(vmes)
 ano  = vano
 fecpjub = vfecpjub
 SELECT * FROM PERSONAL WHERE LEGAJO = Varlegajo INTO CURSOR VPERSOLINEA
-SELECT * FROM &arch WHERE LEGAJO = Varlegajo.AND. LIQUIDA=3 ORDER BY CONCEPTO  INTO CURSOR "CURLIQ"
+SELECT * FROM &arch WHERE LEGAJO = Varlegajo.AND. LIQUIDA=2 ORDER BY CONCEPTO  INTO CURSOR "CURLIQ"
 SUM TO impor aporte+sinaporte -descuento
 monto = objm.monto(" ",impor)
 * monto = " "
@@ -34,4 +36,4 @@ monto = objm.monto(" ",impor)
 *REPORT FORM c:\fwsu\forms\recibosueldo-tacsa-firma-empleado TO PRINTER PROMPT NODIALOG PREVIEW
 *REPORT FORM c:\fwsu\forms\recibosueldo-tacsa TO print
 REPORT FORM RECIBOSUELDO-TACSA PREVIEW
-*REPORT FORM  recibosueldo-tacsa-pr OBJECT PDF3() TO FILE (Varchi)
+*REPORT FORM  recibosueldo-tacsa-pr

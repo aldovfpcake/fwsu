@@ -18,11 +18,11 @@ ENDIF
 
 
 oExcel.Sheets(2).Select
-*VarLegajo = 195
+*VarLegajo = 902
 datper(VarLegajo)
 xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
-FechaDePago = "20201002" 
+FechaDePago = "20210402" 
 FormaDePago  = 3
 *oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
@@ -36,7 +36,8 @@ tf.Writeline(linea)
 
 oExcel.Sheets(3).Select
 oExcel.Range("b5").Value = ALLTRIM("'03")
-SELECT * FROM B102020 WHERE legajo = Varlegajo ORDER BY concepto INTO CURSOR sueldo
+*SELECT * FROM B22021 WHERE legajo = Varlegajo ORDER BY concepto INTO CURSOR sueldo
+SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM B32021 WHERE LEGAJO =VarLegajo   GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO READWRITE
 fila = 5
 
 IF EMPTY(datper.cuil)
@@ -167,7 +168,7 @@ RELEASE VarLegajo
 
 FUNCTION datper
 PARAMETERS xleg
-SELECT * FROM bpersonal WHERE legajo= xleg INTO CURSOR datper
+SELECT * FROM personal WHERE legajo= xleg INTO CURSOR datper
 
 RETURN .t.
 

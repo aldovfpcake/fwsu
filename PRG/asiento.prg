@@ -4,20 +4,20 @@ SET DELETED ON
 CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
-x.Seteopat(2)
+x.Seteopat(5)
 SET CLASSLIB TO rh 
-ms = 2
-an = 2020
+ms = 1
+an = 2021
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
  UPDATE repcab SET mes = op.nombres(ms),;
                       ano = an
 *rp.distinta = 4
-*rp.filtro = 0
-rp.distinta =4
-rp.reporteportipo
-* rp.sindistincion
+*rp.filtro = 4
+*rp.distinta =6
+*rp.reporteportipo
+rp.sindistincion
 *rp.vistapre = 10
 *SET STEP ON 
 *rp.reporte

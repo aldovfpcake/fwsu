@@ -1,11 +1,14 @@
 *
 * cambios 18-09
+*SET FILTER TO CHAPA = 338
+*SET FILTER TO 
 SET PROCEDURE TO c:\fwsu\prg\clasesicoss
 SET POINT TO ","
 fso = CreateObject('Scripting.FileSystemObject')
 tf = fso.CreateTextFile('c:\sueldos\testfile.txt', .t.)
 s= CREATEOBJECT("sicoss")
 SELECT sue3
+
 SCAN 
 s.cuil = cuil
 s.setnombre(nombre)

@@ -1,16 +1,29 @@
 SET PATH TO C:\SUERUT\EMPRE1
 SET EXCLUSIVE off
+SET DELETED ON
+CLOSE tables
 SELECT 0
-USE 12021 ALIAS sueldos
+USE 42021 ALIAS sueldos
+reemp()
+*s.legajo = p.legajo WHERE ALLTRIM(orden) = "20210311" .and. concepto = 20 INTO CURSOR LISTA
+SELECT p.legajo as l ,p.nombre,s.legajo,s.tipoconcep FROM sueldos s INNER JOIN personal p ON ;
+s.legajo = p.legajo WHERE val(s.tipoconcep) = 69 into cursor lista
 
-SELECT p.legajo,p.nombre,s.legajo FROM sueldos s INNER JOIN personal p ON ;
-s.legajo = p.legajo WHERE ALLTRIM(orden) = "20210115" .and. s.concepto = 20 INTO CURSOR LISTA
-
+browse
 DELETE FROM  sueldos
 SELECT LISTA
 SCAN
      SELECT sueldos
-     RECALL FOR sueldos.LEGAJO = LISTA.LEGAJO .AND. sueldos.LIQUIDA = 2
+     RECALL FOR sueldos.LEGAJO = LISTA.L .AND. sueldos.LIQUIDA = 2
      SELECT LISTA
 
 ENDSCAN
+
+
+*****************
+FUNCTION reemp
+****************
+REPLACE TIPOCONCEP WITH "69" FOR LEGAJO = 905 .AND. LIQUIDA = 2
+REPLACE TIPOCONCEP WITH "69" FOR LEGAJO = 563 .AND. LIQUIDA = 2
+REPLACE TIPOCONCEP WITH "69" FOR LEGAJO = 701 .AND. LIQUIDA = 2
+REPLACE TIPOCONCEP WITH "69" FOR LEGAJO = 888 .AND. LIQUIDA = 2

@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 01/14/21              MENU1.MPR               17:16:28  
+*       * 03/11/21              MENU1.MPR               12:01:09  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -26,15 +26,23 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _5yh110wzk OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
+DEFINE PAD _6010prf65 OF _MSYSMENU PROMPT "LIQUIDACION" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _5yh110wzl OF _MSYSMENU PROMPT "LISTADOS" COLOR SCHEME 3 ;
+DEFINE PAD _6010prf66 OF _MSYSMENU PROMPT "ARCHIVOS MAESTROS" COLOR SCHEME 3 ;
+	KEY ALT+A, ""
+DEFINE PAD _6010prf67 OF _MSYSMENU PROMPT "LISTADOS" COLOR SCHEME 3 ;
 	KEY ALT+L, ""
-DEFINE PAD _5yh110wzm OF _MSYSMENU PROMPT "SALIDA" COLOR SCHEME 3 ;
+DEFINE PAD _6010prf68 OF _MSYSMENU PROMPT "SALIDA" COLOR SCHEME 3 ;
 	KEY ALT+S, ""
-ON SELECTION PAD _5yh110wzk OF _MSYSMENU DO LIQUIDACION
-ON PAD _5yh110wzl OF _MSYSMENU ACTIVATE POPUP listados
-ON SELECTION PAD _5yh110wzm OF _MSYSMENU CLEAR EVENTS
+ON SELECTION PAD _6010prf65 OF _MSYSMENU DO LIQUIDACION
+ON PAD _6010prf66 OF _MSYSMENU ACTIVATE POPUP archivosma
+ON PAD _6010prf67 OF _MSYSMENU ACTIVATE POPUP listados
+ON SELECTION PAD _6010prf68 OF _MSYSMENU CLEAR EVENTS
+
+DEFINE POPUP archivosma MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF archivosma PROMPT "RUTA12"
+DEFINE BAR 2 OF archivosma PROMPT "TACSA"
+ON SELECTION BAR 1 OF archivosma DO fichapersonal
 
 DEFINE POPUP listados MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF listados PROMPT "Resumen General"

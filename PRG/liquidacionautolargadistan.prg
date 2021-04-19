@@ -12,11 +12,13 @@ x.Seteopat(1)
 *ver()
 
 USE f:\empre1\lagardi again
+delete for legajo = 900
+
 GO top
 SCAN
-       ? "Largardi....:" + STR(lagardi.legajo,4)
-       DO lqautom-larga-distancia WITH lagardi.legajo
-        
+      
+         DO lqautom-larga-distancia WITH lagardi.legajo
+      
     SELECT lagardi
 
 ENDSCAN

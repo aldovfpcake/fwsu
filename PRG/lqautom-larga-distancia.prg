@@ -16,8 +16,8 @@ x.Seteopat(1)
  
  lq = CREATEOBJECT('liquidacion')
  *** cargar mes y año
- lq.wmes     = 12
- lq.wano     = 2020
+ lq.wmes     = 3
+ lq.wano     = 2021
  lq.wempresa  = 1
 **************************************
 * LOCAL varLeg
@@ -25,13 +25,13 @@ x.Seteopat(1)
  fechapago = " "
  monto = " "
  nombremes = " "
- ano = 2020
+ ano = 2021
  banco = " "
  fecpjub = " "
  DiferSueldo = 0
  ***CARGAR ARCHIVO DE LIQUIDACION******************************************************
  
- archliq= "122020"
+ archliq= "32021"
  
  ************************
  lq.wdisplaynove = .t.
@@ -121,12 +121,6 @@ IF lagardi.knm <> 0
  lq.liquida
  
 * verdif()
- 
- 
- 
- 
- 
- 
  *SET DEVICE TO PRINTER  c:\suerut\recibos
 *REPORT FORM  RECIBOSUELDOAUTOM  NOCONSOLE PREVIEW 
 grabarliq()

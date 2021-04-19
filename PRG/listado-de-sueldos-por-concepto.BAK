@@ -7,12 +7,12 @@ x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SET CLASSLIB TO rh 
 LOCAL ms,an,VarConcepto
-ms = 12
-an = 2020
-VarConcepto = 654
+ms = 3
+an = 2021
+VarConcepto = 123
 
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 
 SELECT p.legajo,p.nombre,SUM(IIF(concepto=VarConcepto,descuento,0)) as ret FROM personal p INNER join;
-liquida s ON p.legajo = s.legajo ORDER BY p.legajo,p.nombre
+liquida s ON p.legajo = s.legajo GROUP BY p.legajo,p.nombre

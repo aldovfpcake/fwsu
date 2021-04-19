@@ -1,11 +1,12 @@
 SET PROCEDURE TO c:\fwsu\prg\classliq
-SET PATH TO F:\EMPRE1
+SET PATH TO C:\SUERUT\EMPRE1
 
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 
-liquida = "122020"
+liquida = "42021"
 *SELECT legajo,aporte,sinaporte,descuento,liquida from;
  &liquida WHERE aporte+sinaporte+descuento = 0
  
- DELETE FROM &liquida WHERE aporte+sinaporte+descuento = 0 
+ DELETE FROM &liquida WHERE aporte+sinaporte+descuento = 0  .and. legajo <> 810 .and. legajo <>819
+ WAIT WINDOW "PROCESO TERMINADO"
