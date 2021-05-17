@@ -6,6 +6,50 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(1)
 SELECT 0
-USE personal
+IF USED("personal") = .F.
+    USE personal
+ENDIF
+IF USED("CATEGO") = .F.
+   SELECT 0
+   USE CATEGO
+ENDIF
+IF USED("SITUARET") = .F.
+   SELECT 0
+   USE SITUARET
+ENDIF
+IF USED("SINIEST") = .F.
+   SELECT 0
+   USE SINIEST
+ENDIF
+IF USED("MDCONTRA") = .F.
+   SELECT 0
+   USE MDCONTRA
+ENDIF
+IF USED("ZGEOF") = .F.
+   SELECT 0
+   USE ZGEOF
+ENDIF
+IF USED("CDOOBS") = .F.
+   SELECT 0
+   USE CDOOBS
+ENDIF
+IF USED("CDACTV") = .F.
+   SELECT 0
+   USE CDACTV
+ENDI
+IF USED("SIND") = .F.
+   SELECT 0
+   USE SIND
+ENDIF
+IF USED("CONDICIO") = .F.
+   SELECT 0
+   USE CONDICIO
+ENDIF
+
+
+
+
+SELECT PERSONAL
 DO FORM c:\fwsu\forms\formlegajope2r.scx
 *MODIFY FORM c:\fwsu\forms\formlegajope2r.scx
+

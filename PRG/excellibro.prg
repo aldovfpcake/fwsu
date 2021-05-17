@@ -17,11 +17,11 @@ oExcel.Sheets(1).Select
 linea =   oExcel.Range("J9").value
 tf.Writeline(linea)
 oExcel.Sheets(2).Select
-VarLegajo = 173
+VarLegajo = 810
 datper(VarLegajo)
 xl = CREATEOBJECT("legajoper")
 LOCAL FechaDePago as String,FormDePago as Integer
-FechaDePago = "20210402" 
+FechaDePago = "20210502" 
 FormaDePago  = 3
 oExcel.visible = .t.
 oExcel.Range("b7").Value = ALLTRIM("'02")
@@ -37,7 +37,7 @@ oExcel.Sheets(3).Select
 oExcel.visible = .t.
 oExcel.Range("b5").Value = ALLTRIM("'03")
 * SELECT * FROM B22021 WHERE legajo = Varlegajo.and. liquida =2  ORDER BY concepto INTO CURSOR sueldo
-SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM B32021 WHERE LEGAJO =VarLegajo   GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO READWRITE
+SELECT LEGAJO,CONCEPTO,CANTIDAD,SUM(APORTE)AS APORTE ,SUM(SINAPORTE) AS SINAPORTE, SUM(DESCUENTO) AS DESCUENTO FROM f:\empre1\52021 WHERE LEGAJO =VarLegajo   GROUP BY LEGAJO,CONCEPTO,CANTIDAD ORDER BY CONCEPTO INTO CURSOR SUELDO READWRITE
 BROWSE
 
 fila = 5

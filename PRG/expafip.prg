@@ -1,6 +1,6 @@
 *
 * cambios 18-09
-*SET FILTER TO CHAPA = 338
+
 *SET FILTER TO 
 SET PROCEDURE TO c:\fwsu\prg\clasesicoss
 SET POINT TO ","
@@ -8,7 +8,10 @@ fso = CreateObject('Scripting.FileSystemObject')
 tf = fso.CreateTextFile('c:\sueldos\testfile.txt', .t.)
 s= CREATEOBJECT("sicoss")
 SELECT sue3
-
+REPLACE canthoras WITH 6 FOR canthoras = 0
+REPLACE codsitu WITH "1" FOR codsitu ="50"
+REPLACE horasextra WITH 120 FOR  horasextra =0
+GO top
 SCAN 
 s.cuil = cuil
 s.setnombre(nombre)
@@ -32,7 +35,7 @@ s.Setactividad(ACTIVIDAD)
  aporteadicionalobrs="000000.00"
  *  1 empresa inciso b
  *  4 empresa inciso  a
- tipoempresa= "4"
+ tipoempresa= "1"
  vvsadi = 0
   vvsadi = sbruto - (sac+horasextra+vacaciones+premios)
   vvbas  = sac+horasextra+basico+vacaciones+premios
@@ -53,7 +56,22 @@ s.Setactividad(ACTIVIDAD)
      vvadicio = sue3->sbruto       
   endif   
   vvoriginal=1
- SELECT situaret,situaret2,situaret3,diani1,diani2,diani3 FROM personal WHERE sue3.chapa = legajo INTO CURSOR tablaper
+ SELECT legajo,situaret,situaret2,situaret3,diani1,diani2,diani3 FROM personal WHERE sue3.chapa = legajo INTO CURSOR tablaper readwrite
+   
+ IF situaret ="50"
+    replace situaret  WITH "1"
+    replace situaret2 with "1"
+    replace situaret3 WITH "1" 
+ ENDIF  
+
+ IF legajo = 597
+    BROWSE
+ ENDIF   
+ 
+ 
+ ?situaret +  " " + situaret2  + " " + situaret3
+ ?"---------------------------------------------" 
+ 
  SELECT sue3
   linea = ALLTRIM(s.cuil)+s.nombre+s.conyuge+s.hijos+"0"+ALLTRIM(codsitu)+"0"+ALLTRIM(condicion)+"0"+ALLTRIM(actividad)+zona+"00,00"+varmodalidad+CODOBRASO;
   +"0"+STR(fami,1)+str(sviatico+sbruto,12,2)+STr(sbruto,12,2)+"000000,00"+"000000,00"+"000000,00"+excedentesaportes+excedentesobrasoc+LOCPROV+STr(sbruto,12,2);

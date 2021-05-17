@@ -9,10 +9,10 @@ SET CLASSLIB TO rh
 LOCAL ms,an,VarConcepto
 ms = 3
 an = 2021
-VarConcepto = 123
+VarConcepto = 38
 
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 
-SELECT p.legajo,p.nombre,SUM(IIF(concepto=VarConcepto,descuento,0)) as ret FROM personal p INNER join;
+SELECT p.legajo,p.nombre,SUM(IIF(INLIST(CONCEPTO,654,655),descuento,0)) as ret FROM personal p INNER join;
 liquida s ON p.legajo = s.legajo GROUP BY p.legajo,p.nombre

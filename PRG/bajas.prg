@@ -4,7 +4,7 @@ SET DELETED ON
 CLOSE TABLES all
 *SET PATH TO c:\suerut\empre1
 x=CREATEOBJECT('configurar')
-x.Seteopat(5)
+x.Seteopat(1)
 SET CLASSLIB TO rh 
 
 SELECT legajo,nombre,cuil,categoria,fechabaja FROM personal WHERE fechabaja >= CTOD("01-03-2021")

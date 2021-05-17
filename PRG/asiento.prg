@@ -6,8 +6,8 @@ CLOSE TABLES all
 x=CREATEOBJECT('configurar')
 x.Seteopat(5)
 SET CLASSLIB TO rh 
-ms = 1
-an = 2021
+ms = 10
+an = 2020
 op= CREATEOBJECT('abretabla')
 op.optabla(ms,an)
 rp = CREATEOBJECT('reportesueldo')
@@ -15,9 +15,9 @@ rp = CREATEOBJECT('reportesueldo')
                       ano = an
 *rp.distinta = 4
 *rp.filtro = 4
-*rp.distinta =6
+rp.distinta =6
 *rp.reporteportipo
-rp.sindistincion
+*rp.sindistincion
 *rp.vistapre = 10
 *SET STEP ON 
 *rp.reporte

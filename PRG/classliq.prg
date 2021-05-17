@@ -191,6 +191,7 @@ Define Class LIQUIDACION As Custom
                     this.waporte = this.waporte + this.wimporte
                CASE this.wtipoconcep =  'APORTE NEG'        
                     this.wtotaporneg = this.wtotaporneg + this.wimporte
+                    this.waporte = this.waporte - this.wimporte
                     SELECT curliq 
                     replace curliq.aporte WITH (this.wimporte - (this.wimporte*2))
                     this.wimporte = (this.wimporte - (this.wimporte*2))
@@ -873,6 +874,7 @@ Define Class LIQUIDACION As Custom
 
     
     PROCEDURE EMBARGOSAL
+         
        PARAMETERS concepto
        Private VarTotalSueldo,VarEmbargo
        STORE 0 TO VarTotalSueldo,VarEmbargo
@@ -890,7 +892,12 @@ Define Class LIQUIDACION As Custom
 
 	   *WAIT WINDOW STR(this.waporte,7,2) + ' ' + str(this.wtotdescue,7,2)
        *WAIT WINDOW STR(this.wcant,2)
-      
+       
+       IF concepto  = 875
+          VarTotalSueldo = this.waporte
+	   ENDIF	  
+
+       WAIT WINDOW "SUELDO : " + STR(VarTotalSueldo,14,2) + "Cantidad " + STR(this.wcant,6,2) 
        VarEmbargo     = (VarTotalSueldo*this.wcant)/100  
        this.wimporte  = VarEmbargo
        

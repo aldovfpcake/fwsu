@@ -76,6 +76,7 @@ lSuccess=CURSORSETPROP("Buffering", 3, "curliq")
 IF lSuccess = .f.
     =MESSAGEBOX("Operation NOT successful!",0,"Operation Status")
 ENDIF
+SET SYSMENU OFF
 _screen.Visible = .f.
 SELECT * FROM CODSUEL ORDER BY CONCEPTO INTO CURSOR CONCEPTOS   
 SET EXCLUSIVE ON
@@ -85,7 +86,7 @@ SELECT curliq
 SET EXCLUSIVE OFF
 ************************** mes y año de liquidacion
 PRIVATE vmes,vano
-vmes = 4
+vmes = 5
 vano = 2021
 *********************************************************
 LOCAL VarStringDe
@@ -100,7 +101,7 @@ IF seteo = 5
 ENDIF
 
       
-DO FORM liquidacion WITH " ABRIL 2021" +VarStringDe ,vmes,vano,emp
+DO FORM liquidacion WITH " MAYO 2021" +VarStringDe ,vmes,vano,emp
 READ EVENTS
 
 PROCEDURE errhand

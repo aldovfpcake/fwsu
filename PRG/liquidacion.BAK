@@ -1,7 +1,6 @@
 *PARAMETERS emp
 *WAIT WINDOW STR(emp,1)
 *CLOSE databases
-CLEAR memory
 SET TALK OFF
 SET EXCLUSIVE OFF
 SET DATE ITALIAN
@@ -13,7 +12,7 @@ SET PROCEDURE TO c:\fwsu\prg\classliq
 ob = CREATEOBJECT("configurar")
 *ob.Seteo
 * 6 demo
-emp = 2
+emp = 1
 DO case
    CASE emp = 1
 	    seteo = 1
@@ -77,6 +76,7 @@ lSuccess=CURSORSETPROP("Buffering", 3, "curliq")
 IF lSuccess = .f.
     =MESSAGEBOX("Operation NOT successful!",0,"Operation Status")
 ENDIF
+SET SYSMENU OFF
 _screen.Visible = .f.
 SELECT * FROM CODSUEL ORDER BY CONCEPTO INTO CURSOR CONCEPTOS   
 SET EXCLUSIVE ON

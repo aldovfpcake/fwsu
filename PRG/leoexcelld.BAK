@@ -4,7 +4,7 @@ SET ESCAPE ON
 SET PATH TO F:\SUELDOS\EMPRE1
 ON ERROR DO errhand WITH ;
 ERROR( ), MESSAGE( ), MESSAGE(1), PROGRAM( ), LINENO( )
-
+CLOSE TABLES ALL
 USE f:\empre1\lagardi
 *MiArchivoExcel = "Z:\ALDO\AVELLANEDA-LD\aver9.xls"
 MiArchivoExcel = GETFILE()
@@ -21,7 +21,7 @@ CLEAR
  
 
  
-FOR i=10 TO 45    
+FOR i=16 TO 16    
     Varlegajo     = oExcel.Cells(i,1).value
     Varknm        = oExcel.Cells(i,4).value
     VarKmcien     = oExcel.Cells(i,5).value
@@ -30,7 +30,8 @@ FOR i=10 TO 45
     VarFres       = oExcel.Cells(i,12).value
     VarCruce      = oExcel.Cells(i,13).value
     VarKMSUR4     = oExcel.Cells(i,7).value 
-    
+    ?Varlegajo
+    WAIT " "
     IF .NOT. ISNULL(VarKmsur2)
       
     ELSE
